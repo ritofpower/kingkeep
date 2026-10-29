@@ -249,6 +249,16 @@ button{font-family:var(--font-ui);}
 .cat-keep{background:linear-gradient(#8f99a5,#58616c);}
 .cat-rare{background:linear-gradient(var(--rare-1),var(--rare));}
 .cpick:nth-child(4){animation-delay:.21s;}
+.cpick.wait{filter:saturate(.55);opacity:.82;cursor:default;}
+.teamrow{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:100%;}
+.tm{display:inline-flex;align-items:center;gap:4px;background:var(--shade);border:2px solid rgba(255,230,170,.18);border-radius:999px;padding:1px 9px 1px 2px;font-size:12.5px;}
+.tm.me{border-color:var(--gold);}
+.tm .sk svg{width:24px;height:26px;display:block;}
+.tm b{font-weight:700;max-width:8ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tm .coin-ico{width:13px;height:13px;}
+.tm em{font-style:normal;font-weight:800;font-variant-numeric:tabular-nums;}
+.tm .ok{color:#9ff07a;font-weight:800;}
+.hostwait{position:absolute;left:0;right:0;top:42%;margin:0 auto;width:max-content;max-width:calc(100% - 40px);background:var(--shade);border:2px solid var(--gold);border-radius:14px;padding:10px 16px;font-weight:700;text-align:center;pointer-events:none;}
 
 /* ---------- หน้าแรก / หอเกียรติยศ / ผลรอบ ---------- */
 .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;}
@@ -326,6 +336,24 @@ button{font-family:var(--font-ui);}
 .sw[disabled]{opacity:.38;cursor:not-allowed;}
 .sw[disabled] span{font-size:10.5px;max-width:9ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .sw:focus-visible{outline:3px solid var(--gold);}
+.looks{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;}
+.lk{display:flex;align-items:center;justify-content:center;gap:8px;min-height:58px;border-radius:13px;border:2.5px solid var(--oak-dark);background:#fffaf0;color:var(--ink);font:800 17px/1 var(--font-ui);cursor:pointer;touch-action:manipulation;box-shadow:0 3px 0 var(--oak-dark);}
+.lk svg{width:40px;height:44px;}
+.lk.on{background:linear-gradient(#ffe68a,#f6b928);}
+.lk:active{transform:translateY(2px);box-shadow:0 1px 0 var(--oak-dark);}
+.lk:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+/* หน้าแรก: เลือกราชา/ราชินี + สีชุด (ใช้ทั้งเล่นคนเดียวและเล่นด้วยกัน) */
+.rpick{display:grid;grid-template-columns:1fr 1fr minmax(0,.8fr);gap:8px;width:100%;}
+.rp{display:flex;align-items:center;justify-content:center;gap:5px;min-height:48px;padding:0 6px;border-radius:13px;border:2.5px solid var(--oak-dark);background:#fffaf0;color:var(--ink);
+  font:800 16px/1 var(--font-ui);cursor:pointer;touch-action:manipulation;box-shadow:0 3px 0 var(--oak-dark);white-space:nowrap;min-width:0;}
+.rp svg{width:32px;height:36px;flex:none;}
+.rp.on{background:linear-gradient(#ffe68a,#f6b928);}
+.rp:active{transform:translateY(2px);box-shadow:0 1px 0 var(--oak-dark);}
+.rp:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+.rp.rc{font-size:14px;gap:6px;}
+.rp .dot{width:20px;height:20px;border-radius:50%;border:2.5px solid var(--oak-dark);flex:none;}
+.rp.rc span:last-child{overflow:hidden;text-overflow:ellipsis;}
+@media (max-width:340px){ .rp.rc span:last-child{display:none;} .rp .dot{width:24px;height:24px;} }   /* จอแคบมาก: เหลือแค่วงสี */
 .lob .or{font-size:13px;opacity:.7;}
 .joinrow{display:grid;grid-template-columns:1fr auto;gap:8px;width:100%;}
 .joinrow input{text-transform:uppercase;letter-spacing:.18em;text-align:center;font-weight:800;}
@@ -353,17 +381,6 @@ button{font-family:var(--font-ui);}
 .q{font-style:normal;font-size:11px;font-weight:800;color:#fff;border-radius:99px;padding:1px 7px;line-height:1.35;}
 .q.good{background:#2f8a3a;} .q.ok{background:#a37a12;} .q.bad{background:#a3321f;} .q.host{background:#6b4423;}
 .btn.ready-on{background:linear-gradient(#c9f0a8,#7cc63a);}
-.coophud{position:absolute;inset:0;pointer-events:none;}
-.ch-top{position:absolute;left:10px;right:10px;top:calc(env(safe-area-inset-top,0px) + 10px);display:flex;align-items:center;gap:8px;}
-.ch-top .pill{font-size:14px;}
-.ch-top .btn{pointer-events:auto;margin-left:auto;font-size:15px;padding:8px 14px;border-radius:13px;box-shadow:0 4px 0 var(--oak-dark);}
-.ch-list{position:absolute;left:10px;right:10px;top:calc(env(safe-area-inset-top,0px) + 60px);display:flex;flex-wrap:wrap;gap:6px;}
-.ch-p{display:inline-flex;align-items:center;gap:5px;background:var(--shade);border:2px solid rgba(255,230,170,.18);border-radius:999px;padding:1px 9px 1px 2px;font-size:13px;}
-.ch-p.me{border-color:var(--gold);}
-.ch-p .sk svg{width:24px;height:26px;display:block;}
-.ch-p b{font-weight:700;max-width:9ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.ch-tip{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 16px);margin:0 auto;width:max-content;max-width:calc(100% - 32px);
-  background:var(--shade);border:1px solid rgba(255,230,170,.2);border-radius:12px;padding:6px 12px;font-size:13px;line-height:1.4;text-align:center;}
 @media (max-height:760px){
   .roomcode b{font-size:36px;} .qr{width:84px;height:84px;}
 }
@@ -371,8 +388,19 @@ button{font-family:var(--font-ui);}
   .screen.title .tagline{display:none;}
   .logo{font-size:clamp(34px,calc(var(--appw) * .115),52px);}
   .howto{gap:7px;} .howto li{font-size:13.5px;}
+  .rp{min-height:42px;} .rp svg{width:28px;height:31px;}
   .card{padding:14px 14px;gap:10px;}
   .stat b{font-size:19px;} .stat{padding:6px;}
+}
+/* จอเตี้ยมาก (เช่น 320×568): ย่อหน้าแรกให้ปุ่มล่างสุดยังอยู่ในจอ · ถ้ายังไม่พอก็เลื่อนได้ */
+.screen.title{overflow-y:auto;}
+@media (max-height:600px){
+  .screen.title{gap:8px;}
+  .screen.title .badge{display:none;}
+  .logo{font-size:clamp(30px,calc(var(--appw) * .1),40px);}
+  .howto{gap:5px;} .howto li{font-size:12.5px;line-height:1.3;}
+  .card{padding:10px 12px;gap:8px;}
+  .rp{min-height:38px;} .rp svg{width:24px;height:27px;}
 }
 </style>
 </head>
@@ -429,19 +457,13 @@ button{font-family:var(--font-ui);}
     <div class="toast" id="toast"><div class="t1" id="toastT1"></div><div class="t2" id="toastT2"></div></div>
     <div class="restbar" id="restBar" hidden>
       <div class="rest-info" id="restInfo"></div>
+      <div class="teamrow" id="teamRow" hidden></div>
       <button class="btn btn-go" id="btnWave">เริ่มด่าน 1</button>
     </div>
     <div class="padpanel" id="padPanel" hidden></div>
   </div>
 
-  <div class="coophud" id="coopHud" hidden>
-    <div class="ch-top">
-      <div class="pill"><svg class="ei" aria-hidden="true"><use href="#i-group"/></svg><b>ทดสอบเล่นด้วยกัน</b></div>
-      <button class="btn alt" id="btnCoopExit">จบทดสอบ</button>
-    </div>
-    <div class="ch-list" id="coopList"></div>
-    <div class="ch-tip" id="coopTip">เดินไปหาเพื่อน ดูว่าขยับลื่นไหม · ตัวเลข ms ยิ่งน้อยยิ่งดี</div>
-  </div>
+  <div class="hostwait" id="hostWait" hidden>หัวห้องพักเกมอยู่ รอสักครู่…</div>
 
   <section class="screen title" id="scrTitle">
     <div class="title-top">
@@ -451,15 +473,16 @@ button{font-family:var(--font-ui);}
     </div>
     <div class="card">
       <ul class="howto" id="howto">
-        <li><span class="hi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="#6b4423" stroke-width="2" stroke-dasharray="3 2.4"/><circle cx="15" cy="10" r="4" fill="#6b4423"/></svg></span>ลากนิ้วตรงไหนก็ได้บนจอเพื่อเดิน ราชายิงให้เอง เดินเก็บเหรียญซ้อนบนหลัง</li>
-        <li><span class="hi"><i class="pad-ico"></i></span>ยืนบนแท่นเส้นประ แล้วกดปุ่มสร้าง/อัปเกรดหอธนู · แท่นหลวงหน้าป้อมไว้ซ่อมป้อมและอัปอาวุธราชา</li>
+        <li><span class="hi"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="#6b4423" stroke-width="2" stroke-dasharray="3 2.4"/><circle cx="15" cy="10" r="4" fill="#6b4423"/></svg></span><span>ลากนิ้วตรงไหนก็ได้บนจอเพื่อเดิน <span class="rname">ราชา</span>ยิงให้เอง เดินเก็บเหรียญซ้อนบนหลัง</span></li>
+        <li><span class="hi"><i class="pad-ico"></i></span><span>ยืนบนแท่นเส้นประ แล้วกดปุ่มสร้าง/อัปเกรดหอธนู · แท่นหลวงหน้าป้อมไว้ซ่อมป้อมและอัปอาวุธ<span class="rname">ราชา</span></span></li>
         <li><span class="hi"><span class="tri"><svg class="ei" style="left:9px;top:1px"><use href="#i-water"/></svg><svg class="ei" style="left:0;top:17px"><use href="#i-plant"/></svg><svg class="ei" style="left:18px;top:17px"><use href="#i-fire"/></svg></span></span>
           <span class="elrule"><span><svg class="ei"><use href="#i-water"/></svg>น้ำชนะไฟ</span><span><svg class="ei"><use href="#i-fire"/></svg>ไฟชนะพืช</span><span><svg class="ei"><use href="#i-plant"/></svg>พืชชนะน้ำ</span><span>ยิงถูกธาตุแรง ×2</span></span></li>
-        <li><span class="hi"><svg aria-hidden="true"><use href="#i-crown"/></svg></span>ทุก 2 ด่านเลือกการ์ดพรราชา 1 ใบ · ทุก 5 ด่านเจอบอส</li>
+        <li><span class="hi"><svg aria-hidden="true"><use href="#i-crown"/></svg></span><span>ทุก 2 ด่านเลือกการ์ดพร<span class="rname">ราชา</span> 1 ใบ · ทุก 5 ด่านเจอบอส</span></li>
         <li><span class="hi"><svg aria-hidden="true"><use href="#i-medal"/></svg></span>ผ่านด่านและล้มบอสได้เกียรติยศ (แพ้ก็เก็บไว้) เอาไปซื้อแต้มต่อถาวรที่หอเกียรติยศ · เกมเซฟเอง</li>
       </ul>
       <div class="records" id="records" hidden></div>
       <div class="btncol">
+        <div class="rpick" id="rulerPick" role="group" aria-label="เลือกตัวละคร"></div>
         <button class="btn big btn-go" id="btnContinue" hidden>เล่นต่อ</button>
         <button class="btn big btn-go" id="btnPlay">เริ่มเล่น</button>
         <div class="btnrow tr">
@@ -488,14 +511,16 @@ button{font-family:var(--font-ui);}
           <ul class="slots" id="lobSlots"></ul>
           <p class="lob-msg" id="lobStatus"></p>
           <p class="lob-msg notice" id="lobNotice" hidden></p>
-          <button class="btn wide btn-go" id="btnLobStart">ลองเดินด้วยกัน</button>
+          <button class="btn wide btn-go" id="btnLobStart">เริ่มเกม · ช่วยกันรักษาป้อม</button>
           <button class="btn wide" id="btnReady">พร้อม</button>
-          <p class="lob-msg note">ขั้นนี้เป็นการทดสอบ: ทุกคนเดินบนแผนที่เดียวกัน เพื่อดูว่ามือถือต่อกันได้ลื่นไหม</p>
+          <p class="lob-msg note" id="lobDiff"></p>
         </div>
         <div class="card lob" id="lobProfile">
-          <label class="lab" for="lobName">ชื่อราชา</label>
+          <label class="lab" for="lobName">ชื่อ</label>
           <input id="lobName" maxlength="14" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="ใส่ชื่อของคุณ">
-          <div class="lab">สีราชา</div>
+          <div class="lab">ตัวละคร</div>
+          <div class="looks" id="lobLooks"></div>
+          <div class="lab">สีชุด</div>
           <div class="swatches" id="lobColors"></div>
         </div>
         <div class="card lob" id="lobEntry">
@@ -530,7 +555,7 @@ button{font-family:var(--font-ui);}
         <button class="btn alt wide" id="btnHome">กลับหน้าแรก (เซฟไว้เล่นต่อ)</button>
         <button class="btn alt wide" id="btnRestart">ยอมแพ้ · เริ่มรอบใหม่</button>
       </div>
-      <p class="note">เกมเซฟให้อัตโนมัติ ปิดแอปแล้วกลับมาเล่นต่อได้</p>
+      <p class="note" id="pauseNote">เกมเซฟให้อัตโนมัติ ปิดแอปแล้วกลับมาเล่นต่อได้</p>
     </div>
   </section>
 
@@ -552,7 +577,8 @@ button{font-family:var(--font-ui);}
       </div>
       <div class="btncol">
         <button class="btn wide btn-go" id="btnEndHall"><svg class="ei" aria-hidden="true"><use href="#i-medal"/></svg>หอเกียรติยศ · ซื้อแต้มต่อ</button>
-        <div class="btnrow">
+        <button class="btn wide" id="btnEndLobby" hidden>กลับห้องรอ</button>
+        <div class="btnrow" id="endRow">
           <button class="btn alt mid" id="btnAgain">เล่นอีกรอบ</button>
           <button class="btn alt mid" id="btnHome2">หน้าแรก</button>
         </div>
@@ -630,6 +656,27 @@ const CURVE={
   swap:0.25,                                        // โอกาสที่ธงธาตุของเส้นทางจะเปลี่ยนในด่านถัดไป
   keepDmg:L=>1+0.05*(L-1)                  // ศัตรูตีป้อมแรงขึ้นเล็กน้อย
 };
+// ---------- เล่นด้วยกัน: ศัตรูเพิ่มตามจำนวนคน (n) ----------
+// หลักเศรษฐศาสตร์ที่ใช้:
+// · ภาระต่อหัว: ทัพศัตรูรวม (จำนวน × ความอึด) = n × ภาระต่อหัว × ทัพเล่นคนเดียว
+//   ส่วนลดต่อหัว 2 คน 8% · 3 คน 3% · 4 คน 2% → คนเยอะได้ส่วนลดน้อยลง เพราะช่วยกันเองได้ผลดีขึ้นอยู่แล้ว
+//   (ประหยัดจากขนาด: หอ/ป้อมเป็นของส่วนรวม ยิ่งคนเยอะยิ่งคุ้ม) · ตั้งค่าจากบอทเล่นหลายพันรอบ ให้ชนะบ่อยกว่าเล่นคนเดียวนิดหน่อย
+//   ผลบอท 400 แผนที่ต่อแบบ (บอทเลือกธาตุเก่ง): คนเดียวชนะ 34% · 2 คน 40% · 3 คน 38% · 4 คน 39%
+//                                    (บอทเลือกธาตุสุ่ม): คนเดียว 12% · 2 คน 23% · 3 คน 18% · 4 คน 16%
+// · ศัตรูเพิ่มทั้ง "จำนวน" (ได้เหรียญเพิ่มตาม) และ "ความอึด" (ไม่ได้เหรียญเพิ่ม) → รายได้ต่อหัวต่ำกว่าเล่นคนเดียว ไม่เฟ้อ
+// · หอธนูกับป้อมเป็นของส่วนรวม แท่นมีจำกัด → เงินที่เพิ่มขึ้นให้ผลลดลงเรื่อยๆ · เหรียญกับหน้าไม้เป็นของส่วนตัว
+// · บอสเป็นเป้าเดียว: เลือดบอสเพิ่มตามพลังยิงรวมของทีมที่ใส่เป้าเดียวได้ (หอมีจำกัด แต่หน้าไม้เพิ่มทุกคน) ไม่ใช่ตามจำนวนคนตรงๆ
+//   (บอทพบว่ามังกรด่าน 20 คือด่านที่ตัดสินผล ถ้าเลือดบอสโตตามจำนวนคน ทีมจะผ่านด่านอื่นสบายแต่ไปแพ้มังกรบ่อยกว่าเล่นคนเดียว)
+// · โบนัสผ่านด่านแบ่งคนละส่วน: รวมทั้งทีมได้มากกว่าเล่นคนเดียว แต่ต่อหัวน้อยลง
+const COOP={
+  load:n=>[1,0.92,0.97,0.98][n-1]||0.98,// ภาระต่อหัวเทียบกับเล่นคนเดียว (ส่วนลด 2 คน 8% · 3 คน 3% · 4 คน 2%)
+  cnt:n=>1+0.6*(n-1),                    // จำนวนศัตรูต่อด่าน (2 คน ×1.6 · 3 คน ×2.2 · 4 คน ×2.8)
+  hp:n=>COOP.load(n)*n/COOP.cnt(n),      // ความอึด = ภาระที่เหลือ (2 คน ×1.15 · 3 คน ×1.32 · 4 คน ×1.40)
+  boss:n=>[1,1.35,1.7,2.3][n-1]||2.3,    // เลือดบอส
+  win:n=>1+0.08*(n-1),                   // เวลาปล่อยศัตรูยืดนิดหน่อย (คนเยอะ ทัพยาวขึ้น)
+  bonus:n=>[1,0.75,0.62,0.55][n-1]||0.55,// โบนัสผ่านด่าน "ต่อคน" เทียบกับเล่นคนเดียว
+  readyWait:25                           // พร้อมครึ่งทีมแล้ว → เริ่มเองใน 25 วิ
+};
 const BOSS_AT={5:0,10:1,15:2,20:3};
 const BOSS_K=[250,245,230,250];   // พลังชีวิตบอส = ตัวคูณ × ความอึดของด่านนั้น
 const BOSS_HP=[5,10,15,20].map((L,i)=>Math.round(BOSS_K[i]*CURVE.hp(L)));
@@ -668,23 +715,24 @@ const CARDS=[
   {id:'plantDmg',name:'หนามพฤกษา',desc:'หอธาตุพืช ดาเมจ +30%',icon:'plant',cat:'plant',max:3,apply(){G.mod.tdmg.plant*=1.3;}},
   {id:'trate',name:'สายหน้าไม้ตึง',desc:'หอธนูทุกหอ ยิงเร็วขึ้น 12%',icon:'clock',cat:'tower',max:3,apply(){G.mod.trate*=1.12;}},
   {id:'trange',name:'ตาเหยี่ยว',desc:'หอธนูทุกหอ ยิงไกลขึ้น 12%',icon:'eye',cat:'tower',max:2,apply(){G.mod.trange*=1.12;}},
-  {id:'kdmg',name:'หน้าไม้หลวง',desc:'ราชา ดาเมจ +35%',icon:'bow',cat:'king',max:3,apply(){G.mod.kdmg*=1.35;}},
-  {id:'krate',name:'มือไวดุจลม',desc:'ราชา ยิงเร็วขึ้น 25%',icon:'clock',cat:'king',max:2,apply(){G.mod.krate*=1.25;}},
-  {id:'kspeed',name:'รองเท้าม้าเร็ว',desc:'ราชาเดินเร็วขึ้น 15% · ดูดเหรียญไกลขึ้น 30%',icon:'boot',cat:'king',max:2,apply(){G.mod.kspeed*=1.15;G.mod.magnet*=1.3;}},
+  {id:'kdmg',name:'หน้าไม้หลวง',desc:'{R} ดาเมจ +35%',icon:'bow',cat:'king',max:3,apply(){G.mod.kdmg*=1.35;}},
+  {id:'krate',name:'มือไวดุจลม',desc:'{R} ยิงเร็วขึ้น 25%',icon:'clock',cat:'king',max:2,apply(){G.mod.krate*=1.25;}},
+  {id:'kspeed',name:'รองเท้าม้าเร็ว',desc:'{R}เดินเร็วขึ้น 15% · ดูดเหรียญไกลขึ้น 30%',icon:'boot',cat:'king',max:2,apply(){G.mod.kspeed*=1.15;G.mod.magnet*=1.3;}},
   {id:'buildDisc',name:'ช่างไม้หลวง',desc:'ค่าสร้างหอใหม่ ลด 20%',icon:'hammer',cat:'eco',max:2,apply(){G.mod.buildDisc=Math.min(0.5,G.mod.buildDisc+0.2);}},
   {id:'upDisc',name:'ช่างตีเหล็ก',desc:'ค่าอัปเกรดหอ ลด 12%',icon:'hammer',cat:'eco',max:2,apply(){G.mod.upDisc=Math.min(0.4,G.mod.upDisc+0.12);}},
   {id:'attuneDisc',name:'นักบวชธาตุ',desc:'ค่าเปลี่ยนธาตุ ลด 60%',icon:'target',cat:'eco',max:1,apply(){G.mod.attuneDisc=0.6;}},
   {id:'bonus',name:'ภาษีสงคราม',desc:'โบนัสผ่านด่าน +60%',icon:'coins',cat:'eco',max:2,apply(){G.mod.bonusMul+=0.6;}},
-  {id:'cache',name:'คลังสมบัติ',desc:'รับเหรียญทันที +{cache}',icon:'coins',cat:'eco',max:9,apply(){const n=30+3*G.level;G.king.coins+=n;G.stats.coins+=n;}},
+  {id:'cache',name:'คลังสมบัติ',desc:'รับเหรียญทันที {cache}',icon:'coins',cat:'eco',max:9,apply(){const n=cacheAmt();for(const k of G.kings){k.coins+=n;G.stats.coins+=n;}}},
   {id:'wall',name:'กำแพงหินผา',desc:'พลังป้อมสูงสุด +60 และซ่อม +60',icon:'wall',cat:'keep',max:3,apply(){G.keep.maxHp+=60;G.keep.hp=Math.min(G.keep.maxHp,G.keep.hp+60);}},
   {id:'mend',name:'ช่างซ่อมประจำป้อม',desc:'หลังจบด่าน ซ่อมป้อมเพิ่มอีก 10%',icon:'heart',cat:'keep',max:2,apply(){G.mod.clearHeal+=0.1;}},
   {id:'strong',name:'จุดตายธาตุ',desc:'ยิงชนะทาง แรงขึ้นจาก ×2 เป็น ×2.5',icon:'target',cat:'rare',max:1,rare:true,apply(){G.mod.strong=2.5;}},
   {id:'weak',name:'ทะลวงธาตุ',desc:'ยิงแพ้ทาง ไม่ลดเหลือ ×½ แต่เป็น ×0.8',icon:'burst',cat:'rare',max:1,rare:true,apply(){G.mod.weak=0.8;}},
-  {id:'kingCounter',name:'ราชันย์สามธาตุ',desc:'ลูกธนูราชาเปลี่ยนเป็นธาตุที่ชนะทางเป้าหมายเสมอ',icon:'crown',cat:'rare',max:1,rare:true,apply(){G.mod.kingCounter=true;}},
-  {id:'multishot',name:'ธนูแฝด',desc:'ราชายิงทีละ 2 ดอก ใส่ 2 เป้าหมาย',icon:'split',cat:'rare',max:1,rare:true,apply(){G.mod.multishot=2;}},
+  {id:'kingCounter',name:'ราชันย์สามธาตุ',desc:'ลูกธนูของ{R}เปลี่ยนเป็นธาตุที่ชนะทางเป้าหมายเสมอ',icon:'crown',cat:'rare',max:1,rare:true,apply(){G.mod.kingCounter=true;}},
+  {id:'multishot',name:'ธนูแฝด',desc:'{R}ยิงทีละ 2 ดอก ใส่ 2 เป้าหมาย',icon:'split',cat:'rare',max:1,rare:true,apply(){G.mod.multishot=2;}},
   {id:'splash',name:'หัวธนูระเบิด',desc:'กระสุนหอแตกกระจาย โดนศัตรูรอบข้าง 25%',icon:'burst',cat:'rare',max:1,rare:true,apply(){G.mod.splash=0.25;}}
 ];
 const CARD_BY={}; for(const c of CARDS) CARD_BY[c.id]=c;
+const TYPE_LIST=Object.keys(ENEMY), TYPE_IDX={}; TYPE_LIST.forEach((t,i)=>TYPE_IDX[t]=i);
 
 // =====================================================================
 //  มรดกราชวงศ์ (แต้มต่อถาวร) — ซื้อด้วย "เกียรติยศ" ที่สะสมได้ทุกรอบ แพ้ก็ได้
@@ -696,7 +744,7 @@ const pct=v=>Math.round(v*100);
 const META=[
   {id:'treasury',name:'คลังหลวง',icon:'coins',cat:'eco',cost:[6,18,40],val:[10,20,30],txt:v=>`เริ่มรอบด้วยเหรียญ +${v}`},
   {id:'walls',name:'กำแพงบรรพบุรุษ',icon:'wall',cat:'keep',cost:[8,25,55],val:[20,40,60],txt:v=>`พลังป้อมเริ่มต้น +${v}`},
-  {id:'heirloom',name:'อาวุธประจำตระกูล',icon:'bow',cat:'king',cost:[35],val:[2],txt:v=>`ราชาเริ่มรอบด้วยอาวุธ Lv${v}`},
+  {id:'heirloom',name:'อาวุธประจำตระกูล',icon:'bow',cat:'king',cost:[35],val:[2],txt:v=>`${ruler(Profile.d.look)}เริ่มรอบด้วยอาวุธ Lv${v}`},
   {id:'manual',name:'ตำราธนูหลวง',icon:'book',cat:'tower',cost:[20,60,120],val:[0.03,0.06,0.09],txt:v=>`หอธนูทุกหอ ดาเมจ +${pct(v)}%`},
   {id:'tax',name:'ภาษีหลวง',icon:'crown',cat:'eco',cost:[15,45,90],val:[0.1,0.2,0.3],txt:v=>`โบนัสผ่านด่าน +${pct(v)}%`},
   {id:'fourth',name:'พรใบที่สี่',icon:'cards',cat:'rare',cost:[70],val:[4],txt:()=>'เลือกการ์ดพรจาก 4 ใบ แทน 3 ใบ'},
@@ -721,10 +769,24 @@ const NET={PROTO:1, MAX:4, PREFIX:'ritof-kingskeep-', CODE_CH:'ABCDEFGHJKLMNPQRS
   LIB:'https://cdn.jsdelivr.net/npm/peerjs@1.5.5/dist/peerjs.min.js',          // WebRTC (ต่อมือถือถึงกันตรงๆ)
   QRLIB:'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js',        // QR สำหรับชวนเพื่อน
   SEND_HZ:15, PING_MS:1000, STALE_MS:6000, DROP_MS:20000, JOIN_MS:12000};
+const ELEM_IDX={fire:0,water:1,plant:2};
+const NetFX={on:false,busy:false,list:[],push(...a){if(this.list.length<700) this.list.push(a);},take(){const l=this.list; this.list=[]; return l;}};
 function cleanName(s){return String(s==null?'':s).replace(/[\u0000-\u001f\u007f<>&"'`\\]/g,'').replace(/\s+/g,' ').trim().slice(0,14);}
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-// ราชาตัวจิ๋ว (ใช้ในปุ่มเลือกสี รายชื่อในห้อง และแถบผู้เล่น)
-function kingSVG(c){
+const HAIR='#5b3418', HAIR_L='#7d4c25';   // ผมราชินี
+const LOOKS={king:'ราชา',queen:'ราชินี'};
+const ruler=look=>LOOKS[look]||LOOKS.king;
+// ราชา/ราชินีตัวจิ๋ว (ใช้ในปุ่มเลือกตัวละคร ปุ่มเลือกสี รายชื่อในห้อง และแถบผู้เล่น)
+function kingSVG(c,look){
+  if(look==='queen') return `<svg viewBox="0 0 40 44" aria-hidden="true"><path d="M10.5 25h19l4.6 14.2Q20 43.6 5.9 39.2z" fill="${c.cape}"/>`+
+    `<path d="M12.6 25Q5.2 37.6 6.8 40Q20 45 33.2 40Q34.8 37.6 27.4 25z" fill="${c.dark}"/><path d="M13.6 25Q8 36.4 9.4 38.4Q20 42.4 30.6 38.4Q32 36.4 26.4 25z" fill="${c.robe}"/>`+
+    `<ellipse cx="20" cy="24.4" rx="8" ry="6.6" fill="${c.robe}"/><rect x="12.4" y="27.4" width="15.2" height="2.4" rx="1" fill="#ffd04a"/>`+
+    `<rect x="10.4" y="11.6" width="4.8" height="13.2" rx="2.4" fill="${HAIR}"/><rect x="24.8" y="11.6" width="4.8" height="13.2" rx="2.4" fill="${HAIR}"/>`+
+    `<ellipse cx="20" cy="20.2" rx="7.2" ry="2.7" fill="#f4f1ea"/><ellipse cx="20" cy="13.6" rx="9.2" ry="9.1" fill="${HAIR}"/><circle cx="20" cy="13.8" r="7.4" fill="#f5cda0"/>`+
+    `<path d="M12.4 13.4Q12.5 5.6 20 6Q27.5 5.6 27.6 13.4Q24.6 9.4 20.8 10.4Q16.6 9.2 12.4 13.4z" fill="${HAIR}"/>`+
+    `<ellipse cx="17.4" cy="14" rx="1.05" ry="1.35" fill="#2b1a10"/><ellipse cx="22.6" cy="14" rx="1.05" ry="1.35" fill="#2b1a10"/>`+
+    `<circle cx="15.4" cy="16.4" r="1.5" fill="#f08a9a" opacity=".55"/><circle cx="24.6" cy="16.4" r="1.5" fill="#f08a9a" opacity=".55"/><ellipse cx="20" cy="18" rx="1.7" ry=".9" fill="#d8435a"/>`+
+    `<path d="M14.2 6.6 15.2 2.8l2.5 2 2.3-4.4 2.3 4.4 2.5-2 1 3.8z" fill="#ffd04a" stroke="#8a5a10" stroke-width=".6" stroke-linejoin="round"/><circle cx="20" cy="4.4" r="1.1" fill="#e04f9a"/></svg>`;
   return `<svg viewBox="0 0 40 44" aria-hidden="true"><path d="M10.5 26h19l4.6 14.2Q20 44.6 5.9 40.2z" fill="${c.cape}"/>`+
     `<circle cx="20" cy="27.5" r="11.2" fill="${c.robe}"/><path d="M9.3 29.6a11.2 11.2 0 0 0 21.4 0z" fill="${c.dark}"/>`+
     `<rect x="9.6" y="29" width="20.8" height="2.8" rx="1" fill="#ffd04a"/><ellipse cx="20" cy="19.6" rx="9" ry="3.4" fill="#f4f1ea"/>`+
@@ -779,9 +841,9 @@ const roundRep=(k,v)=>typeof v==='number'&&!Number.isInteger(v)?Math.round(v*100
 const Save={
   acc:0,
   get(){const s=Store.get('run',null); return s&&s.v===SAVE_VER&&s.seed!=null?s:null;},
-  clear(){Store.del('run'); this.acc=0;},
+  clear(){if(G.coop) return; Store.del('run'); this.acc=0;},   // เล่นด้วยกันไม่แตะเซฟของเล่นคนเดียว
   write(){
-    if(G.fast||!G.map||!G.plan||G.endShown||!['rest','wave','cleared','cards'].includes(G.phase)) return false;
+    if(G.fast||G.coop||!G.map||!G.plan||G.endShown||!['rest','wave','cleared','cards'].includes(G.phase)) return false;
     const k=G.king, K=G.keep;
     const s={v:SAVE_VER,seed:G.seed,level:G.level,phase:G.phase,meta:G.runMeta,prevBest:G.prevBest,mod:G.mod,forge:G.forge,wallLv:G.wallLv,
       cards:G.cards,cardCount:G.cardCount,offer:G.phase==='cards'?G.offer.map(c=>c.id):null,offerRare:!!G.offerRare,
@@ -802,7 +864,7 @@ Meta.load();
 // ชื่อ + สีราชาของเครื่องนี้ (ใช้ทั้งเล่นคนเดียวและเล่นด้วยกัน)
 const Profile={
   d:null,
-  load(){const p=Store.get('profile',null)||{}; this.d={name:cleanName(p.name),color:KC_BY[p.color]?p.color:'blue'};},
+  load(){const p=Store.get('profile',null)||{}; this.d={name:cleanName(p.name),color:KC_BY[p.color]?p.color:'blue',look:p.look==='queen'?'queen':'king'};},
   save(){Store.set('profile',this.d);},
   colorObj(){return KC_BY[this.d.color]||KING_COLORS[0];}
 };
@@ -862,14 +924,18 @@ const Sound={
 // ---------- สถานะเกมทั้งหมด ----------
 const G={
   phase:'title', paused:false, speed:1, t:0, level:1, rng:Math.random, fast:false,
-  map:null, plan:null, keep:null, king:null, mod:defaultMod(), forge:1, wallLv:0, cards:[], cardCount:{}, offer:[],
+  map:null, plan:null, keep:null, king:null, kings:[], mod:defaultMod(), wallLv:0, cards:[], cardCount:{}, offer:[],
   enemies:[], proj:[], coins:[], turrets:[], parts:[], texts:[], flyers:[],
   laneEl:[null,null,null], laneChanged:[false,false,false], laneNew:[false,false,false],
   spawner:null, stats:{kills:0,coins:0,built:0,hits:0,strong:0,attune:0,royal:0}, shake:0, combo:0, comboT:0, effT:0,
   vacuum:false, clearT:0, endT:0, endShown:false, keepAlarm:0, onPad:null, boss:null,
-  seed:0, runMeta:{}, prevBest:0, runHonor:0, hlog:null, reviveUsed:false, bossDown:null, offerRare:false
+  seed:0, runMeta:{}, prevBest:0, runHonor:0, hlog:null, reviveUsed:false, bossDown:null, offerRare:false,
+  coop:null, client:false, eid:0, cid:0, picker:-1, cardRound:0, modVer:0
 };
+// อาวุธเป็นของราชา/ราชินีแต่ละคน: G.forge = อาวุธของคนที่เล่นอยู่บนเครื่องนี้
+Object.defineProperty(G,'forge',{get(){return G.king?G.king.forge:1;},set(v){if(G.king)G.king.forge=v;},enumerable:true});
 const curLv=()=>G.plan.levels[G.level-1];
+const kingBySlot=s=>{for(const k of G.kings) if(k.slot===s) return k; return null;};
 
 // ---------- จอและกล้อง ----------
 const app=$('app'), cv=$('cv'), ctx=cv.getContext('2d');
@@ -931,7 +997,7 @@ window.addEventListener('keydown',e=>{
   if(e.target&&(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')) return;   // กำลังพิมพ์ชื่อ/รหัสห้อง
   Input.keys[e.code]=true;
   if(e.code==='Escape'||e.code==='KeyP') togglePause();
-  if(e.code==='Enter'&&G.phase==='rest'&&!G.paused) startWave();
+  if(e.code==='Enter'&&G.phase==='rest'&&!G.paused){ if(G.coop) CoopGame.toggleReady(); else startWave(); }
   const n={Digit1:'fire',Digit2:'water',Digit3:'plant'}[e.code]; if(n&&G.onPad&&G.onPad.kind==='tower') choosePadElement(G.onPad,n);
   if(e.code==='KeyE'&&G.onPad&&G.onPad.kind==='tower'){ if(G.onPad.state==='empty') buyBuild(G.onPad); else if(G.onPad.turret.el) buyUpgrade(G.onPad); }
 });
@@ -989,7 +1055,7 @@ function genLane(rng,side,keep,straight){
   }
   pts.push([keep.x-dx/L*125,keep.y-dy/L*95]);
   pts.push([keep.x,keep.y]);
-  return buildPath(pts);
+  const P=buildPath(pts); P.ctrl=pts; return P;
 }
 function laneOK(p,keep,lanes){
   if(p.len<720||p.len>1160) return false;
@@ -1016,6 +1082,18 @@ function genMap(seed){
   }
   const pads=genPads(rng,keep,lanes);
   return {seed,keep,lanes,pads,free:sides[3],decoSeed:(rng()*1e9)|0};
+}
+// เล่นด้วยกัน: หัวห้องส่งแผนที่ที่สร้างแล้วให้ทุกเครื่อง (กันมือถือต่างรุ่นคำนวณทศนิยมต่างกันจนแผนที่เพี้ยน)
+const rd2=v=>Math.round(v*100)/100;
+function mapToData(m){
+  return {seed:m.seed,keep:{x:rd2(m.keep.x),y:rd2(m.keep.y)},free:m.free,decoSeed:m.decoSeed,
+    lanes:m.lanes.map(L=>({id:L.id,side:L.side,from:L.from,ctrl:L.path.ctrl.map(q=>[rd2(q[0]),rd2(q[1])])})),
+    pads:m.pads.map(p=>[p.id,p.kind==='royal'?1:0,rd2(p.x),rd2(p.y),rd2(p.ux),rd2(p.uy),p.lane,p.from])};
+}
+function mapFromData(d){
+  const lanes=d.lanes.map(L=>{const P=buildPath(L.ctrl); P.ctrl=L.ctrl; return {id:L.id,side:L.side,path:P,from:L.from};});
+  const pads=d.pads.map(a=>a[1]?{id:a[0],kind:'royal',x:a[2],y:a[3],ux:a[4],uy:a[5],lane:-1,from:1,state:'royal',paid:0,acc:0,stand:0,turret:null,pick:null}:makePad(a[0],a[2],a[3],a[4],a[5],a[6],a[7]));
+  return {seed:d.seed,keep:{x:d.keep.x,y:d.keep.y},lanes,pads,free:d.free,decoSeed:d.decoSeed};
 }
 let curKeep={x:0,y:0};
 function inKeep(x,y,pad){ const a=(x-curKeep.x)/(KEEP_RX+pad), b=(y-curKeep.y)/(KEEP_RY+pad); return a*a+b*b<1; }
@@ -1073,7 +1151,8 @@ function makePad(id,x,y,ux,uy,lane,from){return {id,kind:'tower',x,y,ux,uy,lane,
 // =====================================================================
 //  วางแผนทั้ง 20 ด่านของรอบนี้ (สุ่มจาก seed: ธาตุทาง รูปแบบคลื่น บอส)
 // =====================================================================
-function genRun(seed,lanes){
+function genRun(seed,lanes,n){
+  n=n||1;
   const r=mulberry32((seed^0x9e3779b9)>>>0);
   const bosses=shuffle(['ogre','summoner','berserker'],r);
   const levels=[]; let cur=[null,null,null];
@@ -1084,20 +1163,20 @@ function genRun(seed,lanes){
       if(!cur[Ln.id]){cur[Ln.id]=ELEMS[(r()*3)|0]; fresh[Ln.id]=true;}
       else if(r()<CURVE.swap){const o=ELEMS.filter(e=>e!==cur[Ln.id]); cur[Ln.id]=o[(r()*2)|0]; changed[Ln.id]=true;}
     }
-    const lv={L,laneEl:cur.slice(),changed,fresh,hp:CURVE.hp(L),mix:CURVE.mix(L),events:[],boss:null,pattern:'steady',name:''};
+    const lv={L,laneEl:cur.slice(),changed,fresh,hp:CURVE.hp(L)*COOP.hp(n),mix:CURVE.mix(L),events:[],boss:null,pattern:'steady',name:''};
     const bi=BOSS_AT[L];
     if(bi!=null){
       const act=lanes.filter(x=>x.from<=L), lane=act[(r()*act.length)|0].id, type=bi===3?'dragon':bosses[bi];
-      lv.boss={idx:bi,type,lane,el:lv.laneEl[lane],hp:Math.round(BOSS_HP[bi]*BOSS_TYPE_HP[type])};
+      lv.boss={idx:bi,type,lane,el:lv.laneEl[lane],hp:Math.round(BOSS_HP[bi]*BOSS_TYPE_HP[type]*COOP.boss(n))};
       if(type==='dragon'){lv.boss.order=shuffle(ELEMS.slice(),r); lv.boss.el=lv.boss.order[0];}
     }
-    buildWave(lv,r,lanes);
+    buildWave(lv,r,lanes,n);
     levels.push(lv);
   }
   return {levels};
 }
-function buildWave(lv,r,lanes){
-  const L=lv.L, act=lanes.filter(x=>x.from<=L), N=CURVE.count(L), W=CURVE.window(L);
+function buildWave(lv,r,lanes,n){
+  const L=lv.L, act=lanes.filter(x=>x.from<=L), N=Math.round(CURVE.count(L)*COOP.cnt(n||1)), W=CURVE.window(L)*COOP.win(n||1);
   let nR=L>=2?Math.round(N*Math.min(0.24,0.06+0.012*L)):0;
   let nB=L>=3?Math.max(1,Math.round(N*Math.min(0.13,0.025+0.0055*L))):0;
   let nS=L>=8?Math.max(1,Math.round(N*Math.min(0.06,0.015+0.0025*L))):0;
@@ -1219,38 +1298,52 @@ function drawDeco(g,d,r){
 // =====================================================================
 //  เริ่มรอบ / ด่าน / การ์ด / จบเกม
 // =====================================================================
-function makeKing(x,y){
-  return {isKing:true,x,y,vx:0,vy:0,r:15,fx:0,fy:1,aim:Math.PI/2,cd:0,recoil:0,walk:0,coins:0,speed:185,dmg:7,rate:3,range:165,magnet:84,color:Profile.colorObj(),name:''};
+// ctrl: local = คนเล่นเครื่องนี้ · remote = เพื่อนในห้อง (ตำแหน่งมาจากมือถือเพื่อน) · ai = บอททดสอบ · net = ภาพจากหัวห้อง (ฝั่งผู้เข้าห้อง)
+function makeKing(x,y,o){
+  const k={isKing:true,slot:0,ctrl:'local',x,y,vx:0,vy:0,r:15,fx:0,fy:1,aim:Math.PI/2,cd:0,recoil:0,walk:0,coins:0,forge:1,ready:false,
+    speed:185,dmg:7,rate:3,range:165,magnet:84,color:Profile.colorObj(),look:Profile.d.look,name:'',tx:x,ty:y,tvx:0,tvy:0,at:0,aiv:null};
+  return o?Object.assign(k,o):k;
 }
-function applyKing(){
-  const k=G.king,B=BAL.king,f=G.forge-1;
+function applyKing(k){
+  if(!k){ for(const q of G.kings) applyKing(q); return; }   // ไม่ระบุ = ทุกคน
+  const B=BAL.king,f=(k.forge||1)-1;
   k.dmg=B.dmg*Math.pow(1.3,f)*G.mod.kdmg; k.rate=B.rate*Math.pow(1.06,f)*G.mod.krate; k.range=B.range+6*f;
   k.speed=B.speed*G.mod.kspeed; k.magnet=B.magnet*G.mod.magnet;
 }
-function kingSpot(){
-  const K=G.map.keep; const c=[[0,KEEP_RY+48],[70,KEEP_RY+40],[-70,KEEP_RY+40],[0,KEEP_RY+110],[110,10],[-110,10]];
-  for(const [dx,dy] of c){const x=K.x+dx,y=K.y+dy; if(!G.map.pads.some(p=>Math.abs(p.x-x)<38&&Math.abs(p.y-y)<38||Math.abs(p.ux-x)<34&&Math.abs(p.uy-y)<34)) return [x,y];}
-  return [K.x,K.y+KEEP_RY+48];
+function kingSpots(n){
+  const K=G.map.keep, out=[]; const c=[[0,KEEP_RY+48],[70,KEEP_RY+40],[-70,KEEP_RY+40],[0,KEEP_RY+110],[110,10],[-110,10],[60,KEEP_RY+100],[-60,KEEP_RY+100]];
+  for(const [dx,dy] of c){const x=K.x+dx,y=K.y+dy; if(!G.map.pads.some(p=>Math.abs(p.x-x)<38&&Math.abs(p.y-y)<38||Math.abs(p.ux-x)<34&&Math.abs(p.uy-y)<34)) out.push([x,y]); if(out.length>=n) break;}
+  while(out.length<n) out.push([K.x+(out.length-1.5)*30,K.y+KEEP_RY+48]);
+  return out;
 }
+function kingSpot(){return kingSpots(1)[0];}
 function clearWorld(){
   G.enemies.length=0;G.proj.length=0;G.coins.length=0;G.turrets.length=0;G.parts.length=0;G.texts.length=0;G.flyers.length=0;
 }
 // ตั้งค่าเริ่มรอบ (ใช้ทั้งรอบใหม่และตอนโหลดเซฟ) · rm = ระดับมรดกราชวงศ์ที่ใช้กับรอบนี้
-function setupRun(seed,rm){
+// roster = รายชื่อผู้เล่น (เล่นด้วยกัน) [{slot,name,color,look,ctrl,meta}] · ไม่ส่ง = เล่นคนเดียว
+function setupRun(seed,rm,roster,mapData){
+  const n=roster?roster.length:1;
+  G.coop=roster?{n}:null; G.client=false;
   G.seed=seed; G.runMeta=Object.assign({},rm);
-  G.map=genMap(seed); curKeep=G.map.keep;
-  G.plan=genRun(seed,G.map.lanes);
+  G.map=mapData?mapFromData(mapData):genMap(seed); curKeep=G.map.keep;
+  G.plan=genRun(seed,G.map.lanes,n);
   G.rng=mulberry32((seed^0x5bd1e995)>>>0);
-  G.mod=defaultMod(); applyMetaMod(G.runMeta);
-  G.forge=Math.max(1,Meta.val('heirloom',G.runMeta)); G.wallLv=0; G.cards=[]; G.cardCount={}; G.offer=[]; G.offerRare=false;
+  G.mod=defaultMod(); applyMetaMod(G.runMeta); G.modVer++;
+  G.wallLv=0; G.cards=[]; G.cardCount={}; G.offer=[]; G.offerRare=false; G.eid=0; G.cid=0; G.picker=-1; G.cardRound=0;
   const K=G.map.keep, hp=BAL.keepHp+Meta.val('walls',G.runMeta);
   G.keep={x:K.x,y:K.y,hp,maxHp:hp,flash:0,smoke:0,inv:0};
-  const [kx,ky]=kingSpot(); G.king=makeKing(kx,ky); applyKing();
+  const ros=roster||[{slot:0,ctrl:'local',name:Profile.d.name,color:Profile.d.color,look:Profile.d.look,meta:rm}], spots=kingSpots(ros.length);
+  G.kings=ros.map((r,i)=>{
+    const k=makeKing(spots[i][0],spots[i][1],{slot:r.slot|0,ctrl:r.ctrl||'local',name:cleanName(r.name),color:KC_BY[r.color]||Profile.colorObj(),look:r.look==='queen'?'queen':'king'});
+    const pm=r.meta||rm||{}; k.forge=Math.max(1,Meta.val('heirloom',pm)); k.coins=BAL.startCoins+Meta.val('treasury',pm);   // แต้มต่อส่วนตัวของแต่ละคน
+    return k;
+  });
+  G.king=G.kings.find(k=>k.ctrl==='local')||G.kings[0]; applyKing();
   clearWorld();
   G.level=1; G.stats={kills:0,coins:0,built:0,hits:0,strong:0,attune:0,royal:0}; G.spawner=null; G.shake=0; G.t=0; G.combo=0;
   G.vacuum=false; G.endShown=false; G.paused=false; G.boss=null; G.keepAlarm=0; G.onPad=null; G.clearT=0; G.lvDmg=0;
   G.runHonor=0; G.hlog={levels:0,lvHonor:0,bosses:0,bossHonor:0}; G.reviveUsed=false; G.bossDown=null; G.prevBest=Meta.d.best;
-  G.king.coins=BAL.startCoins+Meta.val('treasury',G.runMeta);
   renderBackground(); updateCamera(0,true);
   $('hLvMax').textContent='/'+MAX_LEVEL;
   for(const id of ['scrCards','scrPause','scrEnd','scrHall','scrTitle']) $(id).hidden=true;
@@ -1265,7 +1358,7 @@ function applyMetaMod(rm){
 }
 function newRun(seed){
   if(seed==null) seed=(Math.random()*2147483647)|0;
-  Save.clear();
+  G.coop=null; G.client=false; Save.clear();
   setupRun(seed,Meta.d.lv);
   Meta.d.runs++; Meta.save();
   enterRest(true);
@@ -1293,7 +1386,7 @@ function loadRun(s){
     G.spawner=w.sp?{t:w.sp.t,i:w.sp.i,events:lv.events,total:lv.events.length,spawned:w.sp.spawned,done:w.sp.i>=lv.events.length}:null;
     for(const o of w.enemies||[]){const e=restoreEnemy(o); if(e) G.enemies.push(e);}
     G.boss=w.boss>=0?(G.enemies[w.boss]||null):null;
-    for(const c of w.coins||[]) G.coins.push({x:c[0],y:c[1],z:0,vx:0,vy:0,vz:0,v:c[2],t:Math.min(c[3],COIN_LIFE-6),state:0,sp:0,spin:Math.random()*TAU,dead:false});
+    for(const c of w.coins||[]) G.coins.push({id:++G.cid,x:c[0],y:c[1],z:0,vx:0,vy:0,vz:0,v:c[2],t:Math.min(c[3],COIN_LIFE-6),state:0,sp:0,spin:Math.random()*TAU,dead:false,own:-1,to:-1});
     UI.dirty=true;
     togglePause(true,'กลับมาสู้ต่อ!');
     return;
@@ -1302,7 +1395,7 @@ function loadRun(s){
 }
 function restoreEnemy(o){
   const T=ENEMY[o.type]; if(!T||!G.map.lanes[o.lane]||!ELEM[o.el]) return null;
-  const e={type:o.type,el:o.el,lane:o.lane,s:0,off:0,hp:1,maxHp:1,speed:T.speed,r:T.r,coin:T.coin,dps:T.dps,state:'walk',flash:0,walk:Math.random()*6,lunge:0,atk:0,
+  const e={id:++G.eid,type:o.type,el:o.el,lane:o.lane,s:0,off:0,hp:1,maxHp:1,speed:T.speed,r:T.r,coin:T.coin,dps:T.dps,state:'walk',flash:0,walk:Math.random()*6,lunge:0,atk:0,
     x:0,y:0,dirx:0,ax:0,ay:0,txtT:-9,healT:2,sumT:4.5,cast:0,inv:0,enraged:false,phase:0,order:null,dead:false};
   for(const key of ENEMY_KEYS) if(o[key]!==undefined&&o[key]!==null) e[key]=o[key];
   return e;
@@ -1328,7 +1421,8 @@ function restInfoHTML(){
   return h;
 }
 function enterRest(first){
-  G.phase='rest'; G.vacuum=false;
+  G.phase='rest'; G.vacuum=false; G.readyT=null;
+  for(const k of G.kings) k.ready=false;   // เล่นด้วยกัน: ทุกคนกดพร้อมใหม่ทุกด่าน
   setLevelFlags();
   $('btnWave').textContent='เริ่มด่าน '+G.level;
   $('restInfo').innerHTML=restInfoHTML(); UI.dirty=true;
@@ -1344,7 +1438,7 @@ function startWave(){
   Sound.init();
   const lv=curLv();
   G.spawner={t:0,i:0,events:lv.events,total:lv.events.length,spawned:0,done:false}; G.lvDmg=0;
-  G.phase='wave';
+  G.phase='wave'; G.readyT=null;
   Sound.horn(); UI.toast('ด่าน '+G.level, lv.name);
   Save.write();
 }
@@ -1365,18 +1459,22 @@ function spawnFromEvent(ev){
 }
 function waveCleared(){
   G.phase='cleared'; G.clearT=2.0; G.spawner=null; G.vacuum=true; G.boss=null;
-  const bonus=Math.round(CURVE.bonus(G.level)*G.mod.bonusMul), K=G.keep;
-  if(bonus>0&&G.level<MAX_LEVEL) dropCoins(K.x,K.y+KEEP_RY+10,bonus);
+  const n=G.kings.length, share=G.coop?COOP.bonus(G.coop.n):1, bonus=Math.round(CURVE.bonus(G.level)*G.mod.bonusMul*share), K=G.keep;
+  if(bonus>0&&G.level<MAX_LEVEL){
+    if(G.coop) G.kings.forEach((k,i)=>dropCoins(K.x+(i-(n-1)/2)*24,K.y+KEEP_RY+10,bonus,k.slot));   // แบ่งโบนัสให้ทุกคน คนละเท่ากัน
+    else dropCoins(K.x,K.y+KEEP_RY+10,bonus);
+  }
   const heal=Math.min(K.maxHp-Math.ceil(K.hp),Math.round(K.maxHp*G.mod.clearHeal)); if(heal>0) K.hp=Math.min(K.maxHp,K.hp+heal);
   Sound.win();
   const last=G.level>=MAX_LEVEL;
   // เกียรติยศ: ได้ทันทีที่ผ่านด่าน (+ล้มบอสในด่านนี้) และบันทึกลงเครื่องทันที กันได้ซ้ำตอนโหลดเซฟ
   const bossH=G.bossDown!=null?HONOR.boss[G.bossDown]:0; G.bossDown=null;
-  const hon=bankHonor(HONOR.level(G.level),bossH);
+  const lvH=HONOR.level(G.level), hon=bankHonor(lvH,bossH);
+  if(NetFX.on) NetFX.push('h',lvH,bossH,G.level,last?1:0);   // เพื่อนในห้องได้เกียรติยศเท่ากัน เข้าเครื่องของตัวเอง
   if(G.level>Meta.d.best) Meta.d.best=G.level;
   if(last) Meta.d.wins++;
   Meta.save();
-  UI.toast(last?'ชนะแล้ว!':'ผ่านด่าน '+G.level+'!', last?'มังกรสามธาตุพ่ายแพ้ ป้อมของราชายังยืนหยัด':`โบนัส +${bonus} เหรียญ · เกียรติยศ +${hon}${heal>0?' · ซ่อมป้อม +'+heal:''}`);
+  UI.toast(last?'ชนะแล้ว!':'ผ่านด่าน '+G.level+'!', last?'มังกรสามธาตุพ่ายแพ้ ป้อมยังยืนหยัด':`โบนัส +${bonus} เหรียญ${G.coop?'/คน':''} · เกียรติยศ +${hon}${heal>0?' · ซ่อมป้อม +'+heal:''}`);
   Save.write();
 }
 function bankHonor(lvH,bossH){
@@ -1388,7 +1486,7 @@ function bankHonor(lvH,bossH){
   return n;
 }
 function afterClear(){
-  if(G.level>=MAX_LEVEL){ G.phase='victory'; Save.clear(); showEnd(true); return; }
+  if(G.level>=MAX_LEVEL){ G.phase='victory'; Save.clear(); showEnd(true); return; }   // (เล่นด้วยกันไม่แตะเซฟของเล่นคนเดียว)
   if(G.level%2===0||BOSS_AT[G.level]!=null){ showCards(BOSS_AT[G.level]!=null); return; }
   G.level++; enterRest(false);
 }
@@ -1405,35 +1503,58 @@ function drawCards(rare){
   }
   return pick;
 }
-function cardDesc(c){return c.desc.replace('{cache}',String(30+3*G.level));}
+// คำในการ์ด: เล่นคนเดียว = ราชา/ราชินี · เล่นด้วยกัน = ทุกคนได้ผล
+// คลังสมบัติ: เล่นด้วยกันได้คนละส่วนแบ่ง (สัดส่วนเดียวกับโบนัสผ่านด่าน) ไม่ใช่เต็มก้อนทุกคน
+function cacheAmt(){return Math.round((30+3*G.level)*(G.coop?COOP.bonus(G.coop.n):1));}
+function cardDesc(c){return c.desc.replace('{cache}',(G.coop?'คนละ +':'+')+cacheAmt()).replace('{R}',G.coop?'ทุกคน':ruler(G.king&&G.king.look));}
 function showCards(rare,preset){
   G.phase='cards'; G.offerRare=!!rare; G.offer=preset&&preset.length?preset:drawCards(rare); Panel.hide();
+  if(G.coop&&!G.client){   // เล่นด้วยกัน: ผลัดกันเลือก
+    const slots=G.kings.map(k=>k.slot).sort((a,b)=>a-b);
+    G.picker=slots[G.cardRound%slots.length]; G.cardRound++;
+    Net.sendAll({t:'cards',offer:G.offer.map(c=>c.id),rare:!!rare,picker:G.picker,fx:NetFX.take()});   // ส่งเอฟเฟกต์ค้างไปก่อน ไม่ให้ข้อความผ่านด่านโผล่ทับหน้าการ์ด
+    CoopGame.cardTimer(true);
+  }
+  renderCards();
+  Save.write();
+}
+function renderCards(){
+  const rare=G.offerRare, mine=!G.coop||G.picker===G.king.slot, pk=G.coop?kingBySlot(G.picker):null;
   $('toast').classList.remove('show');   // ไม่ให้ข้อความ "ผ่านด่าน" ซ้อนอยู่หลังหัวข้อการ์ด
-  $('cardsTitle').textContent=rare?'รางวัลจากบอส!':'เลือกพรของราชา';
-  $('cardsSub').textContent=rare?'มีการ์ดหายากให้เลือก 1 ใบ · มีผลจนจบรอบนี้':'เลือก 1 ใบ · มีผลจนจบรอบนี้';
+  $('cardsTitle').textContent=rare?'รางวัลจากบอส!':G.coop?'เลือกพรให้ทั้งทีม':'เลือกพรของ'+ruler(G.king.look);
+  $('cardsSub').textContent=G.coop?(mine?'ตาของคุณเลือก 1 ใบ · ทุกคนได้ผลจนจบรอบนี้':`ตาของ ${pk?pk.name:'เพื่อน'} เลือก · รอสักครู่นะ`):
+    rare?'มีการ์ดหายากให้เลือก 1 ใบ · มีผลจนจบรอบนี้':'เลือก 1 ใบ · มีผลจนจบรอบนี้';
   $('cardList').innerHTML=G.offer.map((c,i)=>{
     const n=G.cardCount[c.id]||0;
-    return `<button class="cpick${c.rare?' rare':''}" data-i="${i}">${c.rare?'<span class="rib">หายาก</span>':''}<span class="cic cat-${c.cat}">${icon(c.icon,'')}</span>`+
+    return `<button class="cpick${c.rare?' rare':''}${mine?'':' wait'}" data-i="${i}"${mine?'':' disabled'}>${c.rare?'<span class="rib">หายาก</span>':''}<span class="cic cat-${c.cat}">${icon(c.icon,'')}</span>`+
       `<span><b>${c.name}</b><span>${cardDesc(c)}</span>${c.max>1&&c.max<9?`<em>มีแล้ว ${n}/${c.max}</em>`:''}</span></button>`;
   }).join('');
   $('scrCards').hidden=false;
-  Save.write();
 }
-function pickCard(i){
+// k = คนที่เลือก (เล่นด้วยกันต้องเป็นตาของคนนั้น) · force = หมดเวลา หัวห้องเลือกแทน
+function pickCard(i,k,force){
   if(G.phase!=='cards') return false;
   const c=G.offer[i]; if(!c) return false;
-  c.apply(); G.cardCount[c.id]=(G.cardCount[c.id]||0)+1; G.cards.push(c.id);
+  k=k||G.king;
+  if(G.coop){
+    if(G.client){ if(G.picker!==G.king.slot) return false; return Client.act({a:'card',i}); }
+    if(!force&&k.slot!==G.picker) return false;
+    CoopGame.cardTimer(false);
+    Net.sendAll({t:'picked',i,id:c.id,by:k.slot,auto:force?1:0});
+  }
+  const desc=cardDesc(c);   // คิดข้อความก่อนขึ้นด่านใหม่ (คลังสมบัติคิดตามด่านที่เลือก)
+  c.apply(); G.cardCount[c.id]=(G.cardCount[c.id]||0)+1; G.cards.push(c.id); G.modVer++;
   for(const t of G.turrets) applyTurret(t); applyKing();
-  $('scrCards').hidden=true; Sound.card();
+  $('scrCards').hidden=true;
   G.level++; enterRest(false);
-  UI.toast('ได้พร: '+c.name, cardDesc(c));
+  NetFX.busy=true; Sound.card(); UI.toast((G.coop?(force?'หมดเวลา · ได้พร: ':k.name+' เลือก: '):'ได้พร: ')+c.name, desc); NetFX.busy=false;   // เครื่องเพื่อนเล่นเสียง/ขึ้นข้อความเองตอนได้รับ "picked"
   return true;
 }
-$('cardList').addEventListener('click',e=>{const b=e.target.closest('.cpick'); if(b) pickCard(+b.dataset.i);});
+$('cardList').addEventListener('click',e=>{const b=e.target.closest('.cpick'); if(b&&!b.disabled) pickCard(+b.dataset.i);});
 
 function keepDestroyed(){
   G.phase='defeat'; G.endT=2.2;
-  if(G.bossDown!=null){bankHonor(0,HONOR.boss[G.bossDown]); G.bossDown=null;}   // ล้มบอสได้แล้วแต่ป้อมแตก ก็ยังได้แต้มบอส
+  if(G.bossDown!=null){const bh=HONOR.boss[G.bossDown]; bankHonor(0,bh); if(NetFX.on) NetFX.push('h',0,bh,G.level,0); G.bossDown=null;}   // ล้มบอสได้แล้วแต่ป้อมแตก ก็ยังได้แต้มบอส
   Save.clear();
   const K=G.keep; Sound.boom(); Sound.lose(); G.shake=18;
   for(let i=0;i<5;i++) puff(K.x+(Math.random()-0.5)*90,K.y-20-Math.random()*60,'#8d949b',22);
@@ -1444,9 +1565,11 @@ const END_TIPS=['อ่านธงธาตุก่อนเริ่มแต
   'เก็บเหรียญไว้สร้างหอที่ทางใหม่ ก่อนทางนั้นจะเปิด','เอาเกียรติยศไปซื้อแต้มต่อที่หอเกียรติยศ แล้วลองใหม่'];
 function showEnd(win,gaveUp){
   G.endShown=true; Panel.hide(); Save.clear();
-  $('endTitle').textContent=win?'ราชาชนะ!':gaveUp?'ถอยทัพแล้ว':'ป้อมแตกแล้ว!';
-  $('endText').textContent=win?'ปกป้องป้อมครบ 20 ด่าน และล้มมังกรสามธาตุได้ สุดยอด!':
+  if(G.coop&&!G.client) CoopGame.hostEnd(win,gaveUp);
+  $('endTitle').textContent=win?(G.coop?'ทีมเราชนะ!':ruler(G.king.look)+'ชนะ!'):gaveUp?'ถอยทัพแล้ว':'ป้อมแตกแล้ว!';
+  $('endText').textContent=win?(G.coop?'ช่วยกันรักษาป้อมครบ 20 ด่าน และล้มมังกรสามธาตุได้ สุดยอด!':'ปกป้องป้อมครบ 20 ด่าน และล้มมังกรสามธาตุได้ สุดยอด!'):
     `${gaveUp?'ยอมแพ้':'ล้มลง'}ที่ด่าน ${G.level} · ${END_TIPS[(G.level+G.stats.kills)%END_TIPS.length]}`;
+  $('btnEndLobby').hidden=!G.coop; $('endRow').hidden=!!G.coop;
   $('stLv').textContent=(win?MAX_LEVEL:G.level)+'/'+MAX_LEVEL; $('stKills').textContent=G.stats.kills;
   $('stStrong').textContent=(G.stats.hits?Math.round(100*G.stats.strong/G.stats.hits):0)+'%'; $('stCards').textContent=G.cards.length;
   // เกียรติยศที่ได้รอบนี้
@@ -1466,11 +1589,24 @@ function refreshEndHonor(){
   $('btnEndHall').classList.toggle('btn-go',n>0); $('btnEndHall').classList.toggle('alt',n===0);
 }
 function togglePause(force,title){
-  if(G.phase==='title'||G.phase==='victory'||G.phase==='cards'||G.phase==='coop'||G.endShown) return;
+  if(G.phase==='title'||G.phase==='victory'||G.phase==='cards'||G.endShown) return;
+  if(G.client){   // เครื่องเพื่อน: เปิดเมนูของตัวเอง เกมของทีมยังเดินต่อ
+    const show=force!==undefined?force:$('scrPause').hidden; $('scrPause').hidden=!show;
+    if(show){Input.joy=null;Input.jx=Input.jy=0; pauseMenu('เมนู');} return;
+  }
   G.paused=force!==undefined?force:!G.paused;
   $('scrPause').hidden=!G.paused;
-  if(G.paused){Input.joy=null;Input.jx=Input.jy=0;
-    $('pauseTitle').textContent=title||'พักเกม'; disarm($('btnRestart'));
+  if(G.paused){Input.joy=null;Input.jx=Input.jy=0; pauseMenu(title);
+    Save.write();}
+}
+function pauseMenu(title){
+  const co=!!G.coop, host=co&&!G.client;
+  $('pauseTitle').textContent=title||(host?'พักเกม (ทุกคนรออยู่)':'พักเกม'); disarm($('btnRestart')); disarm($('btnHome'));
+  $('btnResume').textContent=G.client?'กลับเข้าเกม':'เล่นต่อ';
+  $('btnHome').textContent=co?(host?'ปิดห้อง · ทุกคนออกจากเกม':'ออกจากห้อง'):'กลับหน้าแรก (เซฟไว้เล่นต่อ)';
+  $('btnRestart').hidden=!!G.client; $('btnRestart').textContent=host?'ยอมแพ้ทั้งทีม':'ยอมแพ้ · เริ่มรอบใหม่';
+  $('pauseNote').textContent=G.client?'เกมของทีมยังเดินอยู่ ตัวละครของคุณจะยืนรอ':host?'เกมหยุดให้ทุกคนจนกว่าจะกดเล่นต่อ':'เกมเซฟให้อัตโนมัติ ปิดแอปแล้วกลับมาเล่นต่อได้';
+  {
     const cnt={}; for(const id of G.cards) cnt[id]=(cnt[id]||0)+1;
     $('ownedCards').innerHTML=Object.keys(cnt).length?Object.keys(cnt).map(id=>`<span>${CARD_BY[id].name}${cnt[id]>1?' ×'+cnt[id]:''}</span>`).join(''):'<span>ยังไม่มีการ์ดพร</span>';
     Save.write();}
@@ -1484,10 +1620,10 @@ function goTitle(){
 }
 function newDemo(){
   G.map=genMap((Math.random()*2147483647)|0); curKeep=G.map.keep; G.level=12; G.rng=Math.random; G.onPad=null; G.plan=null;
-  G.mod=defaultMod(); G.forge=1;
+  G.mod=defaultMod(); G.coop=null; G.client=false;
   G.laneEl=G.map.lanes.map(()=>ELEMS[(Math.random()*3)|0]);
   const K=G.map.keep; G.keep={x:K.x,y:K.y,hp:1,maxHp:1,flash:0,smoke:0};
-  const [kx,ky]=kingSpot(); G.king=makeKing(kx,ky); applyKing(); G.king.coins=18; clearWorld();
+  const [kx,ky]=kingSpot(); G.king=makeKing(kx,ky); G.kings=[G.king]; applyKing(); G.king.coins=18; clearWorld();
   const pads=G.map.pads.filter(p=>p.kind==='tower'&&p.lane>=0); shuffle(pads,Math.random);
   pads.slice(0,4).forEach((p,i)=>{const t=buildTurret(p,1+(i%3)); if(t.level>1){t.el=counterOf(G.laneEl[p.lane]); applyTurret(t);}});
   renderBackground(); updateCamera(0,true); demoT=0.5;
@@ -1496,7 +1632,7 @@ let demoT=0;
 function demoUpdate(dt){
   G.t+=dt; demoT-=dt;
   if(demoT<=0&&G.enemies.length<16){demoT=0.9+Math.random()*0.6;const lane=(Math.random()*G.map.lanes.length)|0;spawnEnemy(Math.random()<0.12?'brute':Math.random()<0.2?'runner':'minion',lane,1,G.laneEl[lane]);}
-  updateKing(dt); updateEnemies(dt); updateTurrets(dt); updateProj(dt); updateCoins(dt); updateFx(dt);
+  updateKings(dt); updateEnemies(dt); updateTurrets(dt); updateProj(dt); updateCoins(dt); updateFx(dt);
   compact(G.enemies); compact(G.proj); compact(G.coins); compact(G.parts); compact(G.texts); compact(G.flyers);
   updateCamera(dt,false);
 }
@@ -1508,18 +1644,27 @@ function pushOutEllipse(o,cx,cy,rx,ry){
   const dx=(o.x-cx)/rx, dy=(o.y-cy)/ry, d=hyp(dx,dy);
   if(d<1&&d>0.0001){o.x=cx+dx/d*rx;o.y=cy+dy/d*ry;}
 }
-const kTargets=[];
-function updateKing(dt){
-  const k=G.king; if(G.phase==='defeat'){k.vx*=0.8;k.vy*=0.8;return;}
-  const v=Input.vec(), mag=hyp(v.x,v.y);
-  let tx=0,ty=0; if(mag>0.02){const m=Math.min(1,mag);tx=v.x/mag*m*k.speed;ty=v.y/mag*m*k.speed;}
-  const a=1-Math.exp(-dt*16); k.vx+=(tx-k.vx)*a; k.vy+=(ty-k.vy)*a;
-  k.x+=k.vx*dt; k.y+=k.vy*dt;
+const kTargets=[], NOV={x:0,y:0};
+function updateKings(dt){ for(const k of G.kings) updateKing(k,dt); }
+// เดิน (ตามจอย/บอท) หรือไหลตามตำแหน่งที่มือถือเพื่อนส่งมา แล้วยิงอัตโนมัติ (noShoot = ฝั่งผู้เข้าห้อง: หัวห้องเป็นคนยิงให้)
+function updateKing(k,dt,noShoot){
+  k=k||G.king; if(G.phase==='defeat'){k.vx*=0.8;k.vy*=0.8;return;}
+  if(k.ctrl==='remote'||k.ctrl==='net'){
+    const age=Math.min(0.25,(performance.now()-(k.at||0))/1000), px=k.tx+k.tvx*age, py=k.ty+k.tvy*age, a=1-Math.exp(-dt*14);
+    if(hyp(px-k.x,py-k.y)>240){k.x=px;k.y=py;} else {k.x+=(px-k.x)*a; k.y+=(py-k.y)*a;}
+    k.vx=k.tvx; k.vy=k.tvy;
+  } else {
+    const v=k.ctrl==='ai'?(k.aiv||NOV):Input.vec(), mag=hyp(v.x,v.y);
+    let tx=0,ty=0; if(mag>0.02){const m=Math.min(1,mag);tx=v.x/mag*m*k.speed;ty=v.y/mag*m*k.speed;}
+    const a=1-Math.exp(-dt*16); k.vx+=(tx-k.vx)*a; k.vy+=(ty-k.vy)*a;
+    k.x+=k.vx*dt; k.y+=k.vy*dt;
+    k.x=clamp(k.x,40,WORLD_W-40); k.y=clamp(k.y,70,WORLD_H-40);
+    pushOutEllipse(k,G.keep.x,G.keep.y,KEEP_RX+8,KEEP_RY+6);
+    for(const t of G.turrets){const dx=k.x-t.x,dy=k.y-t.y,d=hyp(dx,dy),m=24;if(d<m&&d>0.001){k.x=t.x+dx/d*m;k.y=t.y+dy/d*m;}}
+  }
   const sp=hyp(k.vx,k.vy); if(sp>18){k.fx=k.vx/sp;k.fy=k.vy/sp;k.walk+=dt*sp*0.055;}
-  k.x=clamp(k.x,40,WORLD_W-40); k.y=clamp(k.y,70,WORLD_H-40);
-  pushOutEllipse(k,G.keep.x,G.keep.y,KEEP_RX+8,KEEP_RY+6);
-  for(const t of G.turrets){const dx=k.x-t.x,dy=k.y-t.y,d=hyp(dx,dy),m=24;if(d<m&&d>0.001){k.x=t.x+dx/d*m;k.y=t.y+dy/d*m;}}
   k.cd-=dt; k.recoil=Math.max(0,k.recoil-dt*8);
+  if(noShoot) return;
   // เลือกเป้า: หมอผีก่อน แล้วค่อยตัวที่ใกล้ที่สุด
   kTargets.length=0; const r2=k.range*k.range; let sham=null, sd=r2;
   for(const e of G.enemies){const dx=e.x-k.x,dy=e.y-k.y,d=dx*dx+dy*dy; if(d<r2){kTargets.push(e); e._d=d; if(e.type==='shaman'&&d<sd){sd=d;sham=e;}}}
@@ -1530,8 +1675,8 @@ function updateKing(dt){
     k.aim=Math.atan2(best.y-best.r-(k.y-14),best.x-k.x);
     if(k.cd<=0){
       k.cd=1/k.rate; const shots=Math.min(G.mod.multishot,kTargets.length);
-      for(let i=0;i<shots;i++){const tg=kTargets[i];fire('king',G.mod.kingCounter?counterOf(tg.el):null,k.x+Math.cos(k.aim)*14,k.y-14+Math.sin(k.aim)*8,tg,k.dmg,660);}
-      k.recoil=1; Sound.shoot();
+      for(let i=0;i<shots;i++){const tg=kTargets[i];fire('king',G.mod.kingCounter?counterOf(tg.el):null,k.x+Math.cos(k.aim)*14,k.y-14+Math.sin(k.aim)*8,tg,k.dmg,660,k.slot);}
+      k.recoil=1; if(k===G.king||!G.coop) Sound.shoot();
     }
   } else k.aim=angLerp(k.aim,Math.atan2(k.fy,k.fx),Math.min(1,dt*8));
 }
@@ -1546,7 +1691,7 @@ function spawnEnemy(type,lane,hpMul,el,o){
   if(lane==='r'){const act=activeLanes();lane=act[(r()*act.length)|0].id;}
   if(!el) el=G.laneEl[lane]||ELEMS[(r()*3)|0];
   const P=G.map.lanes[lane].path, s=o&&o.s?o.s:0, hp=o&&o.hp?o.hp:T.hp*hpMul;
-  const e={type,el,lane,s,off:(r()*2-1)*T.spread,hp,maxHp:hp,speed:T.speed*(T.boss?1:0.93+r()*0.14),
+  const e={id:++G.eid,type,el,lane,s,off:(r()*2-1)*T.spread,hp,maxHp:hp,speed:T.speed*(T.boss?1:0.93+r()*0.14),
     r:T.r,coin:T.coin,dps:T.dps*CURVE.keepDmg(G.level),state:'walk',flash:0,walk:r()*6,lunge:0,atk:0,x:0,y:0,dirx:0,ax:0,ay:0,txtT:-9,
     healT:2+r()*2,sumT:4.5,cast:0,inv:0,enraged:false,phase:0,order:null,dead:false};
   P.at(s,tmpP); e.x=tmpP.x; e.y=tmpP.y;
@@ -1555,7 +1700,7 @@ function spawnEnemy(type,lane,hpMul,el,o){
     G.boss=e; Sound.roar(); G.shake=Math.max(G.shake,8);
     UI.toast(T.name+(type==='dragon'?'!':'ธาตุ'+ELEM[el].name+'!'), type==='dragon'?'เปลี่ยนธาตุทุก 1/3 เลือด เตรียมหอให้ครบทุกธาตุ':'แพ้ทางธาตุ'+ELEM[counterOf(el)].name+' รวมพลังยิงให้ร่วง');
   }
-  if(type==='shaman'&&!Hints.seen.shaman&&G.phase==='wave'){Hints.mark('shaman');UI.toast('หมอผีมาแล้ว!','รักษาศัตรูรอบตัว ราชาจะเล็งยิงหมอผีก่อน');}
+  if(type==='shaman'&&!Hints.seen.shaman&&G.phase==='wave'){Hints.mark('shaman');UI.toast('หมอผีมาแล้ว!','รักษาศัตรูรอบตัว '+(G.coop?'หน้าไม้ของทุกคน':ruler(G.king.look))+'จะเล็งยิงหมอผีก่อน');}
   return e;
 }
 function updateEnemies(dt){
@@ -1677,11 +1822,14 @@ function updateTurrets(dt){
     }
     if(best){
       const want=Math.atan2(best.y-best.r-(t.y-t.h-8),best.x-t.x); t.aim=angLerp(t.aim,want,Math.min(1,dt*14));
-      if(t.cd<=0){t.cd=1/t.rate;fire('tower',t.el,t.x+Math.cos(t.aim)*16,t.y-t.h-8+Math.sin(t.aim)*10,best,t.dmg,760);t.recoil=1;Sound.tower();}
+      if(t.cd<=0){t.cd=1/t.rate;fire('tower',t.el,t.x+Math.cos(t.aim)*16,t.y-t.h-8+Math.sin(t.aim)*10,best,t.dmg,760,t.pad.id);t.recoil=1;Sound.tower();}
     }
   }
 }
-function fire(kind,el,x,y,target,dmg,spd){G.proj.push({kind,el,x,y,target,tx:target.x,ty:target.y-target.r,dmg,spd,life:1.6,ang:0,dead:false});}
+function fire(kind,el,x,y,target,dmg,spd,own){
+  G.proj.push({kind,el,x,y,target,tx:target.x,ty:target.y-target.r,dmg,spd,life:1.6,ang:0,dead:false});
+  if(NetFX.on) NetFX.push('f',kind==='king'?1:0,el?ELEM_IDX[el]:-1,Math.round(x),Math.round(y),target.id|0,spd,own==null?-1:own);   // ลูกธนู: ให้เครื่องเพื่อนวาดลูกธนูวิ่งเอง
+}
 function updateProj(dt){
   for(const p of G.proj){
     if(p.target&&!p.target.dead){p.tx=p.target.x;p.ty=p.target.y-p.target.r;}
@@ -1720,34 +1868,42 @@ function towerMatch(t){
 // =====================================================================
 //  เหรียญ: ตกพื้น → ดูดเข้าหาราชา → ซ้อนบนหลัง
 // =====================================================================
-function dropCoins(x,y,n){
+// own = เหรียญที่มีเจ้าของ (โบนัสผ่านด่านที่แบ่งให้แต่ละคน) จะบินไปหาเจ้าของเท่านั้น
+function dropCoins(x,y,n,own){
   const big=n>=12||G.coins.length>220;
   let left=n;
   while(left>0){
     const v=(big&&left>=5)?5:1; left-=v;
     const a=Math.random()*TAU,sp=30+Math.random()*75;
-    G.coins.push({x,y,z:6,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp*0.7,vz:110+Math.random()*90,v,t:0,state:0,sp:0,spin:Math.random()*TAU,dead:false});
+    G.coins.push({id:++G.cid,x,y,z:6,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp*0.7,vz:110+Math.random()*90,v,t:0,state:0,sp:0,spin:Math.random()*TAU,dead:false,own:own==null?-1:own,to:-1});
   }
 }
+// เหรียญบนพื้น → ราชา/ราชินีที่อยู่ใกล้ที่สุด (ในระยะดูด) · หลังจบด่านดูดเข้าหาคนที่ใกล้ที่สุดทั้งหมด
+function coinTaker(c){
+  if(c.own>=0){ const o=kingBySlot(c.own); if(o){ if(G.vacuum) return o; const dx=o.x-c.x,dy=o.y-12-c.y; return dx*dx+dy*dy<o.magnet*o.magnet?o:null; } c.own=-1; }
+  let best=null,bd=1e12;
+  for(const k of G.kings){const dx=k.x-c.x,dy=k.y-12-c.y,d=dx*dx+dy*dy; if((G.vacuum||d<k.magnet*k.magnet)&&d<bd){bd=d;best=k;}}
+  return best;
+}
 function updateCoins(dt){
-  const k=G.king, m2=k.magnet*k.magnet;
   for(const c of G.coins){
     c.t+=dt; c.spin+=dt*6;
     if(c.state===0){
       c.x+=c.vx*dt; c.y+=c.vy*dt; const f=Math.pow(0.03,dt); c.vx*=f; c.vy*=f;
       c.z+=c.vz*dt; c.vz-=520*dt; if(c.z<0){c.z=0;c.vz=c.vz<-45?-c.vz*0.35:0;}
-      const dx=k.x-c.x,dy=k.y-12-c.y;
-      if(c.t>0.3&&(G.vacuum||dx*dx+dy*dy<m2)&&G.phase!=='defeat'){c.state=1;c.sp=G.vacuum?160:70;}
+      if(c.t>0.3&&G.phase!=='defeat'){const k=coinTaker(c); if(k){c.state=1;c.to=k.slot;c.sp=G.vacuum?160:70;}}
       if(c.t>COIN_LIFE&&!G.vacuum) c.dead=true;
     } else {
+      const k=kingBySlot(c.to); if(!k){c.state=0;c.to=-1;continue;}   // เจ้าของหลุดจากเกม → ตกพื้นให้คนอื่นเก็บ
       c.sp=Math.min(c.sp+1500*dt,950);
       const tx=k.x,ty=k.y-22-Math.min(stackVis(k.coins),46)*2.7, dx=tx-c.x, dy=ty-c.y, d=hyp(dx,dy);
-      if(d<14){collect(c);c.dead=true;} else {c.x+=dx/d*c.sp*dt;c.y+=dy/d*c.sp*dt;c.z=Math.max(0,c.z-dt*60);}
+      if(d<14){collect(c,k);c.dead=true;} else {c.x+=dx/d*c.sp*dt;c.y+=dy/d*c.sp*dt;c.z=Math.max(0,c.z-dt*60);}
     }
   }
 }
-function collect(c){
-  const k=G.king; k.coins+=c.v; if(G.phase!=='title') G.stats.coins+=c.v; G.combo++; G.comboT=0.7; Sound.coin(G.combo);
+function collect(c,k){
+  k=k||G.king; k.coins+=c.v; if(G.phase!=='title') G.stats.coins+=c.v;
+  if(k===G.king){G.combo++; G.comboT=0.7; Sound.coin(G.combo);}
 }
 function stackVis(c){return c<=0?0:c<=24?c:Math.min(46,24+Math.floor(Math.sqrt(c-24)*2.3));}
 
@@ -1774,19 +1930,26 @@ function updatePads(dt){
   }
 }
 // ---------- ซื้อด้วยการกดปุ่มเท่านั้น ----------
-function noCoins(){ const k=G.king; Sound.deny(); if(G.t-(G.noCoinT||-9)>0.8){G.noCoinT=G.t; floatText(k.x,k.y-58,'เหรียญไม่พอ','#ffb0a6',14);} }
-function buyBuild(p){
-  if(!p||p.kind!=='tower'||p.state!=='empty'||!padOpen(p)) return false;
-  const cost=padCost(p), k=G.king;
-  if(k.coins<cost){noCoins(); return false;}
-  k.coins-=cost; spawnFlyer(p.x,p.y,6); Sound.spend(); completePad(p,cost); return true;
+// k = คนที่จ่ายเหรียญ (ไม่ระบุ = คนเล่นเครื่องนี้) · ฝั่งผู้เข้าห้อง: ส่งคำสั่งให้หัวห้องทำแทน
+function noCoins(k){
+  k=k||G.king;
+  if(k!==G.king){ if(G.coop) Net.sendTo(k.slot,{t:'nope'}); return; }
+  Sound.deny(); if(G.t-(G.noCoinT||-9)>0.8){G.noCoinT=G.t; floatText(k.x,k.y-58,'เหรียญไม่พอ','#ffb0a6',14);}
 }
-function buyUpgrade(p,el){
+function buyBuild(p,k){
+  if(!p||p.kind!=='tower'||p.state!=='empty'||!padOpen(p)) return false;
+  k=k||G.king; const cost=padCost(p);
+  if(k.coins<cost){noCoins(k); return false;}
+  if(G.client) return Client.act({a:'build',p:p.id});
+  k.coins-=cost; spawnFlyer(p.x,p.y,6,k); Sound.spend(); completePad(p,cost); return true;
+}
+function buyUpgrade(p,el,k){
   if(!p||p.kind!=='tower'||p.state!=='built') return false;
   const t=p.turret; if(!t.el&&!ELEM[el]) return false;
-  const cost=padCost(p), k=G.king;
-  if(k.coins<cost){noCoins(); return false;}
-  k.coins-=cost; if(!t.el) p.pick=el; spawnFlyer(p.ux,p.uy,6); Sound.spend(); completePad(p,cost); return true;
+  k=k||G.king; const cost=padCost(p);
+  if(k.coins<cost){noCoins(k); return false;}
+  if(G.client) return Client.act({a:'up',p:p.id,el:t.el?null:el});
+  k.coins-=cost; if(!t.el) p.pick=el; spawnFlyer(p.ux,p.uy,6,k); Sound.spend(); completePad(p,cost); return true;
 }
 function completePad(p,cost){
   if(p.state==='empty'){
@@ -1804,42 +1967,46 @@ function completePad(p,cost){
   G.stats.built++; Sound.build();   // แผงยังเปิดอยู่ → กดต่อ/เปลี่ยนธาตุได้ทันที
   Save.write();
 }
-function choosePadElement(p,el){
+function choosePadElement(p,el,k){
   if(!p||p.kind!=='tower'||p.state==='empty'||!ELEM[el]) return false;
-  const t=p.turret, k=G.king;
-  if(!t.el) return buyUpgrade(p,el);          // หอ Lv1: แตะธาตุ = อัปเกรดเป็น Lv2 ธาตุนั้น
+  const t=p.turret; k=k||G.king;
+  if(!t.el) return buyUpgrade(p,el,k);          // หอ Lv1: แตะธาตุ = อัปเกรดเป็น Lv2 ธาตุนั้น
   if(t.el===el) return false;
   const cost=BAL.attune(t);
-  if(k.coins<cost){noCoins(); return false;}
+  if(k.coins<cost){noCoins(k); return false;}
+  if(G.client) return Client.act({a:'el',p:p.id,el});
   k.coins-=cost; t.el=el; t.pop=1; applyTurret(t); G.stats.attune++;
-  ring(t.x,t.y-t.h,30,ELEM[el].c); elemBurst(t.x,t.y-t.h-6,el,14); spawnFlyer(t.x,t.y-t.h,2);
+  ring(t.x,t.y-t.h,30,ELEM[el].c); elemBurst(t.x,t.y-t.h-6,el,14); spawnFlyer(t.x,t.y-t.h,2,k);
   floatText(t.x,t.y-t.h-34,'เปลี่ยนเป็นธาตุ'+ELEM[el].name+'!',ELEM[el].l,14); Sound.attune();
   Save.write();
   return true;
 }
 // ---------- แท่นหลวง ----------
+// แท่นหลวง: ซ่อมป้อม/กำแพง = ของส่วนรวม · อาวุธ = ของคนที่จ่าย
 const royalCost={
-  repair:()=>BAL.repair(G.level), forge:()=>G.forge<6?BAL.forge[G.forge]:Infinity, wall:()=>G.wallLv<BAL.wall.length?BAL.wall[G.wallLv]:Infinity
+  repair:()=>BAL.repair(G.level), forge:k=>{k=k||G.king; return k.forge<6?BAL.forge[k.forge]:Infinity;}, wall:()=>G.wallLv<BAL.wall.length?BAL.wall[G.wallLv]:Infinity
 };
-function royalOK(act){
+function royalOK(act,k){
   if(act==='repair') return G.keep.hp<G.keep.maxHp-0.5;
-  if(act==='forge') return G.forge<6;
+  if(act==='forge') return (k||G.king).forge<6;
   if(act==='wall') return G.wallLv<BAL.wall.length;
   return false;
 }
-function royalBuy(act){
-  const k=G.king, K=G.keep; if(!royalOK(act)) return false;
-  const c=royalCost[act](); if(k.coins<c){noCoins(); return false;}
+function royalBuy(act,k){
+  k=k||G.king; const K=G.keep; if(!royalOK(act,k)) return false;
+  const c=royalCost[act](k); if(k.coins<c){noCoins(k); return false;}
+  if(G.client) return Client.act({a:'royal',r:act});
   k.coins-=c; G.stats.royal++;
-  const p=G.map.pads[0]; spawnFlyer(p.x,p.y,3);
+  const p=G.map.pads[0]; spawnFlyer(p.x,p.y,3,k);
   if(act==='repair'){const h=Math.min(K.maxHp-K.hp,K.maxHp*BAL.repairFrac); K.hp+=h; floatText(K.x,K.y-90,'+'+Math.round(h)+' พลังป้อม','#a8ffb0',15); ring(K.x,K.y-20,70,'#a8ffb0');}
-  if(act==='forge'){G.forge++; applyKing(); floatText(k.x,k.y-60,'อาวุธราชา Lv'+G.forge+'!','#ffe27a',15); ring(k.x,k.y-14,30,'#ffd04a');}
+  if(act==='forge'){k.forge++; applyKing(k); floatText(k.x,k.y-60,'อาวุธ'+ruler(k.look)+' Lv'+k.forge+'!','#ffe27a',15); ring(k.x,k.y-14,30,'#ffd04a');}
   if(act==='wall'){G.wallLv++; K.maxHp+=50; K.hp+=50; floatText(K.x,K.y-90,'กำแพง +50','#e8edf2',15); ring(K.x,K.y-20,80,'#e8edf2');}
   Sound.buy(); Save.write(); return true;
 }
-function spawnFlyer(x1,y1,n){
+function spawnFlyer(x1,y1,n,k){
   if(G.fast) return;
-  const k=G.king, top=k.y-22-stackVis(k.coins+n)*2.7;
+  k=k||G.king; if(NetFX.on) NetFX.push('y',k.slot,Math.round(x1),Math.round(y1),n);
+  const top=k.y-22-stackVis(k.coins+n)*2.7;
   for(let i=0;i<Math.min(n,8);i++){ if(G.flyers.length>40) break;
     G.flyers.push({x0:k.x,y0:top,x1:x1+(Math.random()-0.5)*16,y1:y1+(Math.random()-0.5)*16,t:-i*0.045,d:0.24+Math.random()*0.08,dead:false}); }
 }
@@ -1890,7 +2057,7 @@ const Hints={seen:Store.get('hints',{}),cur:null,
   mark(k){if(!this.seen[k]){this.seen[k]=1;Store.set('hints',this.seen);}},
   update(){
     this.cur=null;
-    if(G.phase!=='rest'&&G.phase!=='wave') return;
+    if(G.coop||(G.phase!=='rest'&&G.phase!=='wave')) return;
     const k=G.king;
     if(G.turrets.length>0) this.mark('build');
     if(G.turrets.some(t=>t.level>1)) this.mark('up');
@@ -1912,7 +2079,7 @@ const Hints={seen:Store.get('hints',{}),cur:null,
     if(!this.seen.swap&&G.phase==='rest'){
       for(const t of G.turrets){if(t.el&&towerMatch(t)<=0.8&&k.coins>=BAL.attune(t)){this.cur={x:t.pad.ux,y:t.pad.uy-26,txt:'หอนี้แพ้ทาง! ยืนตรงนี้ แล้วแตะเปลี่ยนธาตุ'};return;}}
     }
-    if(!this.seen.royal&&G.phase==='rest'&&G.level>=3){const p=G.map.pads[0]; this.cur={x:p.x,y:p.y-30,txt:'แท่นหลวง: ซ่อมป้อม · อัปอาวุธราชา'};}
+    if(!this.seen.royal&&G.phase==='rest'&&G.level>=3){const p=G.map.pads[0]; this.cur={x:p.x,y:p.y-30,txt:'แท่นหลวง: ซ่อมป้อม · อัปอาวุธ'+ruler(G.king.look)};}
   }
 };
 
@@ -1922,12 +2089,18 @@ const Hints={seen:Store.get('hints',{}),cur:null,
 function update(dt){
   G.t+=dt;
   if(G.phase==='wave') updateSpawner(dt);
-  updateKing(dt); updateEnemies(dt); updateTurrets(dt); updateProj(dt); updateCoins(dt); updatePads(dt); updateFx(dt);
+  updateKings(dt); updateEnemies(dt); updateTurrets(dt); updateProj(dt); updateCoins(dt); updatePads(dt); updateFx(dt);
   compact(G.enemies); compact(G.proj); compact(G.coins); compact(G.parts); compact(G.texts); compact(G.flyers);
   if(G.keep.inv>0) G.keep.inv-=dt;
   if(G.phase==='cleared'){G.clearT-=dt;if(G.clearT<=0&&!G.coins.length)afterClear();else if(G.clearT<-2)afterClear();}
   if(G.phase==='defeat'&&!G.endShown){G.endT-=dt;if(G.endT<=0)showEnd(false);}
   if((G.phase==='wave'||G.phase==='cleared')&&!G.fast){Save.acc+=dt; if(Save.acc>=2.5) Save.write();}   // เซฟกลางด่านทุก 2.5 วินาที
+  if(G.coop&&G.phase==='rest'&&G.kings.length){   // เล่นด้วยกัน: ทุกคนพร้อม → เริ่มด่าน · พร้อมครึ่งทีมแล้ว → นับถอยหลัง (กันเพื่อนเผลอวางมือถือแล้วทั้งทีมค้าง)
+    const r=G.kings.filter(k=>k.ready).length;
+    if(r===G.kings.length) startWave();
+    else if(r*2>=G.kings.length){ G.readyT=(G.readyT==null?COOP.readyWait:G.readyT)-dt; if(G.readyT<=0) startWave(); }
+    else G.readyT=null;
+  }
   Hints.update();
   updateCamera(dt,false);
 }
@@ -1936,12 +2109,12 @@ function frame(now){
   requestAnimationFrame(frame);
   let dt=(now-last)/1000; last=now; if(dt>0.1)dt=0.1; if(dt<0)dt=0;
   if(G.phase==='title'){acc+=dt;let n=0;while(acc>=STEP&&n<8){demoUpdate(STEP);acc-=STEP;n++;}if(n>=8)acc=0;}
-  else if(G.phase==='coop'){acc+=dt;let n=0;while(acc>=STEP&&n<8){Coop.update(STEP);acc-=STEP;n++;}if(n>=8)acc=0;}
+  else if(G.client){acc+=dt;let n=0;while(acc>=STEP&&n<8){Client.update(STEP);acc-=STEP;n++;}if(n>=8)acc=0;}   // เครื่องเพื่อน: วาดตามหัวห้อง
   else if(!G.paused&&!G.endShown&&G.phase!=='cards'){acc+=dt*G.speed;let n=0;while(acc>=STEP&&n<8){update(STEP);acc-=STEP;n++;}if(n>=8)acc=0;}
   else if(G.phase==='cards'){G.t+=dt*0.3;}
   Net.tick(dt);
   render();
-  if(G.phase==='coop') Coop.hud(); else if(G.phase!=='title') UI.sync();
+  if(G.phase!=='title') UI.sync();
 }
 
 // =====================================================================
@@ -1992,18 +2165,17 @@ function render(){
   const sx=clamp(cx,0,WORLD_W), sy=clamp(cy,0,WORLD_H), ex=clamp(cx+VW,0,WORLD_W), ey=clamp(cy+VH,0,WORLD_H);
   if(ex>sx&&ey>sy) ctx.drawImage(bg,sx*BGK,sy*BGK,(ex-sx)*BGK,(ey-sy)*BGK,sx,sy,ex-sx,ey-sy);
   drawRange();
-  if(G.phase!=='title'&&G.phase!=='coop') for(const p of G.map.pads) drawPad(p);
+  if(G.phase!=='title') for(const p of G.map.pads) drawPad(p);
   drawBanners();
   for(const c of G.coins){
-    if(c.state===0&&c.t>COIN_LIFE-5&&!G.vacuum&&((c.t*8)|0)%2===0) continue;
+    if(c.arrived||(c.state===0&&c.t>COIN_LIFE-5&&!G.vacuum&&((c.t*8)|0)%2===0)) continue;
     if(c.z<2&&c.state===0){ctx.fillStyle='rgba(10,40,10,.25)';ell(c.x+1,c.y+2,c.v>1?6:4,1.8);}
     drawCoin(c.x,c.y-c.z-4,c.v>1?6.5:4.6,c.spin);
   }
   drawList.length=0;
   for(const e of G.enemies) drawList.push(e);
   for(const t of G.turrets) drawList.push(t);
-  drawList.push(G.keep); drawList.push(G.king);
-  if(G.phase==='coop') for(const o of Coop.kings) drawList.push(o);   // ราชาของเพื่อน
+  drawList.push(G.keep); for(const o of G.kings) drawList.push(o);   // ราชา/ราชินีทุกคน
   drawList.sort((a,b)=>a.y-b.y);
   for(const o of drawList){
     if(o===G.keep) drawKeep(); else if(o.isKing) drawKing(o); else if(o.pad) drawTurret(o); else drawEnemy(o);
@@ -2101,7 +2273,7 @@ function drawPad(p){
 function drawKeep(){
   const K=G.keep,x=K.x,y=K.y,t=G.t;
   const isBehind=kg=>kg&&kg.y<y+10&&kg.y>y-150&&Math.abs(kg.x-x)<80;
-  const behind=isBehind(G.king)||(G.phase==='coop'&&Coop.kings.some(isBehind));
+  const behind=G.kings.some(isBehind);
   const hit=K.flash>0.45, walls=G.wallLv;
   ctx.save(); if(behind) ctx.globalAlpha=0.55;
   ctx.fillStyle='rgba(8,30,10,.32)'; ell(x+12,y+38,86,26);
@@ -2199,6 +2371,8 @@ function drawKing(k){
   ctx.fillStyle='rgba(8,30,10,.3)'; ell(x+2,y+1,13,5.5);
   const away=k.fy<-0.35;
   if(!away){drawStack(k,x,by);drawCape(k,x,by,sp);}
+  if(k.look==='queen'){ drawQueen(k,C,x,y,by,away,moving); }
+  else {
   const st=moving?Math.sin(k.walk*2.2)*3:0;
   ctx.fillStyle='#4a2f1a'; ell(x-5+st*0.4,y-1,4,2.6); ell(x+5-st*0.4,y-1,4,2.6);
   ctx.fillStyle=C.robe; circ(x,by-11,10.5);
@@ -2216,9 +2390,44 @@ function drawKing(k){
   ctx.fillStyle='#ffd04a'; ctx.beginPath(); ctx.moveTo(x-7,cyy+3.5); ctx.lineTo(x-7.4,cyy-3.4); ctx.lineTo(x-3.6,cyy-0.2); ctx.lineTo(x,cyy-5.4); ctx.lineTo(x+3.6,cyy-0.2); ctx.lineTo(x+7.4,cyy-3.4); ctx.lineTo(x+7,cyy+3.5); ctx.closePath(); ctx.fill();
   ctx.fillStyle='#d9a21a'; ctx.fillRect(x-7,cyy+1.8,14,1.8);
   ctx.fillStyle='#e0382c'; circ(x,cyy+0.6,1.35);
-  drawCrossbow(x,by-12,k.aim,k.recoil);
+  }
+  drawCrossbow(x,by-12,k.aim,k.recoil,k.forge);
   if(away){drawCape(k,x,by,sp);drawStack(k,x,by);}
-  if(k.name&&G.phase==='coop') label(k.name,x,by-50,12.5,C.tag,800);   // ป้ายชื่อเหนือหัว (เล่นด้วยกัน)
+  if(k.name&&(G.coop||G.phase==='coop')) label(k.name,x,by-50,12.5,C.tag,800);   // ป้ายชื่อเหนือหัว (เล่นด้วยกัน)
+}
+// ราชินี: กระโปรงบาน ผมยาว มงกุฎเล็ก (ใช้ผ้าคลุม/หน้าไม้/กองเหรียญเดียวกับราชา)
+function drawQueen(k,C,x,y,by,away,moving){
+  const sw=moving?Math.sin(k.walk*2.2)*1.2:0;
+  ctx.fillStyle=C.dark; ctx.beginPath(); ctx.moveTo(x-7.6,by-12); ctx.quadraticCurveTo(x-14+sw,by-1.6,x-12.6+sw,by+1.4);
+  ctx.quadraticCurveTo(x,by+4.6,x+12.6+sw,by+1.4); ctx.quadraticCurveTo(x+14+sw,by-1.6,x+7.6,by-12); ctx.closePath(); ctx.fill();
+  ctx.fillStyle=C.robe; ctx.beginPath(); ctx.moveTo(x-6.8,by-12); ctx.quadraticCurveTo(x-11.8+sw,by-2.6,x-10.4+sw,by-0.2);
+  ctx.quadraticCurveTo(x,by+2.6,x+10.4+sw,by-0.2); ctx.quadraticCurveTo(x+11.8+sw,by-2.6,x+6.8,by-12); ctx.closePath(); ctx.fill();
+  ctx.fillStyle=C.robe; ell(x,by-14.2,7.8,6.6);
+  ctx.fillStyle='#ffd04a'; ctx.fillRect(x-7.4,by-10.6,14.8,2.4);
+  if(!away){ ctx.fillStyle=HAIR; rr(ctx,x-9.4,by-26,4.8,13.6,2.4); ctx.fill(); rr(ctx,x+4.6,by-26,4.8,13.6,2.4); ctx.fill(); }
+  ctx.fillStyle='#f4f1ea'; ell(x,by-19.2,7.4,2.8);
+  ctx.fillStyle='#ffd04a'; circ(x,by-17.6,1.25);
+  ctx.fillStyle=HAIR; ell(x,by-24.6,9.2,9.1);
+  ctx.fillStyle='#f5cda0'; circ(x,by-24.6,7.6);
+  if(!away){
+    const ex=k.fx*2;
+    ctx.fillStyle=HAIR; ctx.beginPath(); ctx.moveTo(x-7.7,by-25); ctx.quadraticCurveTo(x-7.6,by-33,x,by-32.6);
+    ctx.quadraticCurveTo(x+7.6,by-33,x+7.7,by-25); ctx.quadraticCurveTo(x+4.6,by-29.2,x+0.8+ex*0.3,by-28.2);
+    ctx.quadraticCurveTo(x-3.4,by-29.4,x-7.7,by-25); ctx.closePath(); ctx.fill();
+    ctx.fillStyle=HAIR_L; ell(x-3.2,by-30.4,2.6,0.9);
+    ctx.fillStyle='#2b1a10'; ell(x-2.7+ex,by-24.4,1.1,1.4); ell(x+2.7+ex,by-24.4,1.1,1.4);
+    ctx.fillStyle='#ffffff'; circ(x-2.4+ex,by-24.9,0.42); circ(x+3+ex,by-24.9,0.42);
+    ctx.globalAlpha=0.5; ctx.fillStyle='#f08a9a'; circ(x-4.5+ex*0.6,by-22.3,1.5); circ(x+4.5+ex*0.6,by-22.3,1.5); ctx.globalAlpha=1;
+    ctx.strokeStyle='#cc3d58'; ctx.lineWidth=1.1; ctx.lineCap='round'; ctx.beginPath(); ctx.arc(x+ex*0.7,by-22,1.8,0.2*Math.PI,0.8*Math.PI); ctx.stroke();
+  } else {
+    ctx.fillStyle=HAIR; ell(x,by-25,8.2,8.4); rr(ctx,x-4.6,by-25,9.2,12.6,4.2); ctx.fill();
+    ctx.fillStyle=HAIR_L; ell(x-2.4,by-29.4,2.4,1);
+  }
+  const ty=by-32.4;
+  ctx.fillStyle='#ffd04a'; ctx.beginPath(); ctx.moveTo(x-5.8,ty+2.4); ctx.lineTo(x-4.8,ty-1.4); ctx.lineTo(x-2.3,ty+0.6); ctx.lineTo(x,ty-3.9);
+  ctx.lineTo(x+2.3,ty+0.6); ctx.lineTo(x+4.8,ty-1.4); ctx.lineTo(x+5.8,ty+2.4); ctx.closePath(); ctx.fill();
+  ctx.fillStyle='#d9a21a'; ctx.fillRect(x-5.8,ty+1.2,11.6,1.3);
+  ctx.fillStyle='#e04f9a'; circ(x,ty-0.1,1.25);
 }
 function drawCape(k,x,by,sp){
   const sw=clamp(-k.vx/190,-1,1)*4, fl=Math.sin(G.t*11)*Math.min(1,sp/150)*1.6;
@@ -2236,8 +2445,8 @@ function drawStack(k,x,by){
   }
   const f=(n-1)/46; ctx.fillStyle='#fff3b8'; ell(bx+lean*f*f*22-2,b0-(n-1)*2.7-0.6,2.3,0.9);
 }
-function drawCrossbow(x,y,a,rec){
-  const fl=G.forge||1, gold=fl>=4;
+function drawCrossbow(x,y,a,rec,forge){
+  const fl=forge||1, gold=fl>=4;
   ctx.save(); ctx.translate(x+Math.cos(a)*8,y+Math.sin(a)*4); ctx.rotate(a); ctx.translate(-rec*3,0);
   ctx.fillStyle=gold?'#c9971f':'#5b3a1e'; rr(ctx,-6,-1.8,16+(fl>=2?2:0),3.6,1.5); ctx.fill();
   ctx.strokeStyle=gold?'#ffd04a':(fl>=2?'#4b5866':'#2e1d0e'); ctx.lineWidth=2.4+(fl>=3?0.6:0); ctx.beginPath(); ctx.arc(5,0,8+(fl>=5?1.5:0),-1.2,1.2); ctx.stroke();
@@ -2458,9 +2667,8 @@ function drawIndicators(cx,cy){
     if(G.boss&&!G.boss.dead) pts.push({x:G.boss.x,y:G.boss.y-20,c:'#ff7ab0',el:G.boss.el,boss:true});
   } else if(G.phase==='rest'){
     for(const L of G.map.lanes){const el=G.laneEl[L.id];if(L.from<=G.level&&L.banner&&el) pts.push({x:L.banner.x,y:L.banner.y-20,c:ELEM[el].c,el});}
-  } else if(G.phase==='coop'){
-    for(const o of Coop.kings) pts.push({x:o.x,y:o.y-20,c:o.color.robe});   // ลูกศรชี้ไปหาเพื่อนที่อยู่นอกจอ
   }
+  if(G.coop) for(const o of G.kings) if(o!==G.king) pts.push({x:o.x,y:o.y-20,c:o.color.robe});   // ลูกศรชี้ไปหาเพื่อนที่อยู่นอกจอ
   if(G.keepAlarm>0) pts.push({x:G.keep.x,y:G.keep.y-30,c:'#ffd04a',keep:true});
   const top=(G.boss&&!G.boss.dead?150:104)+safeTop(), bot=CH-30, left=22, right=CW-22;
   for(const p of pts){
@@ -2530,7 +2738,7 @@ const Panel={
         <p class="pp-sub">แตะเพื่อซื้อทันที · เงินที่จ่ายตรงนี้ไม่คืน</p>
         <div class="pp-els">
           <button class="rbtn" data-act="repair">${icon('wrench','')}<b>ซ่อมป้อม</b><small>+${Math.round(BAL.repairFrac*100)}% พลังป้อม</small><span class="pr"><i class="coin-ico"></i><span id="rcRepair"></span></span></button>
-          <button class="rbtn" data-act="forge">${icon('bow','')}<b>อาวุธราชา</b><small id="rsForge"></small><span class="pr"><i class="coin-ico"></i><span id="rcForge"></span></span></button>
+          <button class="rbtn" data-act="forge">${icon('bow','')}<b>อาวุธ${ruler(G.king.look)}</b><small id="rsForge"></small><span class="pr"><i class="coin-ico"></i><span id="rcForge"></span></span></button>
           <button class="rbtn" data-act="wall">${icon('wall','')}<b>เสริมกำแพง</b><small>+50 พลังป้อมสูงสุด</small><span class="pr"><i class="coin-ico"></i><span id="rcWall"></span></span></button>
         </div>`;
       return;
@@ -2582,10 +2790,27 @@ $('padPanel').addEventListener('click',e=>{
 // =====================================================================
 //  HUD (ตัวเลขบนจอ)
 // =====================================================================
-function foesLeft(){const S=G.spawner;return (S?S.total-S.spawned:0)+G.enemies.length;}
+function foesLeft(){if(G.client) return G.foes|0; const S=G.spawner;return (S?S.total-S.spawned:0)+G.enemies.length;}
 const UI={
   last:{},
-  reset(){this.last={}; this.dirty=true; this.setDock(false); app.classList.remove('boss-on');},
+  reset(){this.last={}; this.dirty=true; this.setDock(false); app.classList.remove('boss-on');
+    $('teamRow').hidden=true; $('hostWait').hidden=true; const w=$('btnWave'); w.classList.remove('ready-on'); w.classList.add('btn-go');},
+  // เล่นด้วยกัน: แถบเพื่อนร่วมทีม (เหรียญ + พร้อม) และปุ่มพร้อมเริ่มด่าน
+  team(rb){
+    const me=G.king; if(!me) return;
+    if(rb){
+      const n=G.kings.length, r=G.kings.filter(k=>k.ready).length, w=$('btnWave');
+      const cd=G.readyT!=null&&r<n?Math.max(1,Math.ceil(G.readyT)):0;   // นับถอยหลังเริ่มเอง
+      const lab=me.ready?(cd?`✓ พร้อม · เริ่มใน ${cd} วิ (${r}/${n})`:`✓ พร้อมแล้ว · รอเพื่อน (${r}/${n})`):
+        cd?`พร้อมเริ่ม · อีก ${cd} วิ (${r}/${n})`:`พร้อมเริ่มด่าน ${G.level} (${r}/${n})`;
+      if(w.textContent!==lab){w.textContent=lab; w.classList.toggle('ready-on',me.ready); w.classList.toggle('btn-go',!me.ready);}
+      const key=G.kings.map(k=>k.slot+':'+k.coins+':'+(k.ready?1:0)+':'+k.name+k.color.id+k.look).join('|');
+      if(this.last.tk!==key){this.last.tk=key; this.dirty=true;
+        $('teamRow').innerHTML=G.kings.map(k=>`<span class="tm${k===me?' me':''}"><span class="sk">${kingSVG(k.color,k.look)}</span><b>${esc(k.name)}</b>`+
+          `<i class="coin-ico"></i><em>${k.coins}</em>${k.ready?'<span class="ok">✓</span>':''}</span>`).join('');}
+    }
+    if(this.last.tr!==rb){this.last.tr=rb; $('teamRow').hidden=!rb; this.dirty=true;}
+  },
   put(id,v){if(this.last[id]===v)return false;this.last[id]=v;$(id).textContent=v;return true;},
   sync(){
     const c=G.king.coins;
@@ -2609,6 +2834,8 @@ const UI={
     }
     Panel.update();
     const rb=G.phase==='rest'&&!Panel.pad&&!G.endShown; if(this.last.rb!==rb){this.last.rb=rb;$('restBar').hidden=!rb;this.dirty=true;}
+    if(G.coop) this.team(rb);
+    const hw=!!(G.client&&G.hostPaused&&!G.endShown); if(this.last.hw!==hw){this.last.hw=hw;$('hostWait').hidden=!hw;}
     this.dock();
   },
   // แผงล่างจอจะบังราชาไหม? ถ้าบัง → ย้ายขึ้นไปบน, ถ้าราชาเดินขึ้นมาแล้ว → ย้ายกลับลงล่าง
@@ -2619,7 +2846,8 @@ const UI={
     if(!k||!vis){ if(this.dockTop) this.setDock(false); return; }
     if(this.dirty||vis!==this.dockEl){
       this.dockEl=vis; this.dirty=false;
-      this.dockH=vis===pp?pp.offsetHeight+14:rb.firstElementChild.offsetHeight+rb.lastElementChild.offsetHeight+10+22;
+      let h=22; if(vis!==pp) for(const c of rb.children) if(!c.hidden) h+=c.offsetHeight+10;
+      this.dockH=vis===pp?pp.offsetHeight+14:h;
     }
     const feet=(k.y-cam.y)*SCALE, lim=CH-safeBottom()-this.dockH;
     if(!this.dockTop&&feet>lim-8) this.setDock(true);
@@ -2649,6 +2877,7 @@ function refreshTitle(){
   const r=$('records'); r.hidden=!d.runs;
   if(d.runs) r.innerHTML=`ผ่านไกลสุด <b>${d.best}/${MAX_LEVEL} ด่าน</b> · ชนะ <b>${d.wins}</b> ครั้ง · เล่นไป <b>${d.runs}</b> รอบ`;
   const how=$('howto'); how.hidden=d.runs>0; howLabel();
+  RulerPick.render();
 }
 function howLabel(){const h=$('howto').hidden,b=$('btnHow'); b.setAttribute('aria-expanded',String(!h)); b.setAttribute('aria-label',h?'วิธีเล่น':'ซ่อนวิธีเล่น'); b.classList.toggle('on',!h);}
 function startFresh(){Sound.init(); newRun();}
@@ -2657,7 +2886,8 @@ function continueRun(){
   try{loadRun(s);}catch(e){console.error(e); Save.clear(); newRun();}   // เซฟเสีย → เริ่มรอบใหม่แทน
 }
 function surrender(){
-  if(G.bossDown!=null){bankHonor(0,HONOR.boss[G.bossDown]); G.bossDown=null;}
+  if(G.client) return;
+  if(G.bossDown!=null){const bh=HONOR.boss[G.bossDown]; bankHonor(0,bh); if(NetFX.on) NetFX.push('h',0,bh,G.level,0); G.bossDown=null;}
   Save.clear(); G.paused=false; $('scrPause').hidden=true; G.phase='defeat'; Sound.lose();
   showEnd(false,true);
 }
@@ -2678,7 +2908,7 @@ const Hall={
     $('hallHonor').textContent=Meta.d.honor;
     $('hallNote').textContent=s?`ของที่ซื้อตอนนี้ใช้ได้ตั้งแต่รอบใหม่ · รอบที่ค้างไว้ (ด่าน ${s.level}) ยังใช้ค่าเดิม`:'ซื้อครั้งเดียว ได้ผลทุกรอบ · ผ่านด่านและล้มบอสเพื่อสะสมเพิ่ม';
     $('hallList').innerHTML=META.map(m=>this.row(m)).join('');
-    $('btnHallPlay').textContent=s?`เล่นต่อ · ด่าน ${s.level}`:'เริ่มรอบใหม่';
+    $('btnHallPlay').textContent=s?`เล่นต่อ · ด่าน ${s.level}`:'เริ่มรอบใหม่'; $('btnHallPlay').hidden=Net.inRoom();   // อยู่ในห้องเล่นด้วยกัน: เริ่มรอบจากห้องรอแทน
     $('btnRefund').hidden=Meta.spent()===0;
   },
   row(m){
@@ -2706,12 +2936,12 @@ $('btnPlay').addEventListener('click',()=>{ if(Save.get()) armOr($('btnPlay'),'�
 $('btnContinue').addEventListener('click',()=>{Sound.init(); continueRun();});
 $('btnHall').addEventListener('click',()=>Hall.open('title'));
 $('btnHow').addEventListener('click',()=>{const h=$('howto'); h.hidden=!h.hidden; howLabel();});
-$('btnWave').addEventListener('click',()=>startWave());
+$('btnWave').addEventListener('click',()=>{ if(G.coop) CoopGame.toggleReady(); else startWave(); });
 $('btnPause').addEventListener('click',()=>togglePause());
 $('btnResume').addEventListener('click',()=>togglePause(false));
 $('btnSound').addEventListener('click',()=>{Sound.on=!Sound.on;Store.set('sound',Sound.on);soundLabel();if(Sound.on)Sound.init();});
-$('btnRestart').addEventListener('click',()=>armOr($('btnRestart'),'แตะอีกครั้งเพื่อยอมแพ้รอบนี้',surrender));
-$('btnHome').addEventListener('click',goTitle);
+$('btnRestart').addEventListener('click',()=>armOr($('btnRestart'),G.coop?'แตะอีกครั้ง: ยอมแพ้ทั้งทีม':'แตะอีกครั้งเพื่อยอมแพ้รอบนี้',surrender));
+$('btnHome').addEventListener('click',()=>{ if(G.coop) armOr($('btnHome'),Net.role==='host'?'แตะอีกครั้ง: ปิดห้อง':'แตะอีกครั้ง: ออกจากห้อง',()=>CoopGame.quit()); else goTitle(); });
 $('btnEndHall').addEventListener('click',()=>Hall.open('end'));
 $('btnAgain').addEventListener('click',()=>newRun());
 $('btnHome2').addEventListener('click',goTitle);
@@ -2740,8 +2970,10 @@ const Wake={lock:null,
   async on(){try{if(navigator.wakeLock&&!this.lock&&!document.hidden){this.lock=await navigator.wakeLock.request('screen'); this.lock.addEventListener('release',()=>{this.lock=null;});}}catch(e){this.lock=null;}},
   off(){try{if(this.lock)this.lock.release();}catch(e){} this.lock=null;}
 };
+const rd1=v=>Math.round(v*10)/10;
+function cleanMeta(m){const o={}; if(m&&typeof m==='object') for(const id of ['treasury','heirloom']) o[id]=clamp(m[id]|0,0,(META_BY[id]||{cost:[]}).cost.length); return o;}
 const Net={
-  peer:null, role:null, code:'', state:'off', err:'', me:-1, players:[], conns:{}, hostConn:null, kings:{}, heard:{},
+  peer:null, role:null, code:'', state:'off', err:'', me:-1, players:[], conns:{}, hostConn:null, heard:{},
   timers:[], joinT:0, sendAcc:0, notice:'', noticeT:0,
   opts(){
     const o={debug:0}, q=new URLSearchParams(location.search).get('peer');   // ทดสอบในเครื่อง: ?peer=127.0.0.1:9000
@@ -2749,15 +2981,16 @@ const Net={
     return o;
   },
   newCode(){let s='';for(let i=0;i<4;i++)s+=NET.CODE_CH[(Math.random()*NET.CODE_CH.length)|0];return s;},
-  inRoom(){return !!this.role&&(this.state==='lobby'||this.state==='walk');},
-  changed(){Lobby.render(); Coop.hud(true);},
+  inRoom(){return !!this.role&&(this.state==='lobby'||this.state==='game');},
+  changed(){Lobby.render();},
   note(t){this.notice=t; this.noticeT=performance.now(); this.changed();},
+  myMeta(){return {treasury:Meta.lv('treasury'),heirloom:Meta.lv('heirloom')};},   // แต้มต่อส่วนตัว (เหรียญตั้งต้น + อาวุธ)
   reset(){
     for(const t of this.timers) clearInterval(t); this.timers=[]; clearTimeout(this.joinT);
     const p=this.peer; this.peer=null; if(p) setTimeout(()=>{try{p.destroy();}catch(e){}},250);   // หน่วงนิด ให้ข้อความลาก่อนส่งออกไปทัน
-    this.role=null; this.code=''; this.me=-1; this.players=[]; this.conns={}; this.hostConn=null; this.kings={}; this.heard={}; this.state='off'; this.sendAcc=0;
+    this.role=null; this.code=''; this.me=-1; this.players=[]; this.conns={}; this.hostConn=null; this.heard={}; this.state='off'; this.sendAcc=0;
   },
-  fail(msg){const inWalk=G.phase==='coop'; this.reset(); this.state='error'; this.err=msg; Wake.off(); if(inWalk) Coop.exit(); this.changed();},
+  fail(msg){const inGame=!!G.coop; this.reset(); this.state='error'; this.err=msg; Wake.off(); if(inGame) CoopGame.toLobby(); this.changed();},
   lost(msg){if(this.role) this.fail(msg);},
   // ---------- หัวห้อง ----------
   async host(){
@@ -2773,7 +3006,7 @@ const Net={
     }
     if(!peer) return this.fail('สร้างห้องไม่สำเร็จ ลองใหม่อีกครั้ง');
     const p=peer; this.peer=p; this.code=code; this.role='host'; this.state='lobby'; this.me=0;
-    this.players=[{slot:0,name:Profile.d.name||'ราชา',color:Profile.d.color,ready:true,host:true,rtt:0,stale:false}];
+    this.players=[{slot:0,name:Profile.d.name||ruler(Profile.d.look),color:Profile.d.color,look:Profile.d.look,meta:this.myMeta(),ready:true,host:true,rtt:0,stale:false}];
     p.on('connection',c=>{ if(this.peer===p) this.accept(c); else try{c.close();}catch(e){} });
     p.on('disconnected',()=>{ setTimeout(()=>{ if(this.peer===p&&p.disconnected&&!p.destroyed) try{p.reconnect();}catch(e){} },1500); });
     p.on('error',e=>{ if(this.peer===p&&e&&/network|server|socket/.test(e.type||'')) this.note('สัญญาณเซิร์ฟเวอร์จับคู่หลุด กำลังต่อใหม่… (คนที่อยู่ในห้องยังเล่นต่อได้)'); });
@@ -2805,7 +3038,8 @@ const Net={
     if(this.state!=='lobby') return deny('started');
     if(this.players.length>=NET.MAX) return deny('full');
     let slot=1; while(this.players.some(p=>p.slot===slot)) slot++;
-    const P={slot,name:cleanName(m.name)||('ราชา '+(slot+1)),color:this.freeColor(m.color,-1),ready:false,host:false,rtt:0,stale:false};
+    const look=m.look==='queen'?'queen':'king';
+    const P={slot,name:cleanName(m.name)||(ruler(look)+' '+(slot+1)),color:this.freeColor(m.color,-1),look,meta:cleanMeta(m.meta),ready:false,host:false,rtt:0,stale:false};
     this.players.push(P); this.players.sort((a,b)=>a.slot-b.slot);
     this.conns[slot]=c; this.heard[slot]=performance.now();
     try{c.send({t:'welcome',slot,code:this.code});}catch(e){}
@@ -2820,26 +3054,33 @@ const Net={
   },
   hostMsg(slot,m){
     const P=this.players.find(p=>p.slot===slot); if(!P) return;
-    if(m.t==='set'){
-      if(typeof m.name==='string'){const n=cleanName(m.name); if(n) P.name=n;}
-      if(typeof m.color==='string'&&this.freeColor(m.color,slot)===m.color) P.color=m.color;   // สีซ้ำกับคนอื่น → ไม่ให้เปลี่ยน
-      if(m.ready!=null&&this.state==='lobby') P.ready=!!m.ready;
-      this.broadcastLobby();
+    switch(m.t){
+      case 'pos': CoopGame.remotePos(slot,m.p); break;
+      case 'act': CoopGame.onAct(slot,m); break;
+      case 'pong': if(typeof m.s==='number'){ P.rtt=Math.max(0,Math.round(performance.now()-m.s)); P.stale=false; } break;
+      case 'set':
+        if(this.state!=='lobby') break;
+        if(typeof m.name==='string'){const n=cleanName(m.name); if(n) P.name=n;}
+        if(typeof m.color==='string'&&this.freeColor(m.color,slot)===m.color) P.color=m.color;   // สีซ้ำกับคนอื่น → ไม่ให้เปลี่ยน
+        if(m.look==='king'||m.look==='queen') P.look=m.look;
+        if(m.meta) P.meta=cleanMeta(m.meta);
+        if(m.ready!=null) P.ready=!!m.ready;
+        this.broadcastLobby(); break;
+      case 'bye': this.drop(slot,'ออกจากห้อง'); break;
     }
-    else if(m.t==='pong'&&typeof m.s==='number'){ P.rtt=Math.max(0,Math.round(performance.now()-m.s)); P.stale=false; }
-    else if(m.t==='pos'&&Array.isArray(m.p)&&m.p.length>=4&&m.p.every(Number.isFinite)){ this.kings[slot]=m.p.slice(0,4); }
-    else if(m.t==='bye'){ this.drop(slot,'ออกจากห้อง'); }
   },
   drop(slot,why){
-    const c=this.conns[slot]; delete this.conns[slot]; delete this.kings[slot]; delete this.heard[slot];
+    const c=this.conns[slot]; delete this.conns[slot]; delete this.heard[slot];
     if(c) setTimeout(()=>{try{c.close();}catch(e){}},200);
     const i=this.players.findIndex(p=>p.slot===slot); if(i<0) return;
-    const P=this.players[i]; this.players.splice(i,1); Coop.removeKing(slot);
+    const P=this.players[i]; this.players.splice(i,1);
+    if(G.coop&&!G.client) CoopGame.dropPlayer(slot,P);
     this.notice=P.name+' '+(why||'ออกจากห้อง'); this.noticeT=performance.now();
     this.broadcastLobby();
   },
-  lobbyMsg(){return {t:'lobby',state:this.state,code:this.code,players:this.players.map(p=>({slot:p.slot,name:p.name,color:p.color,ready:p.ready,host:p.host,rtt:p.rtt,stale:!!p.stale}))};},
+  lobbyMsg(){return {t:'lobby',state:this.state,code:this.code,players:this.players.map(p=>({slot:p.slot,name:p.name,color:p.color,look:p.look,ready:p.ready,host:p.host,rtt:p.rtt,stale:!!p.stale}))};},
   sendAll(m){for(const s in this.conns){try{this.conns[s].send(m);}catch(e){}}},
+  sendTo(slot,m){const c=this.conns[slot]; if(c) try{c.send(m);}catch(e){}},
   broadcastLobby(){this.sendAll(this.lobbyMsg()); this.changed();},
   hostPing(){
     const now=performance.now();
@@ -2853,16 +3094,17 @@ const Net={
   },
   canStart(){return this.role==='host'&&this.state==='lobby'&&this.players.length>=2&&this.players.every(p=>p.ready);},
   readyCount(){return this.players.filter(p=>!p.host&&p.ready).length;},
-  start(){
+  // หัวห้องกดเริ่ม → สร้างแผนที่ แล้วส่งให้ทุกเครื่อง
+  startGame(){
     if(!this.canStart()) return false;
-    this.state='walk'; this.kings={}; const seed=(Math.random()*2147483647)|0;
-    this.sendAll({t:'start',mode:'walk',seed}); this.broadcastLobby();
-    Coop.enter(seed); return true;
-  },
-  endWalk(){
-    if(this.role!=='host'||this.state!=='walk') return;
-    this.state='lobby'; this.kings={}; for(const p of this.players) if(!p.host) p.ready=false;
-    this.broadcastLobby(); Coop.exit();
+    this.state='game';
+    const seed=(Math.random()*2147483647)|0;
+    const roster=this.players.map(p=>({slot:p.slot,name:p.name,color:p.color,look:p.look,meta:p.slot===0?this.myMeta():(p.meta||{})}));
+    const md=mapToData(genMap(seed));   // ทุกเครื่อง (รวมหัวห้อง) ใช้แผนที่ชุดเดียวกันเป๊ะ
+    CoopGame.hostStart(seed,roster,md);
+    this.sendAll({t:'go',seed,roster,map:md,hm:Object.assign({},G.runMeta)});
+    this.broadcastLobby();
+    return true;
   },
   // ---------- ผู้เล่นที่เข้าห้อง ----------
   async join(code){
@@ -2883,7 +3125,7 @@ const Net={
     p.on('open',()=>{
       if(this.peer!==p) return;
       const c=p.connect(NET.PREFIX+code,{reliable:true,serialization:'json'}); this.hostConn=c;
-      c.on('open',()=>{ if(this.peer===p) try{c.send({t:'hello',v:NET.PROTO,name:Profile.d.name,color:Profile.d.color});}catch(e){} });
+      c.on('open',()=>{ if(this.peer===p) try{c.send({t:'hello',v:NET.PROTO,name:Profile.d.name,color:Profile.d.color,look:Profile.d.look,meta:this.myMeta()});}catch(e){} });
       c.on('data',m=>{ if(this.peer===p) this.guestMsg(m); });
       c.on('close',()=>{ if(this.peer===p) this.lost(this.state==='connecting'?'ต่อห้องไม่สำเร็จ ลองใหม่อีกครั้ง':'หลุดจากห้อง (หัวห้องออก หรือสัญญาณหาย)'); });
       c.on('error',()=>{});
@@ -2893,6 +3135,8 @@ const Net={
     if(!m||typeof m!=='object') return;
     this.heard.h=performance.now();
     switch(m.t){
+      case 's': Client.snap(m); break;
+      case 'ping': try{this.hostConn.send({t:'pong',s:m.s});}catch(e){} break;
       case 'welcome':
         clearTimeout(this.joinT); this.me=m.slot|0; this.state='lobby';
         this.timers.push(setInterval(()=>this.guestWatch(),NET.PING_MS)); Wake.on(); Sound.coin(4); this.changed(); break;
@@ -2900,115 +3144,295 @@ const Net={
         this.fail({full:'ห้องเต็มแล้ว (สูงสุด 4 คน)',started:'ห้องนี้กำลังเล่นอยู่ รอให้จบก่อนแล้วค่อยเข้า',version:'เกมของคุณกับหัวห้องเป็นคนละรุ่น · รีเฟรชหน้าเกมทั้งสองเครื่อง'}[m.why]||'เข้าห้องไม่ได้'); break;
       case 'lobby':
         if(!Array.isArray(m.players)) break;
-        this.players=m.players.slice(0,NET.MAX).map(p=>({slot:p.slot|0,name:cleanName(p.name)||'ราชา',color:KC_BY[p.color]?p.color:'blue',ready:!!p.ready,host:!!p.host,rtt:Math.max(0,p.rtt|0),stale:!!p.stale}));
+        this.players=m.players.slice(0,NET.MAX).map(p=>({slot:p.slot|0,name:cleanName(p.name)||'ราชา',color:KC_BY[p.color]?p.color:'blue',look:p.look==='queen'?'queen':'king',ready:!!p.ready,host:!!p.host,rtt:Math.max(0,p.rtt|0),stale:!!p.stale}));
         if(this.me>=0&&!this.players.some(p=>p.slot===this.me)){ this.lost('หัวห้องเอาคุณออกจากห้อง'); break; }
-        if(m.state==='lobby'&&this.state==='walk'){ this.state='lobby'; Coop.exit(); }
-        if(G.phase==='coop') Coop.syncRoster();
+        if(m.state==='lobby'&&this.state==='game'){ this.state='lobby'; if(G.coop&&!G.endShown) CoopGame.toLobby(); }   // หัวห้องจบเกม
+        else if(m.state==='game'&&this.state==='lobby'&&!G.coop) this.state='game';
         this.changed(); break;
-      case 'ping': try{this.hostConn.send({t:'pong',s:m.s});}catch(e){} break;
-      case 'start': if(this.state==='lobby'){ this.state='walk'; Coop.enter(m.seed|0); this.changed(); } break;
-      case 'kings': if(Array.isArray(m.k)) Coop.applyKings(m.k); break;
+      case 'go': if(this.state==='lobby'||this.state==='game'){ this.state='game'; CoopGame.clientStart(m); } break;
+      case 'cards': Client.cards(m); break;
+      case 'picked': Client.picked(m); break;
+      case 'end': Client.end(m); break;
+      case 'nope': Client.denied(); break;
       case 'bye': this.lost('หัวห้องปิดห้องแล้ว'); break;
     }
   },
   guestWatch(){ if(this.role==='guest'&&performance.now()-(this.heard.h||0)>NET.DROP_MS) this.lost('ขาดการติดต่อกับหัวห้อง'); },
   // ---------- ใช้ร่วมกัน ----------
   setMine(o){
-    if(!this.inRoom()) return;
+    if(!this.inRoom()||this.state!=='lobby') return;
     if(this.role==='host'){
       const P=this.players.find(p=>p.slot===0); if(!P) return;
       if(o.name!=null){const n=cleanName(o.name); if(n) P.name=n;}
       if(o.color!=null&&this.freeColor(o.color,0)===o.color) P.color=o.color;
+      if(o.look==='king'||o.look==='queen') P.look=o.look;
       this.broadcastLobby();
     } else if(this.hostConn){ try{this.hostConn.send(Object.assign({t:'set'},o));}catch(e){} }
   },
   leave(){
     if(!this.role&&this.state!=='connecting') return;
     try{ if(this.role==='host') this.sendAll({t:'bye'}); else if(this.hostConn) this.hostConn.send({t:'bye'}); }catch(e){}
-    const inWalk=G.phase==='coop'; this.reset(); this.err=''; Wake.off(); if(inWalk) Coop.exit(); this.changed();
+    this.reset(); this.err=''; Wake.off(); this.changed();
   },
-  // ส่งตำแหน่งราชา 15 ครั้ง/วินาที: ผู้เล่น → หัวห้อง → ทุกคน
+  // ระหว่างเกม: หัวห้องส่งภาพสถานะ 15 ครั้ง/วินาที · ผู้เข้าห้องส่งตำแหน่งตัวเองกลับไป
   tick(dt){
-    if(this.state!=='walk'||G.phase!=='coop'||!G.king) return;
+    if(this.state!=='game'||!G.coop) return;
     this.sendAcc+=dt; if(this.sendAcc<1/NET.SEND_HZ) return; this.sendAcc=0;
-    const k=G.king, mine=[Math.round(k.x*10)/10,Math.round(k.y*10)/10,Math.round(k.vx),Math.round(k.vy)];
-    if(this.role==='guest'){ try{this.hostConn.send({t:'pos',p:mine});}catch(e){} return; }
-    const list=[[0,...mine]]; for(const s in this.kings) list.push([+s,...this.kings[s]]);
-    this.sendAll({t:'kings',k:list}); Coop.applyKings(list);
+    if(this.role==='host'){ if(Object.keys(this.conns).length) this.sendAll(CoopGame.snapshot()); else NetFX.take(); }
+    else if(G.client&&G.king&&this.hostConn){ const k=G.king; try{this.hostConn.send({t:'pos',p:[rd1(k.x),rd1(k.y),Math.round(k.vx),Math.round(k.vy)]});}catch(e){} }
   }
 };
-// ---------- ทดสอบเดินด้วยกัน: แผนที่เดียวกัน เห็นราชาของทุกคน ----------
-const Coop={
-  kings:[], hudT:0, lastHud:'',
-  enter(seed){
-    Panel.hide(); app.classList.remove('dock-top','boss-on'); UI.dockTop=false;
-    G.phase='coop'; G.paused=false; G.endShown=false; G.speed=1;
-    G.map=genMap(seed); curKeep=G.map.keep; G.plan=null; G.level=1; G.rng=mulberry32(seed); G.mod=defaultMod(); G.forge=1; G.wallLv=0;
-    G.laneEl=[null,null,null]; G.boss=null; G.onPad=null; G.spawner=null; G.shake=0; G.keepAlarm=0; G.t=0; G.vacuum=false;
-    const K=G.map.keep; G.keep={x:K.x,y:K.y,hp:BAL.keepHp,maxHp:BAL.keepHp,flash:0,smoke:0,inv:0};
-    clearWorld();
-    const [x,y]=this.spawn(Net.me); G.king=makeKing(x,y); applyKing(); this.style(G.king,Net.me);
-    this.kings=[]; for(const p of Net.players) if(p.slot!==Net.me) this.add(p.slot);
-    renderBackground(); updateCamera(0,true);
-    for(const id of ['scrTitle','scrLobby','scrHall','scrEnd','scrPause','scrCards','hud']) $(id).hidden=true;
-    Lobby.open=false; Input.joy=null; Input.jx=Input.jy=0;
-    $('coopHud').hidden=false; this.lastHud=''; this.hud(true);
-    Sound.horn();
+
+// =====================================================================
+//  ช่วยกันรักษาป้อม: หัวห้องเล่นเกมจริง · เครื่องเพื่อนวาดตามภาพสถานะที่ได้รับ
+// =====================================================================
+const CoopGame={
+  timer:0, sentMod:-1, modT:0,
+  begin(){
+    for(const id of ['scrTitle','scrLobby','scrHall','scrEnd','scrCards','scrPause']) $(id).hidden=true;
+    Lobby.open=false; Panel.hide(); app.classList.remove('dock-top','boss-on'); UI.dockTop=false;
+    Input.joy=null; Input.jx=Input.jy=0; Input.override=null; clearTimeout(this.timer);
   },
-  spawn(slot){const K=G.map.keep, a=[Math.PI/2,Math.PI/2-0.8,Math.PI/2+0.8,-Math.PI/2+0.3][((slot%4)+4)%4]; return [clamp(K.x+Math.cos(a)*128,60,WORLD_W-60),clamp(K.y+Math.sin(a)*108,90,WORLD_H-60)];},
-  style(k,slot){const P=Net.players.find(p=>p.slot===slot); k.slot=slot; k.color=KC_BY[P&&P.color]||KING_COLORS[0]; k.name=P?P.name:'';},
-  add(slot){
-    let k=this.kings.find(q=>q.slot===slot); if(k) return k;
-    const [x,y]=this.spawn(slot); k=makeKing(x,y); Object.assign(k,{tx:x,ty:y,tvx:0,tvy:0,at:0}); this.style(k,slot); this.kings.push(k); return k;
+  hostStart(seed,roster,md){
+    this.begin();
+    const ros=roster.map(r=>Object.assign({},r,{ctrl:r.slot===Net.me?'local':'remote'}));
+    setupRun(seed,Meta.d.lv,ros,md);   // แต้มต่อของป้อม/หอ ใช้ของหัวห้อง · เหรียญตั้งต้น/อาวุธ ใช้ของแต่ละคน
+    NetFX.on=true; NetFX.list=[]; this.sentMod=-1;
+    Meta.d.runs++; Meta.save();
+    enterRest(true); Sound.horn();
   },
-  removeKing(slot){const i=this.kings.findIndex(k=>k.slot===slot); if(i>=0) this.kings.splice(i,1);},
-  syncRoster(){ this.kings=this.kings.filter(k=>Net.players.some(p=>p.slot===k.slot)); for(const k of this.kings) this.style(k,k.slot); if(G.king) this.style(G.king,Net.me); },
-  applyKings(list){
-    if(G.phase!=='coop') return;
+  clientStart(m){
+    this.begin();
+    const ros=(m.roster||[]).map(r=>Object.assign({},r,{ctrl:r.slot===Net.me?'local':'net'}));
+    setupRun(m.seed|0,m.hm||{},ros,m.map);
+    G.client=true; NetFX.on=false; Client.reset();
+    Meta.d.runs++; Meta.save();
+    enterRest(true); Sound.horn();
+  },
+  remotePos(slot,p){
+    if(!G.coop||G.client||!Array.isArray(p)||p.length<4||!p.every(Number.isFinite)) return;
+    const k=kingBySlot(slot); if(!k||k.ctrl!=='remote') return;
+    k.tx=clamp(p[0],40,WORLD_W-40); k.ty=clamp(p[1],70,WORLD_H-40); k.tvx=clamp(p[2],-400,400); k.tvy=clamp(p[3],-400,400); k.at=performance.now();
+  },
+  // คำสั่งจากเพื่อน: หัวห้องตรวจว่ายืนอยู่บนแท่นจริง แล้วจ่ายด้วยเหรียญของคนนั้น
+  onAct(slot,m){
+    if(!G.coop||G.client) return;
+    const k=kingBySlot(slot); if(!k) return;
+    const near=p=>{ if(!p) return false; const z=padZone(p); return Math.abs(k.x-z.x)<=z.h+28&&Math.abs(k.y-z.y)<=z.h+28; };
+    const p=m.p!=null?G.map.pads[m.p|0]:null, live=['rest','wave','cleared'].includes(G.phase);
+    switch(m.a){
+      case 'build': if(live&&near(p)&&padOpen(p)) buyBuild(p,k); break;
+      case 'up': if(live&&near(p)) buyUpgrade(p,m.el,k); break;
+      case 'el': if(live&&near(p)) choosePadElement(p,m.el,k); break;
+      case 'royal': if(live&&near(G.map.pads[0])&&['repair','forge','wall'].includes(m.r)) royalBuy(m.r,k); break;
+      case 'ready': if(G.phase==='rest') k.ready=!!m.v; break;
+      case 'card': if(G.phase==='cards'&&G.picker===slot) pickCard(m.i|0,k); break;
+    }
+  },
+  // เพื่อนหลุดกลางเกม: เหรียญที่แบกอยู่ตกพื้นให้คนอื่นเก็บต่อ
+  dropPlayer(slot,P){
+    const k=kingBySlot(slot); if(!k) return;
+    if(k.coins>0) dropCoins(k.x,k.y,k.coins);
+    k.coins=0; G.kings.splice(G.kings.indexOf(k),1);
+    UI.toast(P.name+' หลุดจากเกม','เหรียญที่แบกอยู่ตกอยู่ตรงนั้น ไปเก็บต่อได้');
+    if(G.phase==='cards'&&G.picker===slot){
+      const slots=G.kings.map(q=>q.slot).sort((a,b)=>a-b); G.picker=slots[0];
+      Net.sendAll({t:'cards',offer:G.offer.map(c=>c.id),rare:G.offerRare,picker:G.picker}); renderCards(); this.cardTimer(true);
+    }
+  },
+  cardTimer(on){ clearTimeout(this.timer); if(on) this.timer=setTimeout(()=>{ if(G.coop&&!G.client&&G.phase==='cards') pickCard(0,kingBySlot(G.picker)||G.king,true); },30000); },
+  toggleReady(){
+    const k=G.king; if(!G.coop||G.phase!=='rest'||!k) return;
+    k.ready=!k.ready; Sound.spend();
+    if(G.client) Client.act({a:'ready',v:k.ready},true);
+  },
+  snapshot(){
+    const R=Math.round, K=G.keep;
+    const s={t:'s',ph:G.phase,lv:G.level,kp:[rd1(K.hp),K.maxHp,K.flash>0.3?1:0,rd1(K.inv||0)],wl:G.wallLv,fl:foesLeft(),sh:R(G.shake),ka:G.keepAlarm>0.2?1:0,
+      pz:G.paused?1:0,rv:G.reviveUsed?1:0,vac:G.vacuum?1:0,pk:G.picker,mv:G.modVer,rt:G.readyT==null?-1:Math.ceil(G.readyT),b:G.boss&&!G.boss.dead?G.boss.id:-1,
+      k:G.kings.map(k=>[k.slot,rd1(k.x),rd1(k.y),R(k.vx),R(k.vy),k.coins,k.forge,Math.round(k.aim*100)/100,k.ready?1:0]),
+      e:G.enemies.map(e=>[e.id,TYPE_IDX[e.type],ELEM_IDX[e.el],e.lane,rd1(e.s),rd1(e.off),R(e.hp),R(e.maxHp),e.state==='attack'?1:0,rd1(e.speed),R(e.ax),R(e.ay),
+        (e.inv>0?1:0)|(e.enraged?2:0)|(e.cast>0?4:0),e.phase|0,e.order?e.order.map(x=>ELEM_IDX[x]).join(''):'']),
+      c:G.coins.map(c=>[c.id,R(c.x),R(c.y),R(c.z),c.v,c.state,c.to]),
+      tw:G.turrets.map(t=>[t.pad.id,t.level,t.el?ELEM_IDX[t.el]:-1,Math.round(t.aim*100)/100,t.invested]),
+      fx:NetFX.take()};
     const now=performance.now();
-    for(const r of list){
-      if(!Array.isArray(r)||r.length<5) continue; const [slot,x,y,vx,vy]=r;
-      if(slot===Net.me||!Number.isFinite(x)||!Number.isFinite(y)||!Net.players.some(p=>p.slot===slot)) continue;
-      const k=this.add(slot);
-      if(!k.at||hyp(x-k.x,y-k.y)>240){k.x=x;k.y=y;}   // เพิ่งเห็นครั้งแรก/กระโดดไกล → วางทันที
-      k.tx=x; k.ty=y; k.tvx=Number.isFinite(vx)?vx:0; k.tvy=Number.isFinite(vy)?vy:0; k.at=now;
-    }
+    if(this.sentMod!==G.modVer||now-this.modT>3000){ s.m=G.mod; this.sentMod=G.modVer; this.modT=now; }   // การ์ดพรเปลี่ยน → ส่งค่าพลังใหม่
+    return s;
   },
-  // ราชาของเพื่อน: เดาตำแหน่งต่อจากความเร็วล่าสุด แล้วค่อยๆ ไหลเข้าหา → ภาพลื่นแม้ข้อมูลมา 15 ครั้ง/วินาที
-  update(dt){
-    G.t+=dt; updateKing(dt);
-    const now=performance.now(), a=1-Math.exp(-dt*12);
-    for(const k of this.kings){
-      const age=Math.min(0.25,(now-(k.at||now))/1000), px=k.tx+k.tvx*age, py=k.ty+k.tvy*age;
-      k.x+=(px-k.x)*a; k.y+=(py-k.y)*a; k.vx=k.tvx; k.vy=k.tvy;
-      const sp=hyp(k.vx,k.vy); if(sp>18){k.fx=k.vx/sp;k.fy=k.vy/sp;k.walk+=dt*sp*0.055;}
-      k.aim=angLerp(k.aim,Math.atan2(k.fy,k.fx),Math.min(1,dt*8));
-    }
-    updateFx(dt); updateCamera(dt,false);
+  hostEnd(win,gaveUp){
+    clearTimeout(this.timer);
+    Net.sendAll({t:'end',win:!!win,gaveUp:!!gaveUp,lv:G.level,kills:G.stats.kills,hits:G.stats.hits,strong:G.stats.strong,fx:NetFX.take()});
+    NetFX.on=false; Net.state='lobby'; for(const p of Net.players) if(!p.host) p.ready=false;
+    Net.broadcastLobby();
   },
-  hud(force){
-    if(G.phase!=='coop') return;
-    const now=performance.now(); if(!force&&now-this.hudT<400) return; this.hudT=now;
-    const html=Net.players.map(p=>{const c=KC_BY[p.color]||KING_COLORS[0], q=p.host?'host':p.stale?'bad':p.rtt<90?'good':p.rtt<220?'ok':'bad';
-      return `<span class="ch-p${p.slot===Net.me?' me':''}"><span class="sk">${kingSVG(c)}</span><b>${esc(p.name)}</b><em class="q ${q}">${p.host?'หัวห้อง':p.stale?'หลุด?':p.rtt+' ms'}</em></span>`;}).join('');
-    if(html!==this.lastHud){this.lastHud=html; $('coopList').innerHTML=html;}
-    const lab=Net.role==='host'?'จบทดสอบ':'ออกจากห้อง'; if($('btnCoopExit').textContent!==lab) $('btnCoopExit').textContent=lab;
-  },
-  exit(){
-    if(G.phase!=='coop') return;
-    $('coopHud').hidden=true; this.kings=[]; Input.joy=null; Input.jx=Input.jy=0; Input.override=null;
+  quit(){ Net.leave(); this.toLobby(); },
+  // กลับหน้าห้องรอ (ยังอยู่ในห้อง ถ้ายังต่ออยู่)
+  toLobby(){
+    clearTimeout(this.timer); NetFX.on=false; NetFX.list=[];
+    G.coop=null; G.client=false; G.paused=false; G.endShown=false;
+    for(const id of ['hud','scrEnd','scrCards','scrPause']) $(id).hidden=true;
+    Panel.hide(); app.classList.remove('dock-top','boss-on'); UI.dockTop=false;
     G.phase='title'; newDemo(); Lobby.show();
   }
 };
+
+// ---------- เครื่องเพื่อน: รับภาพสถานะจากหัวห้อง แล้ววาดให้ลื่น ----------
+const Client={
+  emap:new Map(), cmap:new Map(), snapAt:0, modVer:-1, lastCoins:-1,
+  reset(){ this.emap.clear(); this.cmap.clear(); this.snapAt=performance.now(); this.modVer=-1; this.lastCoins=-1; },
+  act(o,quiet){
+    if(!Net.hostConn) return false;
+    try{Net.hostConn.send(Object.assign({t:'act'},o));}catch(e){return false;}
+    if(!quiet) Sound.spend();
+    return true;
+  },
+  snap(s){
+    if(!G.client||!G.coop) return;
+    const now=performance.now(); this.snapAt=now;
+    if(s.m&&s.mv!==this.modVer){ this.modVer=s.mv; const m=Object.assign(defaultMod(),s.m); m.tdmg=Object.assign(defaultMod().tdmg,s.m.tdmg||{}); G.mod=m; for(const t of G.turrets) applyTurret(t); applyKing(); }
+    const K=G.keep; K.hp=s.kp[0]; K.maxHp=s.kp[1]; if(s.kp[2]) K.flash=Math.max(K.flash,0.6); K.inv=s.kp[3];
+    G.wallLv=s.wl|0; G.foes=s.fl|0; G.shake=Math.max(G.shake,s.sh|0); if(s.ka) G.keepAlarm=1.5;
+    G.vacuum=!!s.vac; G.reviveUsed=!!s.rv; G.hostPaused=!!s.pz; G.picker=s.pk; G.readyT=s.rt>=0?s.rt:null;
+    // ราชา/ราชินีทุกคน
+    const seenK=new Set();
+    for(const a of s.k||[]){
+      const k=kingBySlot(a[0]); if(!k) continue; seenK.add(k.slot);
+      if(k!==G.king){k.tx=a[1];k.ty=a[2];k.tvx=a[3];k.tvy=a[4];k.at=now;}
+      k.coins=a[5]; if(k.forge!==a[6]){k.forge=a[6]; applyKing(k);} k.aim=a[7]; k.ready=!!a[8];
+    }
+    for(let i=G.kings.length-1;i>=0;i--) if(G.kings[i]!==G.king&&!seenK.has(G.kings[i].slot)) G.kings.splice(i,1);   // เพื่อนที่หลุด
+    const me=G.king;
+    if(this.lastCoins>=0&&me.coins>this.lastCoins){G.combo++; G.comboT=0.7; Sound.coin(G.combo);}
+    this.lastCoins=me.coins;
+    // หอธนู
+    for(const a of s.tw||[]){
+      const p=G.map.pads[a[0]]; if(!p) continue; const el=a[2]>=0?ELEMS[a[2]]:null; let t=p.turret;
+      if(!t){ t=buildTurret(p,a[1]); t.el=el; applyTurret(t); t.pop=1; }
+      else if(t.level!==a[1]||t.el!==el){ t.level=a[1]; t.el=el; applyTurret(t); t.pop=1; p.state=t.level>=MAX_TLV?'max':'built'; }
+      t.taim=a[3]; t.invested=a[4];
+    }
+    // ศัตรู
+    const seenE=new Set();
+    for(const a of s.e||[]){
+      const [id,ti,ei,lane,es,off,hp,mhp,st,spd,ax,ay,fl,ph,ord]=a; seenE.add(id);
+      let e=this.emap.get(id);
+      if(!e){ e=this.makeEnemy(TYPE_LIST[ti],lane); e.id=id; e.s=es; this.emap.set(id,e); G.enemies.push(e); }
+      if(hp<e.hp-0.01) e.flash=1;
+      e.ts=es; e.off=off; e.hp=hp; e.maxHp=mhp; e.state=st?'attack':'walk'; e.speed=spd; e.ax=ax; e.ay=ay; e.el=ELEMS[ei]||e.el;
+      e.inv=fl&1?0.3:0; e.enraged=!!(fl&2); e.cast=fl&4?0.5:0; e.phase=ph|0; if(ord) e.order=ord.split('').map(x=>ELEMS[+x]);
+    }
+    for(const [id,e] of this.emap) if(!seenE.has(id)){ e.dead=true; this.emap.delete(id); }
+    G.boss=s.b>=0?(this.emap.get(s.b)||null):null;
+    // เหรียญ
+    const seenC=new Set();
+    for(const a of s.c||[]){
+      const [id,x,y,z,v,st,to]=a; seenC.add(id);
+      let c=this.cmap.get(id);
+      if(!c){ c={id,x,y,z,v,state:st,to,spin:Math.random()*TAU,t:0,dead:false,tx:x,ty:y,tz:z,arrived:false}; this.cmap.set(id,c); G.coins.push(c); }
+      c.tx=x; c.ty=y; c.tz=z; c.v=v; c.state=st; c.to=to;
+    }
+    for(const [id,c] of this.cmap) if(!seenC.has(id)){ c.dead=true; this.cmap.delete(id); }
+    // เอฟเฟกต์/เสียง/ข้อความ
+    for(const f of s.fx||[]) this.fx(f);
+    // เปลี่ยนด่าน/ช่วง
+    const lvCh=s.lv!==G.level, phCh=s.ph!==G.phase;
+    G.level=s.lv|0;
+    if(phCh||lvCh){
+      const prev=G.phase; G.phase=s.ph;
+      if(G.phase==='rest'&&(phCh||lvCh)) this.enterRest();
+      if(G.phase!=='cards'&&prev==='cards') $('scrCards').hidden=true;
+    }
+  },
+  enterRest(){
+    setLevelFlags(); $('restInfo').innerHTML=restInfoHTML(); UI.dirty=true;
+  },
+  makeEnemy(type,lane){
+    const T=ENEMY[type]||ENEMY.minion;
+    return {type:ENEMY[type]?type:'minion',el:'fire',lane,s:0,ts:0,off:0,hp:1,maxHp:1,speed:T.speed,r:T.r,coin:T.coin,dps:T.dps,state:'walk',flash:0,walk:Math.random()*6,lunge:0,atk:0,
+      x:0,y:0,dirx:0,ax:0,ay:0,txtT:-9,healT:2,sumT:4.5,cast:0,inv:0,enraged:false,phase:0,order:null,dead:false};
+  },
+  update(dt){
+    G.t+=dt;
+    const me=G.king, now=performance.now(), age=Math.min(0.3,(now-this.snapAt)/1000), a=Math.min(1,dt*8);
+    for(const k of G.kings) updateKing(k,dt,true);   // ตัวเองเดินได้ทันที · เพื่อนไหลตามข้อมูล · หัวห้องเป็นคนยิง
+    for(const e of G.enemies){
+      if(e.state==='walk'){
+        const P=G.map.lanes[e.lane]&&G.map.lanes[e.lane].path; if(!P) continue;
+        const target=e.ts+e.speed*age; e.s+=(target-e.s)*a; P.at(e.s,tmpP);
+        const off=e.off*clamp((P.len-e.s-60)/80,0,1); e.x=tmpP.x+tmpP.nx*off; e.y=tmpP.y+tmpP.ny*off; e.dirx=tmpP.tx; e.walk+=dt*e.speed*0.2;
+      } else {
+        if(!e.x&&!e.y){e.x=e.ax;e.y=e.ay;}
+        e.x+=(e.ax-e.x)*Math.min(1,dt*6); e.y+=(e.ay-e.y)*Math.min(1,dt*6); e.dirx=clamp((G.keep.x-e.x)/40,-1,1); e.lunge=Math.max(0,e.lunge-dt*5);
+      }
+      if(e.flash>0) e.flash=Math.max(0,e.flash-dt*10);
+    }
+    for(const c of G.coins){
+      c.spin+=dt*6; if(c.arrived) continue;
+      if(c.state===1&&c.to===me.slot){   // เหรียญที่บินมาหาเรา: บินเข้าหาตัวเราบนจอเครื่องนี้
+        const tx=me.x, ty=me.y-22-Math.min(stackVis(me.coins),46)*2.7, dx=tx-c.x, dy=ty-c.y, d=hyp(dx,dy), st=700*dt;
+        if(d<14) c.arrived=true; else {c.x+=dx/d*Math.min(st,d); c.y+=dy/d*Math.min(st,d); c.z=Math.max(0,c.z-dt*60);}
+      } else { const b=Math.min(1,dt*12); c.x+=(c.tx-c.x)*b; c.y+=(c.ty-c.y)*b; c.z+=(c.tz-c.z)*b; }
+    }
+    for(const t of G.turrets){ t.recoil=Math.max(0,t.recoil-dt*6); t.pop=Math.max(0,t.pop-dt*3); if(t.taim!=null) t.aim=angLerp(t.aim,t.taim,Math.min(1,dt*14)); }
+    for(const p of G.proj){   // ลูกธนูวิ่งเอง (ดาเมจคิดที่หัวห้อง)
+      if(p.target&&!p.target.dead){p.tx=p.target.x;p.ty=p.target.y-p.target.r;}
+      const dx=p.tx-p.x,dy=p.ty-p.y,d=hyp(dx,dy),st=p.spd*dt; p.ang=Math.atan2(dy,dx);
+      if(d<=st+3) p.dead=true; else {p.x+=dx/d*st;p.y+=dy/d*st;}
+      p.life-=dt; if(p.life<=0) p.dead=true;
+    }
+    updatePads(dt); updateFx(dt);
+    compact(G.enemies); compact(G.proj); compact(G.coins); compact(G.parts); compact(G.texts); compact(G.flyers);
+    if(G.keep.inv>0) G.keep.inv-=dt;
+    updateCamera(dt,false);
+  },
+  fx(f){
+    switch(f[0]){
+      case 'f': {   // ลูกธนู
+        const [,kind,el,x,y,tid,spd,own]=f, tg=this.emap.get(tid); if(!tg) break;
+        let sx=x, sy=y;
+        if(kind===1){ const kk=kingBySlot(own); if(kk){ kk.recoil=1; if(kk===G.king){ sx=kk.x+Math.cos(kk.aim)*14; sy=kk.y-14+Math.sin(kk.aim)*8; Sound.shoot(); } } }
+        else { const p=G.map.pads[own]; if(p&&p.turret) p.turret.recoil=1; }
+        G.proj.push({kind:kind===1?'king':'tower',el:el>=0?ELEMS[el]:null,x:sx,y:sy,target:tg,tx:tg.x,ty:tg.y-tg.r,dmg:0,spd,life:1.6,ang:0,dead:false});
+        break; }
+      case 'y': { const kk=kingBySlot(f[1]); if(kk) spawnFlyer(f[2],f[3],f[4],kk); break; }
+      case 'h': { const [,lvH,bossH,lv,last]=f; bankHonor(lvH,bossH); if(lv>Meta.d.best) Meta.d.best=lv; if(last) Meta.d.wins++; Meta.save(); break; }
+      case 'w': { const fn=FXF[f[1]]; if(fn) fn(...f.slice(2)); break; }
+      case 's': { const fn=Sound[f[1]]; if(typeof fn==='function') fn.apply(Sound,f.slice(2)); break; }
+      case 'o': if(G.phase!=='cards') UI.toast(f[1],f[2]); break;   // หน้าเลือกการ์ดอยู่ ไม่ต้องขึ้นข้อความทับ
+    }
+  },
+  cards(m){
+    if(!G.client) return;
+    for(const f of m.fx||[]) this.fx(f);
+    G.offer=(m.offer||[]).map(id=>CARD_BY[id]).filter(Boolean); G.offerRare=!!m.rare; G.picker=m.picker; G.phase='cards';
+    Panel.hide(); renderCards();
+  },
+  picked(m){
+    if(!G.client) return;
+    const c=CARD_BY[m.id]; if(c){ G.cardCount[c.id]=(G.cardCount[c.id]||0)+1; G.cards.push(c.id); }
+    $('scrCards').hidden=true; Sound.card();
+    const k=kingBySlot(m.by); if(c) UI.toast((m.auto?'หมดเวลา · ได้พร: ':(k?k.name:'เพื่อน')+' เลือก: ')+c.name, cardDesc(c));
+  },
+  end(m){
+    if(!G.client) return;
+    for(const f of m.fx||[]) this.fx(f);
+    G.level=m.lv|0; G.stats.kills=m.kills|0; G.stats.hits=m.hits|0; G.stats.strong=m.strong|0;
+    G.phase=m.win?'victory':'defeat'; if(m.win) Sound.win(); else Sound.lose();
+    showEnd(!!m.win,!!m.gaveUp);
+  },
+  denied(){ if(!G.king) return; Sound.deny(); floatText(G.king.x,G.king.y-58,'ซื้อไม่สำเร็จ','#ffb0a6',14); }
+};
+
 // ---------- หน้าห้องรอ ----------
 const Lobby={
-  open:false, lastSw:'', lastSlots:'', shareURL:'', nT:0,
+  open:false, lastSw:'', lastLk:'', lastSlots:'', shareURL:'', nT:0,
   show(code){
     for(const id of ['scrTitle','scrHall','scrEnd']) $(id).hidden=true;
     $('scrLobby').hidden=false; this.open=true;
     const n=$('lobName'); if(document.activeElement!==n) n.value=Profile.d.name;
     if(code) $('lobCode').value=String(code).toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,4);
-    this.lastSw=this.lastSlots=''; disarm($('btnLobBack')); this.render();
+    this.lastSw=this.lastLk=this.lastSlots=''; disarm($('btnLobBack')); this.render();
     if(Net.role==='host'&&!$('lobQR').innerHTML) this.qr();
   },
   hide(){ $('scrLobby').hidden=true; this.open=false; },
@@ -3024,7 +3448,7 @@ const Lobby={
   },
   myName(){
     const i=$('lobName'), n=cleanName(i.value);
-    if(!n){ this.msg('ใส่ชื่อราชาก่อนนะ',true); i.focus(); i.classList.remove('shake'); void i.offsetWidth; i.classList.add('shake'); return false; }
+    if(!n){ this.msg('ใส่ชื่อก่อนนะ',true); i.focus(); i.classList.remove('shake'); void i.offsetWidth; i.classList.add('shake'); return false; }
     if(n!==Profile.d.name){Profile.d.name=n; Profile.save();} return true;
   },
   msg(t,err){ const m=$('lobMsg'); m.textContent=t||''; m.classList.toggle('err',!!err); },
@@ -3036,8 +3460,14 @@ const Lobby={
     if(G.king&&G.phase==='title') G.king.color=KC_BY[id];
     this.render();
   },
+  pickLook(look){
+    if(look!=='king'&&look!=='queen') return; Profile.d.look=look; Profile.save(); Sound.pick('plant');
+    if(Net.inRoom()) Net.setMine({look});
+    if(G.king&&G.phase==='title') G.king.look=look;
+    this.render();
+  },
   nameInput(v){ clearTimeout(this.nT); this.nT=setTimeout(()=>{ const n=cleanName(v); if(n&&n!==Profile.d.name){ Profile.d.name=n; Profile.save(); } if(n&&Net.inRoom()) Net.setMine({name:n}); },350); },
-  toggleReady(){ const P=Net.players.find(p=>p.slot===Net.me); if(!P||Net.role!=='guest') return; Sound.spend(); Net.setMine({ready:!P.ready}); },
+  toggleReady(){ const P=Net.players.find(p=>p.slot===Net.me); if(!P||Net.role!=='guest') return; Sound.spend(); Net.setMine({ready:!P.ready,meta:Net.myMeta()}); },
   async qr(){
     const box=$('lobQR'), code=Net.code; box.innerHTML='';
     const q=new URLSearchParams(location.search).get('peer');
@@ -3057,11 +3487,15 @@ const Lobby={
     if(!this.open) return;
     const inRoom=Net.inRoom(), host=Net.role==='host', busy=Net.state==='connecting';
     $('lobEntry').hidden=inRoom; $('lobRoom').hidden=!inRoom;
+    const meP=inRoom?Net.players.find(p=>p.slot===Net.me):null, mine=meP?meP.color:Profile.d.color, look=meP?meP.look:Profile.d.look;
+    // ตัวละคร: ราชา / ราชินี
+    const C=KC_BY[mine]||KING_COLORS[0];
+    const lk=['king','queen'].map(l=>`<button class="lk${l===look?' on':''}" data-l="${l}" aria-pressed="${l===look}">${kingSVG(C,l)}<span>${ruler(l)}</span></button>`).join('');
+    if(lk!==this.lastLk){this.lastLk=lk; $('lobLooks').innerHTML=lk;}
     // ปุ่มสี: สีที่เพื่อนในห้องใช้อยู่จะกดไม่ได้
     const used={}; if(inRoom) for(const p of Net.players) if(p.slot!==Net.me) used[p.color]=p.name;
-    const meP=inRoom?Net.players.find(p=>p.slot===Net.me):null, mine=meP?meP.color:Profile.d.color;
     const sw=KING_COLORS.map(c=>`<button class="sw${c.id===mine?' on':''}" data-c="${c.id}"${used[c.id]?' disabled':''} aria-pressed="${c.id===mine}" `+
-      `aria-label="สี${c.name}${used[c.id]?' · '+esc(used[c.id])+' ใช้อยู่':''}">${kingSVG(c)}<span>${used[c.id]?esc(used[c.id]):c.name}</span></button>`).join('');
+      `aria-label="สี${c.name}${used[c.id]?' · '+esc(used[c.id])+' ใช้อยู่':''}">${kingSVG(c,look)}<span>${used[c.id]?esc(used[c.id]):c.name}</span></button>`).join('');
     if(sw!==this.lastSw){this.lastSw=sw; $('lobColors').innerHTML=sw;}
     const back=$('btnLobBack'); if(!back.classList.contains('armed')) back.textContent=inRoom?(host?'ปิดห้อง':'ออกจากห้อง'):'กลับหน้าแรก';
     if(!inRoom){
@@ -3070,7 +3504,7 @@ const Lobby={
       $('btnJoin').textContent=busy&&Net.code?'กำลังเข้า…':'เข้าห้อง';
       if(Net.state==='error') this.msg(Net.err,true);
       else if(busy) this.msg(Net.code?'กำลังหาห้อง '+Net.code+'…':'กำลังต่อเซิร์ฟเวอร์จับคู่…');
-      else this.msg('ทุกเครื่องต้องต่อ Wi-Fi เดียวกัน และเปิดเกมนี้ไว้');
+      else this.msg('ทุกเครื่องต้องต่อ Wi-Fi หรือฮอตสปอตเดียวกัน และเปิดเกมนี้ไว้');
       return;
     }
     $('lobRoomCode').textContent=Net.code;
@@ -3080,30 +3514,51 @@ const Lobby={
       const p=Net.players.find(q=>q.slot===s);
       if(!p){rows.push(`<li class="slot empty"><span class="sk"></span><span>ว่าง · รอเพื่อนเข้าห้อง</span></li>`); continue;}
       const c=KC_BY[p.color]||KING_COLORS[0], qc=p.host?'host':p.stale?'bad':p.rtt<90?'good':p.rtt<220?'ok':'bad';
-      const sub=[p.host?'หัวห้อง':'',p.slot===Net.me?'คุณ':''].filter(Boolean).join(' · ')||'สี'+c.name;
-      rows.push(`<li class="slot${p.slot===Net.me?' me':''}"><span class="sk">${kingSVG(c)}</span><span class="sn"><b>${esc(p.name)}</b><small>${sub}</small></span>`+
+      const sub=[p.host?'หัวห้อง':'',p.slot===Net.me?'คุณ':''].filter(Boolean).join(' · ')||ruler(p.look)+'สี'+c.name;
+      rows.push(`<li class="slot${p.slot===Net.me?' me':''}"><span class="sk">${kingSVG(c,p.look)}</span><span class="sn"><b>${esc(p.name)}</b><small>${sub}</small></span>`+
         `<span class="st">${p.host?'':`<span class="${p.ready?'tagok':'tagwait'}">${p.ready?'✓ พร้อม':'ยังไม่พร้อม'}</span>`}<em class="q ${qc}">${p.host?'ศูนย์กลาง':p.stale?'หลุด?':p.rtt+' ms'}</em></span></li>`);
     }
     const sl=rows.join(''); if(sl!==this.lastSlots){this.lastSlots=sl; $('lobSlots').innerHTML=sl;}
-    const n=Net.players.length, rd=Net.readyCount();
+    const n=Net.players.length, rd=Net.readyCount(), playing=Net.state==='game';
     $('btnLobStart').hidden=!host; $('btnReady').hidden=host;
     let st='';
-    if(host){ $('btnLobStart').disabled=!Net.canStart(); st=n<2?`รอเพื่อนเข้าห้อง (${n}/${NET.MAX} คน)`:rd<n-1?`รอเพื่อนกดพร้อม (${rd}/${n-1})`:'ทุกคนพร้อมแล้ว กดเริ่มได้เลย'; }
+    if(playing) st='ทีมกำลังเล่นอยู่…';
+    else if(host){ $('btnLobStart').disabled=!Net.canStart(); st=n<2?`รอเพื่อนเข้าห้อง (${n}/${NET.MAX} คน)`:rd<n-1?`รอเพื่อนกดพร้อม (${rd}/${n-1})`:'ทุกคนพร้อมแล้ว กดเริ่มได้เลย'; }
     else { const r=!!(meP&&meP.ready), b=$('btnReady'); b.textContent=r?'✓ พร้อมแล้ว':'พร้อม'; b.classList.toggle('ready-on',r); b.classList.toggle('btn-go',!r); st=r?'รอหัวห้องกดเริ่ม · แตะปุ่มอีกครั้งถ้าจะยกเลิก':'กด "พร้อม" เมื่อพร้อมเล่น'; }
     $('lobStatus').textContent=st;
+    $('lobDiff').textContent=n>1?`${n} คน: ศัตรูเยอะขึ้น ×${COOP.cnt(n).toFixed(1)} อึดขึ้น ${Math.round((COOP.hp(n)-1)*100)}% · หารต่อคนแล้วเบากว่าเล่นคนเดียว ${Math.round((1-COOP.load(n))*100)}% · เหรียญของใครของมัน หอธนูกับป้อมใช้ร่วมกัน`:
+      'เล่นได้ 2–4 คน · ยิ่งคนเยอะ ศัตรูยิ่งเยอะ แต่หารต่อคนแล้วง่ายกว่าเล่นคนเดียวนิดหน่อย';
     const fresh=Net.notice&&performance.now()-Net.noticeT<4000, nb=$('lobNotice');
     nb.hidden=!fresh; if(fresh&&nb.textContent!==Net.notice) nb.textContent=Net.notice;
   }
 };
+// ---------- หน้าแรก: เลือกตัวละคร (ราชา/ราชินี) + สีชุด ----------
+const RulerPick={
+  last:'',
+  render(){
+    const C=Profile.colorObj(), look=Profile.d.look;
+    const h=['king','queen'].map(l=>`<button class="rp${l===look?' on':''}" data-l="${l}" aria-pressed="${l===look}">${kingSVG(C,l)}<span>${ruler(l)}</span></button>`).join('')+
+      `<button class="rp rc" data-c="next" aria-label="เปลี่ยนสีชุด · ตอนนี้สี${C.name}"><span class="dot" style="background:${C.robe}"></span><span>สีชุด</span></button>`;
+    if(h!==this.last){this.last=h; $('rulerPick').innerHTML=h;}
+    for(const el of document.querySelectorAll('.rname')) el.textContent=ruler(look);
+  }
+};
+$('rulerPick').addEventListener('click',e=>{
+  const b=e.target.closest('.rp'); if(!b) return; Sound.init();
+  if(b.dataset.l) Lobby.pickLook(b.dataset.l);
+  else { const i=KING_COLORS.findIndex(c=>c.id===Profile.d.color); Lobby.pickColor(KING_COLORS[(i+1)%KING_COLORS.length].id); }
+  RulerPick.render();
+});
 $('btnCoop').addEventListener('click',()=>{Sound.init(); Lobby.show();});
 $('btnLobBack').addEventListener('click',()=>Lobby.back());
 $('btnHost').addEventListener('click',()=>Lobby.create());
 $('btnJoin').addEventListener('click',()=>Lobby.join());
 $('btnShare').addEventListener('click',()=>Lobby.share());
-$('btnLobStart').addEventListener('click',()=>{ if(!Net.start()) Sound.deny(); });
+$('btnLobStart').addEventListener('click',()=>{ Sound.init(); if(!Net.startGame()) Sound.deny(); });
 $('btnReady').addEventListener('click',()=>Lobby.toggleReady());
-$('btnCoopExit').addEventListener('click',()=>{ if(Net.role==='host') Net.endWalk(); else Net.leave(); });
+$('btnEndLobby').addEventListener('click',()=>CoopGame.toLobby());
 $('lobColors').addEventListener('click',e=>{const b=e.target.closest('.sw'); if(b&&!b.disabled) Lobby.pickColor(b.dataset.c);});
+$('lobLooks').addEventListener('click',e=>{const b=e.target.closest('.lk'); if(b) Lobby.pickLook(b.dataset.l);});
 $('lobName').addEventListener('input',e=>Lobby.nameInput(e.target.value));
 $('lobName').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault(); e.target.blur();}});
 $('lobCode').addEventListener('input',e=>{const v=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,4); if(v!==e.target.value) e.target.value=v;});
@@ -3111,12 +3566,23 @@ $('lobCode').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault
 document.addEventListener('visibilitychange',()=>{ if(!document.hidden&&Net.role) Wake.on(); });
 window.addEventListener('pagehide',e=>{ if(Net.role&&!e.persisted) Net.leave(); });
 
+// ---------- เอฟเฟกต์/เสียง/ข้อความของหัวห้อง → ส่งให้เครื่องเพื่อนเล่นตาม ----------
+const FXF={hitFx,puff,ring,sparks,dust,elemBurst,floatText};
+const rdArg=v=>typeof v==='number'?Math.round(v*10)/10:v;
+function fxWrap(name,fn){ return function(...a){ if(NetFX.on&&!NetFX.busy){ NetFX.push('w',name,...a.map(rdArg)); NetFX.busy=true; try{ return fn(...a); } finally { NetFX.busy=false; } } return fn(...a); }; }
+hitFx=fxWrap('hitFx',hitFx); puff=fxWrap('puff',puff); ring=fxWrap('ring',ring); sparks=fxWrap('sparks',sparks);
+dust=fxWrap('dust',dust); elemBurst=fxWrap('elemBurst',elemBurst); floatText=fxWrap('floatText',floatText);
+for(const name of ['tower','hit','crit','dull','die','heal','summon','roar','build','attune','buy','card','keep','horn','win','lose','boom','spend','pick']){
+  const f=Sound[name]; Sound[name]=function(...a){ if(NetFX.on&&!NetFX.busy) NetFX.push('s',name,...a); return f.apply(Sound,a); };
+}
+{ const t=UI.toast; UI.toast=function(a,b){ if(NetFX.on&&!NetFX.busy) NetFX.push('o',a,b||''); return t.call(UI,a,b); }; }
+
 // ---------- ช่องทางสำหรับทดสอบอัตโนมัติ ----------
 window.KK={G,BAL,CURVE,ENEMY,ELEM,ELEMS,CARDS,BOSS_AT,BOSS_HP,STEP,MAX_LEVEL,update,newRun,startWave,padOpen,padCost,padZone,spawnEnemy,dropCoins,buildTurret,
   mult,counterOf,coverage,towerMatch,needsPick,suggestEl,royalBuy,royalOK,royalCost,pickCard,applyTurret,
   showEnd,enterRest,curLv,hurt,buyBuild,buyUpgrade,UI,cam,
   Meta,Save,META,HONOR,loadRun,setupRun,continueRun,surrender,Hall,refreshTitle,reviveKeep,goTitle,hitKeep,togglePause,
-  Net,NET,Coop,Lobby,Profile,KING_COLORS,cleanName,
+  Net,NET,CoopGame,Client,NetFX,COOP,Lobby,Profile,KING_COLORS,cleanName,kingBySlot,mapToData,mapFromData,choosePadElement,
   scale(){return SCALE;},
   pick(el){return choosePadElement(G.onPad,el);},
   step(n){for(let i=0;i<n;i++)update(STEP);},
