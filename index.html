@@ -100,6 +100,9 @@ button{font-family:var(--font-ui);}
 .rest-info{background:var(--shade);border:1px solid rgba(255,230,170,.2);border-radius:14px;padding:8px 12px;font-size:14px;
   text-align:center;line-height:1.4;max-width:36ch;display:flex;flex-direction:column;gap:6px;align-items:center;}
 .rest-info b{color:var(--gold);font-weight:700;}
+.rest-info .invline{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2px 4px;}
+.rest-info .invline svg{width:16px;height:16px;color:var(--gold);}
+.rest-info .invline b.rr{color:#e2c4ff;}
 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;}
 .chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:3px 10px 3px 6px;font-size:13px;font-weight:700;color:#fff;
   border:1.5px solid rgba(255,255,255,.35);}
@@ -218,6 +221,7 @@ button{font-family:var(--font-ui);}
 .note{font-size:13px!important;opacity:.78;}
 .owned{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font-size:12.5px;}
 .owned span{background:rgba(107,68,35,.14);border-radius:99px;padding:2px 9px;}
+.owned .oh{background:none;font-weight:800;padding:2px 2px 2px 6px;flex-basis:100%;text-align:center;}
 #scrRotate{z-index:5;}
 
 /* ---------- การ์ดพรราชา ---------- */
@@ -250,6 +254,36 @@ button{font-family:var(--font-ui);}
 .cat-rare{background:linear-gradient(var(--rare-1),var(--rare));}
 .cpick:nth-child(4){animation-delay:.21s;}
 .cpick.wait{filter:saturate(.55);opacity:.82;cursor:default;}
+.cpick em.tg{display:inline-block;margin-top:5px;padding:1px 8px;border-radius:99px;font-size:11.5px;font-weight:700;opacity:1;}
+.tg.now{background:rgba(107,68,35,.14);color:var(--oak-dark);}
+.tg.item{background:#dfe8ff;color:#24459a;}
+.tg.rare{background:#efe0ff;color:#5b2a8f;}
+.cpick.picked{cursor:default;animation:none;}
+.swap-new{display:flex;align-items:center;gap:6px;align-self:flex-start;color:var(--snow);font-size:13px;font-weight:700;text-shadow:0 2px 3px #000;}
+.swap-new svg{width:18px;height:18px;}
+/* ลิ้นชักไอเทม (หน้าเลือกการ์ด + เมนูพัก) */
+.inv{width:100%;display:flex;flex-direction:column;gap:6px;}
+.inv:empty{display:none;}
+.inv-h{display:flex;align-items:center;gap:6px;color:var(--snow);font-size:13px;text-shadow:0 2px 3px #000;flex-wrap:wrap;}
+.inv-h svg{width:18px;height:18px;color:var(--gold);}
+.inv-h b{font-weight:800;}
+.inv-h span{opacity:.75;font-size:12px;}
+.inv-s{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;}
+.ivc{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:6px 4px 7px;border-radius:12px;background:rgba(255,248,230,.94);border:2px solid var(--oak-dark);color:var(--ink);font-family:var(--font-ui);min-width:0;}
+.ivc .cic{width:34px;height:34px;border-radius:10px;} .ivc .cic svg{width:20px;height:20px;}
+.ivc b{display:block;font-size:12.5px;font-weight:800;line-height:1.2;}
+.ivc small{display:none;}
+.ivc.rare{border-color:var(--rare);background:linear-gradient(#f5e9ff,#e6d2f8);}
+.ivc.empty{justify-content:center;min-height:62px;background:rgba(0,0,0,.25);border:2px dashed rgba(255,230,170,.35);color:rgba(255,248,230,.7);font-size:12px;}
+.ivc.act{cursor:pointer;touch-action:manipulation;box-shadow:0 4px 0 var(--oak-dark);}
+.ivc.act:active{transform:translateY(3px);box-shadow:0 1px 0 var(--oak-dark);}
+.ivc.act small{display:block;font-size:11px;line-height:1.25;opacity:.8;}
+.ivc em{font-style:normal;font-size:11.5px;font-weight:800;color:#a3321f;}
+.ivc.out{position:relative;opacity:.6;filter:grayscale(.5);}
+.ivc.out::after{content:'ทิ้ง';position:absolute;top:-8px;right:-4px;background:#a3321f;color:#fff;font-size:10.5px;font-weight:800;padding:1px 7px;border-radius:99px;border:2px solid #fff;}
+.owned.inv-p{margin-top:2px;}
+.owned .rare{background:#efe0ff;color:#5b2a8f;}
+.owned .item{background:#dfe8ff;color:#24459a;}
 .teamrow{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:100%;}
 .tm{display:inline-flex;align-items:center;gap:4px;background:var(--shade);border:2px solid rgba(255,230,170,.18);border-radius:999px;padding:1px 9px 1px 2px;font-size:12.5px;}
 .tm.me{border-color:var(--gold);}
@@ -318,6 +352,32 @@ button{font-family:var(--font-ui);}
 /* ---------- เล่นด้วยกัน (ทดลอง): ห้องรอ + ทดสอบเดินด้วยกัน ---------- */
 .helpbtn{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:12px;margin:0;font:800 21px/1 var(--font-ui);color:var(--parch);}
 .helpbtn.on{border-color:var(--gold);color:var(--gold);}
+.musicbtn{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);left:12px;margin:0;color:var(--parch);}
+.musicbtn svg{width:22px;height:22px;}
+/* ปุ่มเร่งความเร็ว (ข้างปุ่มพัก) */
+.speedbtn{width:auto;min-width:58px;padding:0 9px;display:flex;align-items:center;justify-content:center;gap:3px;font:800 15px/1 var(--font-ui);}
+.speedbtn svg{width:17px;height:17px;}
+.speedbtn.on{background:linear-gradient(#ffe68a,#f6b928);color:var(--ink);border-color:var(--oak-dark);box-shadow:0 0 12px rgba(255,208,74,.55);}
+#btnPause{margin-left:0;}
+.fs{display:none;}
+@media (max-width:374px){   /* จอแคบ: ย่อแถวที่สองให้ปุ่มพักยังอยู่ในจอ */
+  .fw{display:none;} .fs{display:inline;} .wheel{gap:1px;padding:3px 6px;} .wheel .ei{width:15px;height:15px;} .wheel i{font-size:9px;}
+  .speedbtn{min-width:42px;width:42px;padding:0;} .speedbtn svg{display:none;}
+}
+/* แถบเลื่อนความดัง */
+.vols{display:flex;flex-direction:column;gap:8px;width:100%;}
+.vol{display:grid;grid-template-columns:7.3em minmax(0,1fr) 3.1em;align-items:center;gap:10px;font-size:15px;text-align:left;}
+.vol .vl{display:flex;align-items:center;gap:6px;white-space:nowrap;} .vol .vl svg{width:20px;height:20px;}
+.vol b{font-weight:700;}
+.vol em{font-style:normal;font-weight:800;text-align:right;font-variant-numeric:tabular-nums;}
+.vol input{-webkit-appearance:none;appearance:none;width:100%;height:32px;margin:0;background:transparent;touch-action:manipulation;cursor:pointer;--p:70%;}
+.vol input::-webkit-slider-runnable-track{height:9px;border-radius:99px;background:linear-gradient(90deg,#e0a52a var(--p),rgba(107,68,35,.22) var(--p));}
+.vol input::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-8.5px;border-radius:50%;background:#fffaf0;border:3px solid var(--oak-dark);box-shadow:0 2px 0 var(--oak-dark);}
+.vol input::-moz-range-track{height:9px;border-radius:99px;background:rgba(107,68,35,.22);}
+.vol input::-moz-range-progress{height:9px;border-radius:99px;background:#e0a52a;}
+.vol input::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fffaf0;border:3px solid var(--oak-dark);}
+.vol input:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px;}
+#scrSet{z-index:4;}
 .screen.lobby{justify-content:flex-start;gap:0;}
 .lob-wrap{width:100%;max-width:420px;flex:1;min-height:0;display:flex;flex-direction:column;gap:10px;}
 .lob-head{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;}
@@ -420,6 +480,11 @@ button{font-family:var(--font-ui);}
     <symbol id="i-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-8.5-5.2-8.5-11.2A4.6 4.6 0 0 1 12 7.1a4.6 4.6 0 0 1 8.5 2.7C20.5 15.8 12 21 12 21z"/></symbol>
     <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></symbol>
     <symbol id="i-crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.5 4.6 6.8l4.6 4.6L12 4.6l2.8 6.8 4.6-4.6L21 17.5z"/><rect x="3" y="18.8" width="18" height="2.6" rx="1.2"/></symbol>
+    <symbol id="i-feather" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 3C12 3 6 8.5 5 17l-2 4"/><path d="M20 3c0 7-4.2 12.4-11.6 13.6M9.2 11.6h5.6M7.4 15h4.4"/></symbol>
+    <symbol id="i-chest" viewBox="0 0 24 24" fill="currentColor"><path d="M4 9.5C4 6 6.5 4 12 4s8 2 8 5.5V11H4z"/><rect x="4" y="12" width="16" height="8" rx="1.6"/><rect x="10.6" y="10" width="2.8" height="4.6" rx=".8" fill="#ffd04a"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18.2 6.4a7.6 7.6 0 0 1 0 11.2"/></symbol>
+    <symbol id="i-ff" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5v13l8.5-6.5zM12.5 5.5v13L21 12z"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24" fill="currentColor"><path d="M9 4.5 20 2v13.2a3.3 3.3 0 1 1-2-3V6.3l-7 1.6v9.3a3.3 3.3 0 1 1-2-3z"/></symbol>
     <symbol id="i-split" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14 14 3M9 3h5v5M10 21 21 10M16 10h5v5"/></symbol>
     <symbol id="i-burst" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5l2.2 5.8 6-1.9-3.5 5.2 4.9 3.7-6.2.6.6 6.2-4-4.6-4 4.6.6-6.2-6.2-.6 4.9-3.7L3.8 5.4l6 1.9z"/></symbol>
     <symbol id="i-wrench" viewBox="0 0 24 24" fill="currentColor"><path d="M21.2 6.6a5.6 5.6 0 0 1-7.5 5.3l-7.4 7.4a2.1 2.1 0 0 1-3-3l7.4-7.4A5.6 5.6 0 0 1 17.4 1.6L14 5l1.1 3.9 3.9 1.1z"/></symbol>
@@ -445,8 +510,9 @@ button{font-family:var(--font-ui);}
       <div class="pill coins" id="hCoinsBox"><i class="coin-ico"></i><b id="hCoins">0</b></div>
     </div>
     <div class="hud-row2">
-      <div class="pill small" id="hFoesBox">ศัตรูเหลือ&nbsp;<b id="hFoes">0</b></div>
+      <div class="pill small" id="hFoesBox"><span class="fw">ศัตรูเหลือ</span><span class="fs">ศัตรู</span>&nbsp;<b id="hFoes">0</b></div>
       <div class="pill wheel" aria-label="ธาตุที่ชนะทาง: น้ำชนะไฟ ไฟชนะพืช พืชชนะน้ำ"><svg class="ei"><use href="#i-water"/></svg><i>▶</i><svg class="ei"><use href="#i-fire"/></svg><i>▶</i><svg class="ei"><use href="#i-plant"/></svg><i>▶</i><svg class="ei"><use href="#i-water"/></svg></div>
+      <button class="iconbtn speedbtn" id="btnSpeed" aria-label="เร่งความเร็วเกม ×2" aria-pressed="false"><svg aria-hidden="true"><use href="#i-ff"/></svg><b id="hSpeed">×1</b></button>
       <button class="iconbtn" id="btnPause" aria-label="พักเกม"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.6" height="12" rx="1" fill="#fff"/><rect x="9.4" y="2" width="3.6" height="12" rx="1" fill="#fff"/></svg></button>
     </div>
     <div class="bossbar" id="bossBar" hidden>
@@ -492,6 +558,7 @@ button{font-family:var(--font-ui);}
       </div>
     </div>
     <button class="iconbtn helpbtn" id="btnHow" aria-label="วิธีเล่น" aria-expanded="false">?</button>
+    <button class="iconbtn musicbtn" id="btnSetT" aria-label="ตั้งค่าเสียง"><svg aria-hidden="true"><use href="#i-sound"/></svg></button>
   </section>
 
   <section class="screen lobby" id="scrLobby" hidden>
@@ -542,6 +609,7 @@ button{font-family:var(--font-ui);}
       <h2 class="cards-title" id="cardsTitle">เลือกพรของราชา</h2>
       <p class="cards-sub" id="cardsSub">เลือก 1 ใบ มีผลจนจบรอบนี้</p>
       <div class="cards" id="cardList"></div>
+      <div class="inv" id="cardInv"></div>
     </div>
   </section>
 
@@ -551,11 +619,19 @@ button{font-family:var(--font-ui);}
       <div class="owned" id="ownedCards"></div>
       <div class="btncol">
         <button class="btn wide btn-go" id="btnResume">เล่นต่อ</button>
-        <button class="btn alt wide" id="btnSound">เสียง: เปิด</button>
+        <div class="vols" data-vols></div>
         <button class="btn alt wide" id="btnHome">กลับหน้าแรก (เซฟไว้เล่นต่อ)</button>
         <button class="btn alt wide" id="btnRestart">ยอมแพ้ · เริ่มรอบใหม่</button>
       </div>
       <p class="note" id="pauseNote">เกมเซฟให้อัตโนมัติ ปิดแอปแล้วกลับมาเล่นต่อได้</p>
+    </div>
+  </section>
+
+  <section class="screen" id="scrSet" hidden>
+    <div class="card">
+      <h2>ตั้งค่าเสียง</h2>
+      <div class="vols" data-vols></div>
+      <button class="btn wide btn-go" id="btnSetDone">เสร็จแล้ว</button>
     </div>
   </section>
 
@@ -649,7 +725,7 @@ function counterOf(el){ for(const k of ELEMS) if(ELEM[k].beats===el) return k; r
 // =====================================================================
 const CURVE={
   count:L=>Math.round(9+3*(L-1)),                   // จำนวนศัตรูปกติต่อด่าน (โตแบบเส้นตรง)
-  hp:L=>Math.exp(0.46*Math.pow(L-1,0.68)),          // ตัวคูณพลังชีวิต: เร่งเร็วช่วงต้น-กลาง ชะลอช่วงท้าย (ด่าน 5≈×3.3, 10≈×7.8, 20≈×30)
+  hp:L=>Math.exp(0.447*Math.pow(L-1,0.68)),         // ตัวคูณพลังชีวิต: เร่งเร็วช่วงต้น-กลาง ชะลอช่วงท้าย (ด่าน 5≈×3.2, 10≈×7.3, 20≈×27) · ลดจาก 0.46 ชดเชยการ์ดที่ซ้อนกันไม่ได้แล้ว
   window:L=>16+2*L,                                 // ระยะเวลาปล่อยศัตรู (วินาที)
   mix:L=>L<3?0:Math.min(0.2,0.025*(L-2)),           // สัดส่วนศัตรูต่างธาตุที่ปนมา
   bonus:L=>6+2*L,                          // โบนัสผ่านด่าน
@@ -657,22 +733,25 @@ const CURVE={
   keepDmg:L=>1+0.05*(L-1)                  // ศัตรูตีป้อมแรงขึ้นเล็กน้อย
 };
 // ---------- เล่นด้วยกัน: ศัตรูเพิ่มตามจำนวนคน (n) ----------
+// เป้าหมาย: ยากพอๆ กับเล่นคนเดียว · ทีมที่วางแผนดี (เช่น ช่วยกันยิงอัดทีละทาง) จะง่ายขึ้นด้วยฝีมือเอง
 // หลักเศรษฐศาสตร์ที่ใช้:
-// · ภาระต่อหัว: ทัพศัตรูรวม (จำนวน × ความอึด) = n × ภาระต่อหัว × ทัพเล่นคนเดียว
-//   ส่วนลดต่อหัว 2 คน 8% · 3 คน 3% · 4 คน 2% → คนเยอะได้ส่วนลดน้อยลง เพราะช่วยกันเองได้ผลดีขึ้นอยู่แล้ว
-//   (ประหยัดจากขนาด: หอ/ป้อมเป็นของส่วนรวม ยิ่งคนเยอะยิ่งคุ้ม) · ตั้งค่าจากบอทเล่นหลายพันรอบ ให้ชนะบ่อยกว่าเล่นคนเดียวนิดหน่อย
-//   ผลบอท 400 แผนที่ต่อแบบ (บอทเลือกธาตุเก่ง): คนเดียวชนะ 34% · 2 คน 40% · 3 คน 38% · 4 คน 39%
-//                                    (บอทเลือกธาตุสุ่ม): คนเดียว 12% · 2 คน 23% · 3 คน 18% · 4 คน 16%
+// · ภาระต่อหัว: ทัพศัตรูรวม (จำนวน × ความอึด) ≈ n เท่าของทัพเล่นคนเดียว (load ≈ 1)
 // · ศัตรูเพิ่มทั้ง "จำนวน" (ได้เหรียญเพิ่มตาม) และ "ความอึด" (ไม่ได้เหรียญเพิ่ม) → รายได้ต่อหัวต่ำกว่าเล่นคนเดียว ไม่เฟ้อ
-// · หอธนูกับป้อมเป็นของส่วนรวม แท่นมีจำกัด → เงินที่เพิ่มขึ้นให้ผลลดลงเรื่อยๆ · เหรียญกับหน้าไม้เป็นของส่วนตัว
-// · บอสเป็นเป้าเดียว: เลือดบอสเพิ่มตามพลังยิงรวมของทีมที่ใส่เป้าเดียวได้ (หอมีจำกัด แต่หน้าไม้เพิ่มทุกคน) ไม่ใช่ตามจำนวนคนตรงๆ
-//   (บอทพบว่ามังกรด่าน 20 คือด่านที่ตัดสินผล ถ้าเลือดบอสโตตามจำนวนคน ทีมจะผ่านด่านอื่นสบายแต่ไปแพ้มังกรบ่อยกว่าเล่นคนเดียว)
+// · หอธนูกับป้อมเป็นของส่วนรวม แท่นมีจำกัด → ช่วงท้ายแท่นเต็ม เงินที่เพิ่มตามจำนวนคนซื้อพลังป้องกันเพิ่มไม่ได้ (ผลได้ลดลง)
+//   จึงค่อยๆ ลดศัตรูที่เพิ่มตามจำนวนคนในด่าน 14–20 (cut) · เหรียญกับหน้าไม้เป็นของส่วนตัว
+// · บอสเป็นเป้าเดียว: เลือดบอสเพิ่มน้อยกว่าจำนวนคน · มังกรด่าน 20 เพิ่มน้อยที่สุด เพราะทีมต้องรับทัพใหญ่สุดไปพร้อมกัน
 // · โบนัสผ่านด่านแบ่งคนละส่วน: รวมทั้งทีมได้มากกว่าเล่นคนเดียว แต่ต่อหัวน้อยลง
+// ผลบอท 400 แผนที่ต่อแบบ (บอทเล่นแบบเดียวกันทุกตัว ไม่ได้ช่วยกันยิงอัด):
+//   บอทเลือกธาตุเก่ง ชนะ: คนเดียว 33% · 2 คน 29% · 3 คน 30% · 4 คน 32%
+//   บอทเลือกธาตุสุ่ม ชนะ: คนเดียว 11% · 2 คน 17% · 3 คน 11% · 4 คน 12%
 const COOP={
-  load:n=>[1,0.92,0.97,0.98][n-1]||0.98,// ภาระต่อหัวเทียบกับเล่นคนเดียว (ส่วนลด 2 คน 8% · 3 คน 3% · 4 คน 2%)
-  cnt:n=>1+0.6*(n-1),                    // จำนวนศัตรูต่อด่าน (2 คน ×1.6 · 3 คน ×2.2 · 4 คน ×2.8)
-  hp:n=>COOP.load(n)*n/COOP.cnt(n),      // ความอึด = ภาระที่เหลือ (2 คน ×1.15 · 3 คน ×1.32 · 4 คน ×1.40)
-  boss:n=>[1,1.35,1.7,2.3][n-1]||2.3,    // เลือดบอส
+  load:n=>[1,0.96,1.02,1.035][n-1]||1.035,// ภาระต่อหัวเทียบกับเล่นคนเดียว (≈1 = ยากเท่ากัน)
+  cnt:(n,L)=>1+0.6*(n-1)*COOP.late(n,L),  // จำนวนศัตรูต่อด่าน (2 คน ×1.6 · 3 คน ×2.2 · 4 คน ×2.8) · ช่วงท้ายลดลงตาม late
+  late:(n,L)=>L?1-(COOP.cut[n-1]||0)*clamp((L-13)/7,0,1):1,   // ด่าน 14–20: ศัตรูที่เพิ่มตามจำนวนคนค่อยๆ น้อยลง (แท่นหอเต็มแล้ว เงินที่เพิ่มซื้อพลังเพิ่มไม่ได้)
+  cut:[0,0,0.25,0.2],                    // ลดศัตรูส่วนเพิ่มลงเท่านี้ที่ด่าน 20 (3 คน 25% · 4 คน 20%)
+  hp:n=>COOP.load(n)*n/COOP.cnt(n),      // ความอึด = ภาระที่เหลือ (คิดจากจำนวนศัตรูช่วงต้นเกม)
+  boss:n=>[1,1.35,1.7,2.3][n-1]||2.3,    // เลือดบอสด่าน 5 / 10 / 15
+  dragon:n=>[1,1.15,1.35,1.6][n-1]||1.6, // เลือดมังกรด่าน 20
   win:n=>1+0.08*(n-1),                   // เวลาปล่อยศัตรูยืดนิดหน่อย (คนเยอะ ทัพยาวขึ้น)
   bonus:n=>[1,0.75,0.62,0.55][n-1]||0.55,// โบนัสผ่านด่าน "ต่อคน" เทียบกับเล่นคนเดียว
   readyWait:25                           // พร้อมครึ่งทีมแล้ว → เริ่มเองใน 25 วิ
@@ -706,37 +785,45 @@ const ENEMY={
 const PAT_NAME={steady:['กองทัพเดินแถว','ทัพหน้าบุก','ขบวนมินเนี่ยน'],rush:['หน่วยเร็วจู่โจม','ฝูงวิ่งทะลวง'],siege:['ขบวนยักษ์บุก','ทัพยักษ์ทหาร'],
   pincer:['ตีขนาบสองทาง','กระหนาบป้อม'],surge:['คลื่นถาโถม','ทัพโหมกระหน่ำ']};
 
-// ---------- การ์ดพรราชา (สุ่มให้เลือก 1 ใน 3 ทุก 2 ด่าน และหลังบอส) ----------
-function defaultMod(){return {tdmg:{fire:1,water:1,plant:1,none:1},trate:1,trange:1,strong:2,weak:0.5,kdmg:1,krate:1,kspeed:1,magnet:1,
+// ---------- การ์ดพร (สุ่มให้เลือก 1 ใน 3 ทุก 2 ด่าน และหลังบอส) ----------
+// · การ์ดหอธนู / เศรษฐกิจ / ป้อม = อัปทันที สะสมได้ถึงเพดาน (max)
+// · ไอเทมของราชา/ราชินี = เก็บใน "ลิ้นชัก" 3 ช่อง ชิ้นละอันไม่ซ้อนกัน · ลิ้นชักเต็มต้องเลือกทิ้งของเก่า
+// · ของหายากสีม่วง = ได้จากบอสเท่านั้น และถือได้ทีละชิ้น (ได้ชิ้นใหม่ = เลือกทิ้งชิ้นเก่า)
+// mod(m) = ผลถาวรต่อค่าพลัง (คิดใหม่ได้ทุกเมื่อ) · now() = ผลครั้งเดียวตอนเลือก · val = ความคุ้ม ใช้ตัดสินว่าจะทิ้งชิ้นไหนเมื่อเลือกแทน
+const INV_MAX=3;
+function defaultMod(){return {tdmg:{fire:1,water:1,plant:1,none:1},trate:1,trange:1,strong:2,weak:0.5,kdmg:1,krate:1,krange:1,kspeed:1,magnet:1,
   buildDisc:0,upDisc:0,attuneDisc:0,bonusMul:1,clearHeal:0.1,multishot:1,kingCounter:false,splash:0,cardN:3,revive:0};}
 const CARDS=[
-  {id:'fireDmg',name:'ไฟโหมกระหน่ำ',desc:'หอธาตุไฟ ดาเมจ +30%',icon:'fire',cat:'fire',max:3,apply(){G.mod.tdmg.fire*=1.3;}},
-  {id:'waterDmg',name:'กระแสน้ำเชี่ยว',desc:'หอธาตุน้ำ ดาเมจ +30%',icon:'water',cat:'water',max:3,apply(){G.mod.tdmg.water*=1.3;}},
-  {id:'plantDmg',name:'หนามพฤกษา',desc:'หอธาตุพืช ดาเมจ +30%',icon:'plant',cat:'plant',max:3,apply(){G.mod.tdmg.plant*=1.3;}},
-  {id:'trate',name:'สายหน้าไม้ตึง',desc:'หอธนูทุกหอ ยิงเร็วขึ้น 12%',icon:'clock',cat:'tower',max:3,apply(){G.mod.trate*=1.12;}},
-  {id:'trange',name:'ตาเหยี่ยว',desc:'หอธนูทุกหอ ยิงไกลขึ้น 12%',icon:'eye',cat:'tower',max:2,apply(){G.mod.trange*=1.12;}},
-  {id:'kdmg',name:'หน้าไม้หลวง',desc:'{R} ดาเมจ +35%',icon:'bow',cat:'king',max:3,apply(){G.mod.kdmg*=1.35;}},
-  {id:'krate',name:'มือไวดุจลม',desc:'{R} ยิงเร็วขึ้น 25%',icon:'clock',cat:'king',max:2,apply(){G.mod.krate*=1.25;}},
-  {id:'kspeed',name:'รองเท้าม้าเร็ว',desc:'{R}เดินเร็วขึ้น 15% · ดูดเหรียญไกลขึ้น 30%',icon:'boot',cat:'king',max:2,apply(){G.mod.kspeed*=1.15;G.mod.magnet*=1.3;}},
-  {id:'buildDisc',name:'ช่างไม้หลวง',desc:'ค่าสร้างหอใหม่ ลด 20%',icon:'hammer',cat:'eco',max:2,apply(){G.mod.buildDisc=Math.min(0.5,G.mod.buildDisc+0.2);}},
-  {id:'upDisc',name:'ช่างตีเหล็ก',desc:'ค่าอัปเกรดหอ ลด 12%',icon:'hammer',cat:'eco',max:2,apply(){G.mod.upDisc=Math.min(0.4,G.mod.upDisc+0.12);}},
-  {id:'attuneDisc',name:'นักบวชธาตุ',desc:'ค่าเปลี่ยนธาตุ ลด 60%',icon:'target',cat:'eco',max:1,apply(){G.mod.attuneDisc=0.6;}},
-  {id:'bonus',name:'ภาษีสงคราม',desc:'โบนัสผ่านด่าน +60%',icon:'coins',cat:'eco',max:2,apply(){G.mod.bonusMul+=0.6;}},
-  {id:'cache',name:'คลังสมบัติ',desc:'รับเหรียญทันที {cache}',icon:'coins',cat:'eco',max:9,apply(){const n=cacheAmt();for(const k of G.kings){k.coins+=n;G.stats.coins+=n;}}},
-  {id:'wall',name:'กำแพงหินผา',desc:'พลังป้อมสูงสุด +60 และซ่อม +60',icon:'wall',cat:'keep',max:3,apply(){G.keep.maxHp+=60;G.keep.hp=Math.min(G.keep.maxHp,G.keep.hp+60);}},
-  {id:'mend',name:'ช่างซ่อมประจำป้อม',desc:'หลังจบด่าน ซ่อมป้อมเพิ่มอีก 10%',icon:'heart',cat:'keep',max:2,apply(){G.mod.clearHeal+=0.1;}},
-  {id:'strong',name:'จุดตายธาตุ',desc:'ยิงชนะทาง แรงขึ้นจาก ×2 เป็น ×2.5',icon:'target',cat:'rare',max:1,rare:true,apply(){G.mod.strong=2.5;}},
-  {id:'weak',name:'ทะลวงธาตุ',desc:'ยิงแพ้ทาง ไม่ลดเหลือ ×½ แต่เป็น ×0.8',icon:'burst',cat:'rare',max:1,rare:true,apply(){G.mod.weak=0.8;}},
-  {id:'kingCounter',name:'ราชันย์สามธาตุ',desc:'ลูกธนูของ{R}เปลี่ยนเป็นธาตุที่ชนะทางเป้าหมายเสมอ',icon:'crown',cat:'rare',max:1,rare:true,apply(){G.mod.kingCounter=true;}},
-  {id:'multishot',name:'ธนูแฝด',desc:'{R}ยิงทีละ 2 ดอก ใส่ 2 เป้าหมาย',icon:'split',cat:'rare',max:1,rare:true,apply(){G.mod.multishot=2;}},
-  {id:'splash',name:'หัวธนูระเบิด',desc:'กระสุนหอแตกกระจาย โดนศัตรูรอบข้าง 25%',icon:'burst',cat:'rare',max:1,rare:true,apply(){G.mod.splash=0.25;}}
+  {id:'fireDmg',name:'ไฟโหมกระหน่ำ',desc:'หอธาตุไฟ ดาเมจ +30%',icon:'fire',cat:'fire',max:3,mod(m){m.tdmg.fire*=1.3;}},
+  {id:'waterDmg',name:'กระแสน้ำเชี่ยว',desc:'หอธาตุน้ำ ดาเมจ +30%',icon:'water',cat:'water',max:3,mod(m){m.tdmg.water*=1.3;}},
+  {id:'plantDmg',name:'หนามพฤกษา',desc:'หอธาตุพืช ดาเมจ +30%',icon:'plant',cat:'plant',max:3,mod(m){m.tdmg.plant*=1.3;}},
+  {id:'trate',name:'สายหน้าไม้ตึง',desc:'หอธนูทุกหอ ยิงเร็วขึ้น 12%',icon:'clock',cat:'tower',max:3,mod(m){m.trate*=1.12;}},
+  {id:'trange',name:'ตาเหยี่ยว',desc:'หอธนูทุกหอ ยิงไกลขึ้น 12%',icon:'eye',cat:'tower',max:2,mod(m){m.trange*=1.12;}},
+  {id:'buildDisc',name:'ช่างไม้หลวง',desc:'ค่าสร้างหอใหม่ ลด 20%',icon:'hammer',cat:'eco',max:2,mod(m){m.buildDisc=Math.min(0.5,m.buildDisc+0.2);}},
+  {id:'upDisc',name:'ช่างตีเหล็ก',desc:'ค่าอัปเกรดหอ ลด 12%',icon:'hammer',cat:'eco',max:2,mod(m){m.upDisc=Math.min(0.4,m.upDisc+0.12);}},
+  {id:'attuneDisc',name:'นักบวชธาตุ',desc:'ค่าเปลี่ยนธาตุ ลด 60%',icon:'target',cat:'eco',max:1,mod(m){m.attuneDisc=0.6;}},
+  {id:'bonus',name:'ภาษีสงคราม',desc:'โบนัสผ่านด่าน +60%',icon:'coins',cat:'eco',max:2,mod(m){m.bonusMul+=0.6;}},
+  {id:'cache',name:'คลังสมบัติ',desc:'รับเหรียญทันที {cache}',icon:'coins',cat:'eco',max:9,now(){const n=cacheAmt();for(const k of G.kings){k.coins+=n;G.stats.coins+=n;}}},
+  {id:'wall',name:'กำแพงหินผา',desc:'พลังป้อมสูงสุด +60 และซ่อม +60',icon:'wall',cat:'keep',max:3,now(){G.keep.maxHp+=60;G.keep.hp=Math.min(G.keep.maxHp,G.keep.hp+60);}},
+  {id:'mend',name:'ช่างซ่อมประจำป้อม',desc:'หลังจบด่าน ซ่อมป้อมเพิ่มอีก 10%',icon:'heart',cat:'keep',max:2,mod(m){m.clearHeal+=0.1;}},
+  // ไอเทมของราชา/ราชินี (ลิ้นชัก)
+  {id:'kdmg',name:'หน้าไม้หลวง',desc:'{R} ดาเมจ +50%',icon:'bow',cat:'king',item:true,val:5,mod(m){m.kdmg*=1.5;}},
+  {id:'krate',name:'มือไวดุจลม',desc:'{R} ยิงเร็วขึ้น 35%',icon:'clock',cat:'king',item:true,val:4,mod(m){m.krate*=1.35;}},
+  {id:'kspeed',name:'รองเท้าม้าเร็ว',desc:'{R}เดินเร็วขึ้น 20% · ดูดเหรียญไกลขึ้น 40%',icon:'boot',cat:'king',item:true,val:3,mod(m){m.kspeed*=1.2;m.magnet*=1.4;}},
+  {id:'krange',name:'ขนนกอินทรี',desc:'{R} ยิงไกลขึ้น 30%',icon:'feather',cat:'king',item:true,val:2,mod(m){m.krange*=1.3;}},
+  // ของหายากสีม่วง (ลิ้นชัก · ถือได้ทีละชิ้น · ได้จากบอส)
+  {id:'strong',name:'จุดตายธาตุ',desc:'ยิงชนะทาง แรงขึ้นจาก ×2 เป็น ×2.5',icon:'target',cat:'rare',rare:true,item:true,val:9,mod(m){m.strong=2.5;}},
+  {id:'weak',name:'ทะลวงธาตุ',desc:'ยิงแพ้ทาง ไม่ลดเหลือ ×½ แต่เป็น ×0.8',icon:'burst',cat:'rare',rare:true,item:true,val:7,mod(m){m.weak=0.8;}},
+  {id:'kingCounter',name:'ราชันย์สามธาตุ',desc:'ลูกธนูของ{R}เปลี่ยนเป็นธาตุที่ชนะทางเป้าหมายเสมอ',icon:'crown',cat:'rare',rare:true,item:true,val:8,mod(m){m.kingCounter=true;}},
+  {id:'multishot',name:'ธนูแฝด',desc:'{R}ยิงทีละ 2 ดอก ใส่ 2 เป้าหมาย',icon:'split',cat:'rare',rare:true,item:true,val:8,mod(m){m.multishot=2;}},
+  {id:'splash',name:'หัวธนูระเบิด',desc:'กระสุนหอแตกกระจาย โดนศัตรูรอบข้าง 25%',icon:'burst',cat:'rare',rare:true,item:true,val:8,mod(m){m.splash=0.25;}}
 ];
 const CARD_BY={}; for(const c of CARDS) CARD_BY[c.id]=c;
 const TYPE_LIST=Object.keys(ENEMY), TYPE_IDX={}; TYPE_LIST.forEach((t,i)=>TYPE_IDX[t]=i);
 
 // =====================================================================
 //  มรดกราชวงศ์ (แต้มต่อถาวร) — ซื้อด้วย "เกียรติยศ" ที่สะสมได้ทุกรอบ แพ้ก็ได้
-//  · เกียรติยศต่อด่านโตช้าๆ (2 → 7) ผ่านลึกได้มากขึ้น แต่ไม่พุ่งแบบทวีคูณ
+//  · เกียรติยศต่อด่านโตช้าๆ (1 → 5) ผ่านลึกได้มากขึ้น แต่ไม่พุ่งแบบทวีคูณ (ลดลงราว 30% จากรุ่นแรก ให้แต้มต่อมาช้าลง)
 //  · ทุกอย่างมีเพดาน และขั้นถัดไปแพงขึ้นเรื่อยๆ (ผลตอบแทนลดลง) → แต้มต่อไม่ทำให้เกมง่ายเกินไป
 //  · มีผลตั้งแต่ "รอบใหม่" (รอบที่เล่นค้างไว้ใช้ค่าเดิม)
 // =====================================================================
@@ -751,7 +838,7 @@ const META=[
   {id:'banner',name:'ธงศักดิ์สิทธิ์',icon:'flag',cat:'rare',cost:[120],val:[0.3],txt:v=>`ป้อมแตกครั้งแรกของรอบ ฟื้นคืน ${pct(v)}% + โล่ทอง 3 วินาที`}
 ];
 const META_BY={}; for(const m of META) META_BY[m.id]=m;
-const HONOR={level:L=>2+Math.floor(L/4), boss:[8,12,16,25]};   // ผ่านด่าน L ได้กี่แต้ม · ล้มบอสตัวที่ 1-4 ได้เพิ่ม
+const HONOR={level:L=>Math.round((2+Math.floor(L/4))*0.7), boss:[6,8,11,18]};   // ผ่านด่าน L ได้กี่แต้ม (1→5) · ล้มบอสตัวที่ 1-4 ได้เพิ่ม · ชนะครบ 20 ด่าน 103 แต้ม (เดิม 146)
 
 // ---------- เล่นด้วยกัน: สีราชา + ค่าการเชื่อมต่อ ----------
 // สีราชาเลี่ยงส้ม/ฟ้า/เขียวสด ไม่ให้สับสนกับสีธาตุ (น้ำเงินคือราชาตัวเดิม)
@@ -846,7 +933,7 @@ const Save={
     if(G.fast||G.coop||!G.map||!G.plan||G.endShown||!['rest','wave','cleared','cards'].includes(G.phase)) return false;
     const k=G.king, K=G.keep;
     const s={v:SAVE_VER,seed:G.seed,level:G.level,phase:G.phase,meta:G.runMeta,prevBest:G.prevBest,mod:G.mod,forge:G.forge,wallLv:G.wallLv,
-      cards:G.cards,cardCount:G.cardCount,offer:G.phase==='cards'?G.offer.map(c=>c.id):null,offerRare:!!G.offerRare,
+      cards:G.cards,cardCount:G.cardCount,inv:G.inv,offer:G.phase==='cards'?G.offer.map(c=>c.id):null,offerRare:!!G.offerRare,
       coins:k.coins,kx:k.x,ky:k.y,keep:{hp:K.hp,maxHp:K.maxHp,inv:K.inv||0},
       turrets:G.turrets.map(t=>({p:t.pad.id,lv:t.level,el:t.el,inv:t.invested})),
       stats:G.stats,runHonor:G.runHonor,hlog:G.hlog,reviveUsed:G.reviveUsed,bossDown:G.bossDown,at:Date.now()};
@@ -870,61 +957,319 @@ const Profile={
 };
 Profile.load();
 
-// ---------- เสียง (สังเคราะห์สด ไม่ต้องโหลดไฟล์) ----------
+// ---------- เสียงประกอบ (สังเคราะห์สด ไม่ต้องโหลดไฟล์) — โทนนุ่มแบบ ASMR ----------
+// · ไม่มีคลื่นสี่เหลี่ยม/ฟันเลื่อยที่บาดหู: ใช้คลื่นไซน์/สามเหลี่ยม + เสียงซ่ากรองนุ่ม · สุ่มระดับเสียงนิดๆ ทุกครั้งไม่ให้ซ้ำจนน่าเบื่อ
+// · เสียงซ้าย-ขวาตามตำแหน่งบนจอ (ใส่หูฟังจะรู้สึกใกล้) + ห้องสะท้อนเบาๆ
+// · ยิงธนู = ดีดสายเบาๆ ไล่โน้ตในคอร์ดของเพลงที่กำลังเล่น → ยิ่งยิงยิ่งเป็นทำนองคลอเพลง
+// · เก็บเหรียญ = กระดิ่งไล่บันไดเสียงเพนทาโทนิกขึ้นเรื่อยๆ ตามคอมโบ · ครบทุก 10 เหรียญมีประกายเสียงพิเศษ
+// · ประหยัดเครื่อง: แพนผ่านบัสถาวร 5 ช่อง + ส่งเข้าห้องสะท้อนผ่านบัสถาวร 3 ระดับ (ไม่สร้างโหนดเพิ่มทุกเสียง) · ห้องสะท้อนโมโน
+const SFX_STD=0.7;   // ตำแหน่งแถบเลื่อนที่ = ความดังมาตรฐาน
+const SFX_PANS=[-0.6,-0.3,0,0.3,0.6], SFX_RV=[0.12,0.32,0.48];
 const Sound={
-  ctx:null,out:null,nb:null,on:Store.get('sound',true),last:{},
+  ctx:null,out:null,bus:null,pb:null,rvs:null,nb:null,last:{},arp:0,
+  vol:(()=>{const v=Store.get('sfxVol',null); return v==null?(Store.get('sound',true)?SFX_STD:0):clamp(+v||0,0,1);})(),
+  get on(){return this.vol>0;},
   init(){
-    if(this.ctx){ if(this.ctx.state==='suspended') this.ctx.resume().catch(()=>{}); return; }
+    if(this.ctx){ if(this.ctx.state!=='running') this.ctx.resume().catch(()=>{}); return; }
     const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
     try{
-      this.ctx=new AC(); this.out=this.ctx.createGain(); this.out.gain.value=0.5; this.out.connect(this.ctx.destination);
-      const n=(this.ctx.sampleRate*0.6)|0; this.nb=this.ctx.createBuffer(1,n,this.ctx.sampleRate);
+      const c=this.ctx=new AC();
+      this.out=c.createGain(); this.out.gain.value=this.gain(); this.out.connect(c.destination);
+      const lp=c.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=6500; lp.Q.value=0.4;   // ตัดเสียงแหลมบาดหู
+      this.bus=c.createGain(); this.bus.connect(lp); lp.connect(this.out);
+      const sp=!!c.createStereoPanner, pan=(p,to)=>{ const n=c.createStereoPanner(); n.pan.value=p; n.connect(to); return n; };
+      this.pb=sp?SFX_PANS.map(p=>pan(p,this.bus)):null;   // แพนซ้าย-ขวาตามตำแหน่ง (เลือกช่องที่ใกล้สุด)
+      const n=(c.sampleRate*0.6)|0; this.nb=c.createBuffer(1,n,c.sampleRate);
       const d=this.nb.getChannelData(0); for(let i=0;i<n;i++) d[i]=Math.random()*2-1;
+      // ห้องสะท้อน: เสียงซ่าที่จางลง 1 วินาที (โมโน) → ออกซ้าย และขวาช้ากว่า 19 มิลลิวินาที ให้รู้สึกกว้าง
+      const L=(c.sampleRate*1.0)|0, ir=c.createBuffer(1,L,c.sampleRate), x=ir.getChannelData(0);
+      for(let i=0;i<L;i++) x[i]=(Math.random()*2-1)*Math.pow(1-i/L,3.4);
+      const rin=c.createGain(), cv=c.createConvolver(), rl=c.createBiquadFilter(), rw=c.createGain();
+      rin.channelCount=1; rin.channelCountMode='explicit'; cv.buffer=ir; rl.type='lowpass'; rl.frequency.value=3600; rw.gain.value=sp?0.25:0.355;
+      rin.connect(cv); cv.connect(rl); rl.connect(rw);
+      if(sp){ const dl=c.createDelay(0.05); dl.delayTime.value=0.019; rw.connect(pan(-0.55,this.out)); rw.connect(dl); dl.connect(pan(0.55,this.out)); }
+      else rw.connect(this.out);
+      this.rvs=SFX_RV.map(v=>{ const g=c.createGain(); g.gain.value=v; g.connect(rin); return g; });
     }catch(e){this.ctx=null;}
+    if(this.ctx&&typeof Music!=='undefined') Music.init();
   },
+  gain(){return 0.62*this.vol/SFX_STD;},
+  setVol(v){ this.vol=clamp(v,0,1); Store.set('sfxVol',this.vol); if(this.out) this.out.gain.setTargetAtTime(this.gain(),this.ctx.currentTime,0.04); },
   gap(k,ms){const t=performance.now();if((this.last[k]||0)+ms>t)return false;this.last[k]=t;return true;},
-  tone(f,dur,type,vol,f2,delay){
+  pan(x){return x==null||!isFinite(x)?0:clamp(((x-cam.x)/VW)*2-1,-1,1)*0.65;},
+  // ส่งเสียงหนึ่งก้อนเข้า: ช่องแพนที่ใกล้ตำแหน่งสุด (เสียงเมนู pan=0 เข้ากลางตรงๆ) + ห้องสะท้อน (ปัดเป็น 3 ระดับ · น้อยมาก = แห้ง)
+  route(g,pan,rv){
+    const P=this.pb; g.connect(P&&pan?P[Math.round((clamp(pan,-0.6,0.6)+0.6)/0.3)]:this.bus);
+    if(rv>0.07&&this.rvs) g.connect(this.rvs[rv<0.2?0:rv<0.4?1:2]);
+  },
+  // โทนหนึ่งตัว: w คลื่น · f0→f1 เลื่อนระดับใน fd วินาที · a เวลาขึ้น · d ความยาว · v ดัง
+  tn(w,f0,f1,fd,a,d,v,pan,rv,delay){
     if(!this.on||!this.ctx) return;
-    const c=this.ctx,t0=c.currentTime+(delay||0),o=c.createOscillator(),g=c.createGain();
-    o.type=type||'sine'; o.frequency.setValueAtTime(f,t0); if(f2) o.frequency.exponentialRampToValueAtTime(f2,t0+dur);
-    g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(vol,t0+0.01); g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
-    o.connect(g); g.connect(this.out); o.start(t0); o.stop(t0+dur+0.03);
+    const c=this.ctx,t=c.currentTime+(delay||0),o=c.createOscillator(),g=c.createGain();
+    o.type=w; o.frequency.setValueAtTime(f0,t); if(f1&&f1!==f0) o.frequency.exponentialRampToValueAtTime(f1,t+fd);
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(v,t+a); g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+    o.connect(g); this.route(g,pan,rv); o.start(t); o.stop(t+d+0.05);
   },
-  noise(dur,vol,freq,q){
+  // เสียงซ่ากรอง: type/f/q = ตัวกรอง (f→f2 กวาดความถี่ได้) · d ความยาว · v ดัง
+  nz(type,f,q,a,d,v,pan,rv,delay,f2){
     if(!this.on||!this.ctx||!this.nb) return;
-    const c=this.ctx,t0=c.currentTime,s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();
-    s.buffer=this.nb; f.type='bandpass'; f.frequency.value=freq; f.Q.value=q||1;
-    g.gain.setValueAtTime(vol,t0); g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
-    s.connect(f); f.connect(g); g.connect(this.out); s.start(t0); s.stop(t0+dur+0.02);
+    const c=this.ctx,t=c.currentTime+(delay||0),s=c.createBufferSource(),fl=c.createBiquadFilter(),g=c.createGain();
+    s.buffer=this.nb; s.loop=true; fl.type=type; fl.frequency.setValueAtTime(f,t); if(f2) fl.frequency.exponentialRampToValueAtTime(f2,t+d); fl.Q.value=q;
+    g.gain.setValueAtTime(0.0001,t); g.gain.exponentialRampToValueAtTime(v,t+a); g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+    s.connect(fl); fl.connect(g); this.route(g,pan,rv); s.start(t,Math.random()*0.4); s.stop(t+d+0.05);
   },
-  coin(n){ if(!this.gap('coin',38)) return; const f=880*Math.pow(1.0595,Math.min(n,18)); this.tone(f,0.08,'triangle',0.08); this.tone(f*2,0.05,'sine',0.025,null,0.012); },
-  shoot(){ if(this.gap('shoot',95)) this.noise(0.05,0.045,2600,2); },
-  tower(){ if(this.gap('tower',120)) this.tone(380,0.07,'triangle',0.03,170); },
-  hit(){ if(this.gap('hit',60)) this.noise(0.035,0.05,1500,1); },
-  crit(){ if(this.gap('crit',90)) this.tone(1320,0.06,'square',0.025,1760); },
-  dull(){ if(this.gap('dull',140)) this.tone(170,0.07,'triangle',0.045,130); },
-  die(){ if(this.gap('die',70)) this.tone(300,0.1,'square',0.03,90); },
-  spend(){ if(this.gap('spend',55)) this.tone(700,0.05,'triangle',0.045,1100); },
-  pick(el){ const b={fire:523,water:440,plant:392}[el]||440; this.tone(b,0.09,'triangle',0.07); this.tone(b*1.5,0.12,'triangle',0.06,null,0.07); },
-  attune(){ [392,523,659,880].forEach((f,i)=>this.tone(f,0.14,'sine',0.08,null,i*0.06)); },
-  buy(){ [660,880,1320].forEach((f,i)=>this.tone(f,0.12,'triangle',0.07,null,i*0.05)); },
-  card(){ [523,784,1046,1568].forEach((f,i)=>this.tone(f,0.3,'sine',0.07,null,i*0.08)); },
-  heal(){ if(this.gap('heal',400)) this.tone(988,0.25,'sine',0.04,1318); },
-  summon(){ this.noise(0.5,0.06,600,0.7); this.tone(220,0.5,'triangle',0.05,440); },
-  roar(){ this.noise(0.9,0.12,220,0.5); this.tone(110,0.9,'sawtooth',0.08,55); this.tone(165,0.7,'sawtooth',0.05,80,0.1); },
-  deny(){ this.tone(150,0.16,'square',0.04,110); },
-  build(){ [523,659,784,1046].forEach((f,i)=>this.tone(f,0.18,'triangle',0.09,null,i*0.07)); },
-  keep(){ if(!this.gap('keep',320)) return; this.tone(120,0.2,'sawtooth',0.05,55); this.noise(0.12,0.045,400,0.8); },
-  horn(){ this.tone(196,0.45,'sawtooth',0.05); this.tone(294,0.55,'sawtooth',0.045,null,0.2); },
-  win(){ [523,659,784,1046,1318].forEach((f,i)=>this.tone(f,0.25,'triangle',0.09,null,i*0.1)); },
-  lose(){ [392,330,262,196].forEach((f,i)=>this.tone(f,0.32,'sawtooth',0.05,null,i*0.17)); },
-  boom(){ this.noise(0.6,0.12,180,0.6); this.tone(80,0.5,'sine',0.12,40); }
+  bell(f,v,pan,d,rv,delay){ this.tn('sine',f,0,0,0.004,d||0.42,v,pan,rv==null?0.3:rv,delay); this.tn('sine',f*2.76,0,0,0.003,(d||0.42)*0.35,v*0.22,pan,0,delay); },
+  pluck(f,v,pan,d,rv,delay){ this.tn('triangle',f,0,0,0.003,d||0.14,v,pan,rv==null?0.12:rv,delay); this.tn('sine',f*2,0,0,0.002,(d||0.14)*0.55,v*0.35,pan,0,delay); },
+  // โทนของเพลงที่กำลังเล่น (คอร์ดในห้องนี้ + คีย์หลัก) · ปิดเพลงอยู่ = ดีไมเนอร์
+  chord(){ const S=Music.song; return S&&S.ch?S.ch[Math.floor(Music.step/16)%S.ch.length]:{r:2,t:[0,3,7]}; },
+  tonic(){ const S=Music.song; return S&&S.ch?S.ch[0]:{r:2,t:[0,3,7]}; },
+  hz:n=>440*Math.pow(2,(n-69)/12),
+  vary:a=>1+(Math.random()*2-1)*a,
+  // ---- เสียงในเกม (x = ตำแหน่งบนแผนที่ ใช้แพนซ้าย-ขวา) ----
+  coin(n,x){
+    if(!this.gap('coin',38)) return;
+    const k=this.tonic(), PENT=[0,2,4,7,9], i=Math.min(Math.max(0,(n||1)-1),11), base=72+((k.r+3)%12);   // เพนทาโทนิกของคีย์เมเจอร์คู่ขนาน
+    const f=this.hz(base+PENT[i%5]+12*Math.floor(i/5)), pan=this.pan(x);
+    this.bell(f,0.066*(1-i*0.03),pan,0.45,0.32);
+    this.nz('highpass',6200,0.8,0.002,0.016,0.015,pan,0);   // เสียงเหรียญกระทบกันเบาๆ
+    if(n>0&&n%10===0){ this.bell(f*1.5,0.022,-pan,0.6,0.45,0.05); this.bell(f*2,0.016,pan*0.5,0.7,0.5,0.1); }   // คอมโบครบ 10: ประกายเสียง
+  },
+  shoot(x){
+    if(!this.gap('shoot',70)) return;
+    const c=this.chord(), PAT=[0,1,2,3,2,1], j=PAT[this.arp++%PAT.length], tone=j<3?c.t[j]:12, pan=this.pan(x);
+    this.pluck(this.hz(62+c.r+tone)*this.vary(0.004),0.024,pan,0.13,0.1);
+    this.nz('bandpass',2300,1.2,0.002,0.035,0.009,pan,0);   // สายธนูดีด "ฟึ่บ" เบาๆ
+  },
+  tower(x){ if(!this.gap('tower',110)) return; const p=this.pan(x), v=this.vary(0.06);
+    this.nz('bandpass',1050*v,2.4,0.002,0.045,0.016,p,0.05); this.tn('sine',185*v,118*v,0.06,0.003,0.08,0.02,p,0); },
+  hit(x){ if(!this.gap('hit',60)) return; const p=this.pan(x);
+    this.nz('bandpass',2500*this.vary(0.1),1.4,0.002,0.026,0.017,p,0.04); this.tn('sine',330,240,0.035,0.002,0.05,0.011,p,0); },
+  crit(x){ if(!this.gap('crit',90)) return; const c=this.chord(), j=(Math.random()*3)|0;
+    this.bell(this.hz(86+c.r+c.t[j]),0.017,this.pan(x),0.3,0.35); },
+  dull(x){ if(this.gap('dull',140)){ const p=this.pan(x); this.tn('sine',150,104,0.08,0.003,0.1,0.03,p,0); this.nz('lowpass',420,0.7,0.003,0.05,0.01,p,0); } },
+  die(x){ if(!this.gap('die',60)) return; const p=this.pan(x), v=this.vary(0.08);
+    this.tn('sine',330*v,700*v,0.045,0.003,0.1,0.038,p,0.12); this.nz('highpass',3200,0.8,0.001,0.012,0.012,p,0); },   // ป๊อปเหมือนฟองสบู่แตก
+  spend(){ if(!this.gap('spend',55)) return; this.nz('bandpass',1700,3,0.002,0.03,0.034,0,0.05); this.tn('sine',520,0,0,0.002,0.05,0.014,0,0); },
+  pick(el){ const c=this.tonic(), up={fire:7,water:3,plant:0}[el]||0, f=this.hz(62+c.r+up); this.pluck(f,0.05,0,0.2,0.2); this.pluck(f*1.5,0.04,0,0.24,0.2,0.07); },
+  arpUp(notes,gapS,v,d,rv,fn){ const c=this.tonic(); notes.forEach((nn,i)=>this[fn||'bell'](this.hz(nn+c.r),v,0,d,rv,i*gapS)); },
+  attune(){ this.arpUp([74,77,81,86],0.06,0.04,0.4,0.35); },
+  buy(){ this.arpUp([77,81,86],0.05,0.042,0.4,0.3); },
+  card(){ const c=this.tonic(), b=72+((c.r+3)%12); [0,4,7,9,12].forEach((s2,i)=>this.bell(this.hz(b+s2),0.04,0,0.6,0.45,i*0.08)); },
+  heal(){ if(this.gap('heal',400)){ const c=this.tonic(); this.bell(this.hz(86+c.r),0.022,0,0.5,0.4); this.bell(this.hz(93+c.r),0.016,0,0.5,0.4,0.08); } },
+  summon(){ this.nz('bandpass',420,1.2,0.12,0.6,0.05,0,0.3,0,1700); this.tn('sine',110,140,0.5,0.1,0.6,0.03,0,0.2); },
+  roar(){ this.nz('lowpass',260,0.7,0.04,0.95,0.12,0,0.25); this.tn('sine',82,50,0.9,0.02,0.95,0.08,0,0.1); this.tn('triangle',123,75,0.7,0.02,0.75,0.04,0,0.1,0.08); },
+  deny(){ this.tn('triangle',220,180,0.12,0.004,0.15,0.045,0,0.05); },
+  build(){ this.arpUp([62,69,74,77],0.07,0.05,0.24,0.25,'pluck'); this.tn('sine',140,90,0.12,0.004,0.16,0.04,0,0.1); },
+  keep(){ if(!this.gap('keep',320)) return; this.tn('sine',120,70,0.18,0.004,0.22,0.05,0,0.12); this.nz('lowpass',320,0.7,0.004,0.16,0.035,0,0.1); },
+  horn(){ const c=this.tonic(), f=this.hz(50+c.r); this.tn('triangle',f,0,0,0.07,0.6,0.05,0,0.35); this.tn('triangle',f*1.5,0,0,0.08,0.7,0.035,0,0.35,0.14); this.tn('sine',f*2,0,0,0.08,0.7,0.02,0,0.35,0.14); },
+  win(){ const c=this.tonic(), b=72+((c.r+3)%12); [0,4,7,12,16].forEach((s2,i)=>this.bell(this.hz(b+s2),0.05,0,0.55,0.45,i*0.1)); },
+  lose(){ const c=this.tonic(); [7,3,0,-5].forEach((s2,i)=>this.tn('triangle',this.hz(62+c.r+s2),0,0,0.02,0.5,0.045,0,0.35,i*0.17)); },
+  boom(){ this.tn('sine',80,38,0.55,0.005,0.65,0.12,0,0.2); this.nz('lowpass',220,0.6,0.005,0.6,0.1,0,0.25); }
 };
+
+// =====================================================================
+//  เพลงประกอบ — แต่งใหม่ทั้งหมด สังเคราะห์สดเป็นเสียง FM แบบเครื่องเกม 16 บิต (ไม่ต้องโหลดไฟล์เพลง)
+//  · main  = เพลงยุคกลาง (โหมดดอเรียน) ใช้หน้าแรกและด่านปกติ
+//  · boss  = ด่านบอส 5 / 10 / 15 · มืด ตึงเครียด เครื่องสายรัวเร็ว ทองเหลืองหนัก กลองศึก
+//  · final = ด่าน 20 มังกรสามธาตุ · ยิ่งใหญ่ คอรัส ทองเหลือง กลองทิมปานี
+//  เครื่องดนตรี: FM 2 ตัว (ตัวพา + ตัวกล้ำ) เหมือนชิปเสียงยุคนั้น · กลองสังเคราะห์จากคลื่นไซน์/เสียงซ่า · มีเสียงสะท้อน (echo)
+// =====================================================================
+const NOTE_PC={C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+function midiOf(s){const m=/^([A-G])([#b]?)(\d)$/.exec(s); return m?12*(+m[3]+1)+NOTE_PC[m[1]]+(m[2]==='#'?1:m[2]==='b'?-1:0):null;}
+function chordOf(s){const m=/^([A-G])([#b]?)(m?)(7?)$/.exec(s), t=m[3]?[0,3,7]:[0,4,7]; if(m[4]) t.push(10); return {r:NOTE_PC[m[1]]+(m[2]==='#'?1:m[2]==='b'?-1:0),t};}
+// r = อัตราความถี่ตัวกล้ำ · i0→i1 = ความลึกการกล้ำ (เปลี่ยนภายใน it วินาที) · a/d/s/rel = ซองเสียง · vib = [ความเร็ว, ความลึก] · det = เสียงคู่เพี้ยน (เซนต์) · v = ความดัง
+const PATCH={
+  bass: {r:1,  i0:5,  i1:1.3, it:0.12,a:0.004,d:0.14,s:0.5, rel:0.05,v:0.20},
+  bass2:{r:0.5,i0:4.5,i1:1.8, it:0.22,a:0.004,d:0.22,s:0.6, rel:0.07,v:0.17},
+  reed: {r:1,  i0:2.4,i1:1.6, it:0.12,a:0.025,d:0.45,s:0.75,rel:0.08,v:0.15,vib:[5.6,0.006]},
+  brass:{r:1,  i0:0.5,i1:2.8, it:0.09,a:0.04, d:0.5, s:0.8, rel:0.13,v:0.095,vib:[5,0.005],det:7},
+  harp: {r:2,  i0:3,  i1:0.05,it:0.4, a:0.002,d:0.3, s:0,   rel:0.35,v:0.075},
+  stab: {r:1,  i0:2.2,i1:0.6, it:0.1, a:0.003,d:0.08,s:0.3, rel:0.05,v:0.075},
+  choir:{r:1,  i0:0.8,i1:0.5, it:0.4, a:0.3,  d:0.6, s:0.85,rel:0.5, v:0.04,vib:[4.6,0.008],det:9},
+  pad:  {r:1,  i0:0.8,i1:0.5, it:0.4, a:0.35, d:0.7, s:0.85,rel:0.6, v:0.03,det:9},
+  psg:  {w:'square',a:0.002,d:0.06,s:0.35,rel:0.03,v:0.022}
+};
+// โน้ต: "ชื่อโน้ต:ความยาว" (ความยาวนับเป็นโน้ตเขบ็ตสองชั้น 1/16 · r = พัก · | = ขีดห้อง ไว้อ่านง่าย)
+// แพตเทิร์นต่อห้อง: R = ราก F = ขั้นห้า O = รากสูงขึ้นคู่แปด T = ขั้นสาม · ตัวเลข = โน้ตในคอร์ดไล่ขึ้นไป (0 ราก 1 ขั้นสาม 2 ขั้นห้า 3 รากคู่แปด …)
+const ALL=[0,1];
+const SONGS={
+  main:{bpm:120, chords:'Dm C Dm Am Dm C Bb A F C G Dm Bb F G A',
+    lead:'D5:4 A4:2 D5:2 E5:2 F5:2 E5:2 D5:2 | C5:4 G4:2 C5:2 E5:4 D5:2 C5:2 | D5:2 F5:2 A5:4 G5:2 F5:2 E5:2 F5:2 | E5:6 D5:2 C5:4 A4:4 |'+
+      ' D5:4 A4:2 D5:2 E5:2 F5:2 G5:2 A5:2 | G5:4 E5:2 C5:2 G5:2 F5:2 E5:2 G5:2 | F5:4 D5:2 Bb4:2 C5:2 D5:2 Bb4:2 D5:2 | E5:4 C#5:2 A4:2 E5:4 r:4 |'+
+      ' A5:6 G5:2 F5:4 C5:4 | G5:6 F5:2 E5:4 C5:4 | D5:2 G5:2 B5:4 A5:2 G5:2 A5:2 B5:2 | A5:8 F5:4 D5:4 |'+
+      ' D6:4 C6:2 Bb5:2 F5:4 D5:4 | C6:4 A5:2 F5:2 G5:2 A5:2 Bb5:2 A5:2 | G5:4 D5:2 G5:2 B5:4 A5:2 G5:2 | A5:8 E5:4 C#5:4',
+    build(L,S){
+      L.mel(S.lead,'reed',[0],0,1,1); L.mel(S.lead,'brass',[1],0,1,1); L.mel(S.lead,'psg',[1],-12,0.9,0);
+      L.bar('R:2 R:1 R:1 O:2 R:2 F:2 R:2 O:2 F:2','bass',ALL,2);
+      L.bar('0:2 2:2 3:2 4:2 5:2 4:2 3:2 2:2','harp',[0],3,1,1);
+      L.bar('0:1 2:1 3:1 4:1 3:1 2:1 0:1 2:1 3:1 4:1 5:1 4:1 3:1 2:1 3:1 2:1','harp',[1],3,0.75,1);
+      const fill=[7,15], main=L.except(fill);
+      L.drum({k:'x.......x.....x.',s:'....x.......x...',h:'x.x.x.x.x.x.x.x.'},ALL,main);
+      L.drum({o:'..x...x...x...x.'},[1],main);
+      L.drum({k:'x.......x.......',s:'....x.....x.x.xx',t:'........x.x.....',m:'............x...',l:'..............x.'},ALL,fill);
+      L.drum({c:'x...............'},ALL,[0,8]);
+    }},
+  boss:{bpm:144, chords:'Em Em C C Am B Em F Em D C B Am C B B',
+    lead:'E4:8 G4:4 F#4:4 | E4:12 B3:4 | C4:8 D4:4 E4:4 | G4:12 A4:4 | A4:8 G4:4 E4:4 | F#4:8 D#4:8 | E4:16 | F4:8 E4:4 F4:4 |'+
+      ' B4:8 G4:4 B4:4 | A4:8 F#4:4 A4:4 | G4:8 E4:4 G4:4 | F#4:8 D#4:4 F#4:4 | E5:8 C5:4 A4:4 | G4:8 E4:4 C5:4 | B4:8 A4:4 F#4:4 | D#4:8 F#4:4 B4:4',
+    build(L,S){
+      L.mel(S.lead,'brass',[0],0,1.15,1); L.mel(S.lead,'brass',[1],12,0.9,1); L.mel(S.lead,'choir',[1],0,1.6,0);
+      L.bar('0:1 3:1 0:1 2:1 0:1 3:1 0:1 2:1 0:1 3:1 0:1 2:1 1:1 2:1 3:1 2:1','stab',ALL,3);
+      L.pad('pad',ALL,4);
+      L.bar('R:2 R:2 R:2 R:2 R:2 R:2 O:2 R:2','bass2',ALL,2);
+      const fill=[7,15], main=L.except(fill);
+      L.drum({k:'x..x..x.x..x..x.',s:'....x.......x...',h:'..x...x...x...x.',p:'x...............'},ALL,main);
+      L.drum({h:'x.x.x.x.x.x.x.x.'},[1],main);
+      L.drum({k:'x..x..x.x.......',s:'....x...x.x.xxxx',m:'........x.x.....',l:'............x.x.',p:'x...............'},ALL,fill);
+      L.drum({c:'x...............'},ALL,[0,4,8,12]);
+    }},
+  final:{bpm:132, chords:'Dm Bb F C Gm Bb A A Dm C Bb A Gm F E A',
+    lead:'D4:6 A4:2 D5:8 | C5:4 Bb4:4 F4:8 | A4:6 C5:2 F5:8 | E5:4 D5:4 C5:4 G4:4 | Bb4:6 D5:2 G5:8 | F5:4 D5:4 Bb4:4 D5:4 | E5:8 C#5:4 A4:4 | A4:12 r:4 |'+
+      ' D5:6 F5:2 A5:8 | G5:4 F5:4 E5:4 C5:4 | D5:6 F5:2 Bb5:8 | A5:4 G5:4 E5:4 C#5:4 | D5:4 G5:4 Bb5:4 A5:4 | A5:6 G5:2 F5:4 C5:4 | G#5:8 E5:4 B4:4 | A5:12 E5:2 C#5:2',
+    build(L,S){
+      L.mel(S.lead,'brass',ALL,0,1.05,1); L.mel(S.lead,'choir',[0],-12,1.7,0); L.mel(S.lead,'brass',[1],-12,0.8,0);
+      L.pad('pad',ALL,4,1.15);
+      L.bar('0:2 2:2 3:2 2:2 0:2 2:2 3:2 4:2','stab',[0],3);
+      L.bar('0:1 2:1 3:1 2:1 0:1 2:1 3:1 4:1 0:1 2:1 3:1 2:1 0:1 2:1 4:1 5:1','stab',[1],3,0.85);
+      L.bar('0:1 2:1 4:1 6:1 4:1 2:1 0:1 2:1 4:1 6:1 7:1 6:1 4:1 2:1 4:1 2:1','harp',[1],4,0.55,1);
+      L.bar('R:4 R:2 R:2 O:4 R:2 F:2','bass2',ALL,2);
+      const fill=[7,15], main=L.except(fill);
+      L.drum({k:'x.......x.x.....',s:'....x.......x...',h:'..x...x...x...x.',p:'x.......x.......'},[0],main);
+      L.drum({k:'x.x.....x.x...x.',s:'....x.......x...',h:'x.x.x.x.x.x.x.x.',p:'x.......x.......'},[1],main);
+      L.drum({k:'x.......x.......',s:'....x.......x.xx',t:'....x.x.........',m:'........x.x.....',l:'............xxxx',p:'x...............'},ALL,fill);
+      L.drum({c:'x...............'},ALL,[0,4,8,12]);
+    }}
+};
+// แปลงเพลงเป็นตารางเหตุการณ์ทีละช่อง 1/16 (เตรียมครั้งเดียว) · รอบคี่/คู่เรียบเรียงต่างกัน (pass 0 / 1) ให้ฟังไม่ซ้ำเร็ว
+function buildSong(def){
+  const bars=def.chords.split(' ').map(chordOf), len=bars.length*16, S={bpm:def.bpm,len,spb:60/def.bpm/4,ev:[[],[]],dr:[[],[]]};
+  for(const p of ALL) for(let i=0;i<len;i++){S.ev[p].push([]);S.dr[p].push('');}
+  const add=(ps,st,ins,n,l,v,e)=>{for(const p of ps) S.ev[p][st%len].push([ins,n,l,v||1,e||0]);};
+  const toks=str=>str.split(/[\s|]+/).filter(Boolean).map(t=>{const [a,b]=t.split(':'); return [a,+b||2];});
+  const L={
+    except(list){return bars.map((_,i)=>i).filter(i=>!list.includes(i));},
+    mel(str,ins,ps,sh,v,e){let st=0; for(const [nm,l] of toks(str)){ const n=nm==='r'?null:midiOf(nm); if(n!=null) add(ps,st,ins,n+(sh||0),l,v,e); st+=l; } S.melLen=st;},
+    bar(tpl,ins,ps,oct,v,e){ const tk=toks(tpl);
+      bars.forEach((c,b)=>{ const base=12*(oct+1)+c.r, tones=[]; for(let o=0;o<4;o++) for(const x of c.t.slice(0,3)) tones.push(base+x+12*o);
+        let st=b*16; for(const [nm,l] of tk){ const n=nm==='R'?base:nm==='F'?base+7:nm==='O'?base+12:nm==='T'?base+c.t[1]:/^\d+$/.test(nm)?tones[+nm]:null; if(n!=null) add(ps,st,ins,n,l,v,e); st+=l; } }); },
+    pad(ins,ps,oct,v){ bars.forEach((c,b)=>{ const base=12*(oct+1)+c.r; for(const x of c.t.slice(0,3)) add(ps,b*16,ins,base+x,16,v,0); }); },
+    drum(pat,ps,list){ for(const b of list) for(const k in pat) for(let i=0;i<16;i++) if(pat[k][i]==='x') for(const p of ps) S.dr[p][b*16+i]+=k; }
+  };
+  def.build(L,def);
+  S.ch=bars;   // คอร์ดแต่ละห้อง (ให้เสียงยิง/เก็บเหรียญเล่นโน้ตเข้ากับเพลง)
+  return S;
+}
+const Music={
+  vol:0.075, ctx:null,
+  uvol:(()=>{const v=Store.get('musVol',null); return v==null?(Store.get('music',true)?SFX_STD:0):clamp(+v||0,0,1);})(),   // แถบเลื่อนของผู้เล่น (70% = มาตรฐาน)
+  get on(){return this.uvol>0;}, bus:null, cur:null, song:null, sg:null, se:null, step:0, next:0, pass:0, level:-1, built:{},
+  // สร้างสายเสียงของเพลง (ใช้ได้ทั้งเครื่องจริงและตอนทดสอบเรนเดอร์เป็นไฟล์)
+  init(c,dest){
+    if(this.bus&&!c) return true;
+    c=c||Sound.ctx; if(!c||!Sound.nb) return false;
+    this.ctx=c; this.bus=c.createGain();
+    const lp=c.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=7500;
+    const comp=c.createDynamicsCompressor(); comp.threshold.value=-16; comp.knee.value=8; comp.ratio.value=3.5; comp.attack.value=0.008; comp.release.value=0.25;
+    this.master=c.createGain(); this.master.gain.value=0;
+    this.bus.connect(lp); lp.connect(comp); comp.connect(this.master); this.master.connect(dest||c.destination);
+    // เสียงสะท้อน 3/16 จังหวะ (ตั้งตามความเร็วเพลง)
+    this.dIn=c.createGain(); this.dl=c.createDelay(1.5); const fb=c.createGain(), dlp=c.createBiquadFilter(), wet=c.createGain();
+    fb.gain.value=0.3; dlp.type='lowpass'; dlp.frequency.value=2600; wet.gain.value=0.24;
+    this.dIn.connect(this.dl); this.dl.connect(dlp); dlp.connect(fb); fb.connect(this.dl); dlp.connect(wet); wet.connect(this.bus);
+    this.level=-1; this.cur=null; this.song=null; this.sg=null;
+    return true;
+  },
+  data(name){return this.built[name]||(this.built[name]=buildSong(SONGS[name]));},
+  // เปลี่ยนเพลง: ค่อยๆ เบาเพลงเดิม แล้วเริ่มเพลงใหม่ต้นห้อง
+  play(name,at){
+    const c=this.ctx, t=at!=null?at:c.currentTime, had=!!this.sg;
+    if(this.sg){ const g=this.sg, e=this.se; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value,t); g.gain.linearRampToValueAtTime(0,t+0.7); e.gain.setTargetAtTime(0,t,0.15);
+      setTimeout(()=>{try{g.disconnect();e.disconnect();}catch(_){}} ,2500); }
+    this.cur=name; this.sg=null; this.se=null; this.song=null;
+    if(!name) return;
+    const S=this.data(name), t0=t+(had?0.6:0.05);
+    this.sg=c.createGain(); this.se=c.createGain(); this.sg.gain.setValueAtTime(0.0001,t); this.sg.gain.setValueAtTime(0.0001,t0); this.sg.gain.linearRampToValueAtTime(1,t0+0.25);
+    this.sg.connect(this.bus); this.se.connect(this.dIn); this.dl.delayTime.setValueAtTime(S.spb*3,t0);
+    this.song=S; this.step=0; this.pass=0; this.next=t0;
+  },
+  // ตั้งคิวโน้ตล่วงหน้าเล็กน้อย (เรียกทุกเฟรม) · กลับมาจากพื้นหลังก็เล่นต่อจากจุดเดิม
+  tick(ahead){
+    const S=this.song; if(!S) return; const now=this.ctx.currentTime;
+    if(this.next<now-0.3) this.next=now+0.05;
+    while(this.next<now+(ahead||0.2)){ this.fire(S,this.step,this.next); this.next+=S.spb; if(++this.step>=S.len){this.step=0; this.pass++;} }
+  },
+  fire(S,st,t){
+    const p=this.pass&1;
+    for(const e of S.ev[p][st]) this.voice(PATCH[e[0]],t,e[1],e[2]*S.spb,e[3],e[4]);
+    const d=S.dr[p][st]; for(let i=0;i<d.length;i++) this.drum(d[i],t,st);
+  },
+  voice(P,t,n,dur,v,echo){
+    const c=this.ctx, f=440*Math.pow(2,(n-69)/12), vol=P.v*v, end=t+dur+P.rel*5+0.05, g=c.createGain(), cars=[];
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+P.a); g.gain.setTargetAtTime(vol*P.s,t+P.a,P.d); g.gain.setTargetAtTime(0,t+Math.max(P.a,dur),P.rel);
+    g.connect(this.sg); if(echo) g.connect(this.se);
+    for(const det of P.det?[-P.det,P.det]:[0]){ const o=c.createOscillator(); o.type=P.w||'sine'; o.frequency.value=f; if(det) o.detune.value=det; o.connect(g); o.start(t); o.stop(end); cars.push(o); }
+    if(P.r){ const m=c.createOscillator(), mg=c.createGain(); m.frequency.value=f*P.r; mg.gain.setValueAtTime(f*P.i0,t); mg.gain.exponentialRampToValueAtTime(Math.max(0.01,f*P.i1),t+P.it);
+      m.connect(mg); for(const o of cars) mg.connect(o.frequency); m.start(t); m.stop(end); }
+    if(P.vib&&dur>0.3){ const l=c.createOscillator(), lg=c.createGain(); l.frequency.value=P.vib[0]; lg.gain.setValueAtTime(0,t); lg.gain.linearRampToValueAtTime(f*P.vib[1],t+Math.min(0.5,dur));
+      l.connect(lg); for(const o of cars) lg.connect(o.frequency); l.start(t); l.stop(end); }
+  },
+  drum(k,t,st){
+    const c=this.ctx, nb=Sound.nb, acc=st%4===0?1:st%2===0?0.75:0.55;
+    const env=(node,v,d)=>{const g=c.createGain(); g.gain.setValueAtTime(v,t); g.gain.exponentialRampToValueAtTime(0.001,t+d); node.connect(g); g.connect(this.sg);};
+    const osc=(type,f0,f1,fd,v,d)=>{const o=c.createOscillator(); o.type=type; o.frequency.setValueAtTime(f0,t); o.frequency.exponentialRampToValueAtTime(f1,t+fd); env(o,v,d); o.start(t); o.stop(t+d+0.02);};
+    const noise=(type,f,q,v,d)=>{if(!nb) return; const s=c.createBufferSource(), fl=c.createBiquadFilter(); s.buffer=nb; s.loop=true; fl.type=type; fl.frequency.value=f; fl.Q.value=q; s.connect(fl); env(fl,v,d); s.start(t,Math.random()*0.4); s.stop(t+d+0.02);};
+    switch(k){
+      case 'k': osc('sine',150,48,0.12,0.45,0.3); osc('triangle',700,120,0.02,0.14,0.03); break;   // กลองเบส
+      case 's': noise('bandpass',1900,0.8,0.32,0.16); osc('triangle',210,150,0.06,0.2,0.09); break;   // สแนร์
+      case 'h': noise('highpass',7200,0.8,0.075*acc,0.045); break;   // ไฮแฮต
+      case 'o': noise('highpass',6600,0.8,0.05,0.22); break;
+      case 'c': noise('highpass',3600,0.5,0.14,1.6); break;   // ฉาบ
+      case 't': osc('triangle',280,160,0.16,0.34,0.26); break;   // กลองทอม (คลื่นสามเหลี่ยม ให้ลำโพงมือถือได้ยิน)
+      case 'm': osc('triangle',210,120,0.18,0.36,0.3); break;
+      case 'l': osc('triangle',150,90,0.2,0.4,0.36); break;
+      case 'p': osc('triangle',130,96,0.35,0.42,0.9); osc('sine',65,50,0.3,0.25,0.7); noise('lowpass',320,0.7,0.2,0.5); break;   // ทิมปานี
+    }
+  },
+  // เพลงตามจังหวะเกม · หน้าการ์ดเล่นเพลงเดิมต่อ · จบรอบ = เงียบ (ให้เสียงชนะ/แพ้เด่น)
+  want(){
+    if(!this.on) return null;
+    if(G.endShown||G.phase==='defeat'||G.phase==='victory') return null;
+    if(G.phase==='title'||!G.plan) return 'main';
+    if(G.phase==='cards') return this.cur||'main';
+    if(G.level>=MAX_LEVEL) return 'final';
+    return BOSS_AT[G.level]!=null?'boss':'main';
+  },
+  update(){
+    if(!this.bus&&!(Sound.ctx&&this.init())) return;
+    const w=this.want(); if(w!==this.cur) this.play(w);
+    const target=this.on?(G.paused||document.hidden?0.45:1)*this.vol*this.uvol/SFX_STD:0;   // พักเกม = เบาลง
+    if(target!==this.level){ this.level=target; this.master.gain.setTargetAtTime(target,this.ctx.currentTime,0.12); }
+    this.tick();
+  },
+  setVol(v){ this.uvol=clamp(v,0,1); Store.set('musVol',this.uvol); Sound.init(); }
+};
+// ---------- ตั้งค่าความดัง: แถบเลื่อนเสียงประกอบ / ดนตรี (ในเมนูพัก และปุ่มลำโพงหน้าแรก) ----------
+const VOL_ROWS=[['sfx','sound','เสียงประกอบ'],['mus','note','ดนตรี']];
+function volVal(k){return Math.round(100*(k==='sfx'?Sound.vol:Music.uvol));}
+function renderVols(){
+  for(const box of document.querySelectorAll('[data-vols]')){
+    if(!box.firstChild) box.innerHTML=VOL_ROWS.map(([k,ic,nm])=>`<label class="vol"><span class="vl">${icon(ic,'')}<b>${nm}</b></span>`+
+      `<input type="range" min="0" max="100" step="5" data-v="${k}" aria-label="ความดัง${nm}"><em data-vv="${k}"></em></label>`).join('');
+    for(const [k] of VOL_ROWS){ const v=volVal(k), inp=box.querySelector(`[data-v="${k}"]`); if(+inp.value!==v) inp.value=v; inp.style.setProperty('--p',v+'%');
+      box.querySelector(`[data-vv="${k}"]`).textContent=v?v+'%':'ปิด'; }
+  }
+}
+document.addEventListener('input',e=>{
+  const k=e.target&&e.target.dataset&&e.target.dataset.v; if(!k) return;
+  const v=(+e.target.value||0)/100; Sound.init();
+  if(k==='sfx'){ Sound.setVol(v); if(Sound.gap('volPrev',120)) Sound.coin(1+((Sound.arp++)%6)); } else Music.setVol(v);
+  renderVols();
+});
 
 // ---------- สถานะเกมทั้งหมด ----------
 const G={
   phase:'title', paused:false, speed:1, t:0, level:1, rng:Math.random, fast:false,
-  map:null, plan:null, keep:null, king:null, kings:[], mod:defaultMod(), wallLv:0, cards:[], cardCount:{}, offer:[],
+  map:null, plan:null, keep:null, king:null, kings:[], mod:defaultMod(), wallLv:0, cards:[], cardCount:{}, offer:[], inv:[],
   enemies:[], proj:[], coins:[], turrets:[], parts:[], texts:[], flyers:[],
   laneEl:[null,null,null], laneChanged:[false,false,false], laneNew:[false,false,false],
   spawner:null, stats:{kills:0,coins:0,built:0,hits:0,strong:0,attune:0,royal:0}, shake:0, combo:0, comboT:0, effT:0,
@@ -1167,7 +1512,7 @@ function genRun(seed,lanes,n){
     const bi=BOSS_AT[L];
     if(bi!=null){
       const act=lanes.filter(x=>x.from<=L), lane=act[(r()*act.length)|0].id, type=bi===3?'dragon':bosses[bi];
-      lv.boss={idx:bi,type,lane,el:lv.laneEl[lane],hp:Math.round(BOSS_HP[bi]*BOSS_TYPE_HP[type]*COOP.boss(n))};
+      lv.boss={idx:bi,type,lane,el:lv.laneEl[lane],hp:Math.round(BOSS_HP[bi]*BOSS_TYPE_HP[type]*(bi===3?COOP.dragon(n):COOP.boss(n)))};
       if(type==='dragon'){lv.boss.order=shuffle(ELEMS.slice(),r); lv.boss.el=lv.boss.order[0];}
     }
     buildWave(lv,r,lanes,n);
@@ -1176,7 +1521,7 @@ function genRun(seed,lanes,n){
   return {levels};
 }
 function buildWave(lv,r,lanes,n){
-  const L=lv.L, act=lanes.filter(x=>x.from<=L), N=Math.round(CURVE.count(L)*COOP.cnt(n||1)), W=CURVE.window(L)*COOP.win(n||1);
+  const L=lv.L, act=lanes.filter(x=>x.from<=L), N=Math.round(CURVE.count(L)*COOP.cnt(n||1,L)), W=CURVE.window(L)*COOP.win(n||1);
   let nR=L>=2?Math.round(N*Math.min(0.24,0.06+0.012*L)):0;
   let nB=L>=3?Math.max(1,Math.round(N*Math.min(0.13,0.025+0.0055*L))):0;
   let nS=L>=8?Math.max(1,Math.round(N*Math.min(0.06,0.015+0.0025*L))):0;
@@ -1307,7 +1652,7 @@ function makeKing(x,y,o){
 function applyKing(k){
   if(!k){ for(const q of G.kings) applyKing(q); return; }   // ไม่ระบุ = ทุกคน
   const B=BAL.king,f=(k.forge||1)-1;
-  k.dmg=B.dmg*Math.pow(1.3,f)*G.mod.kdmg; k.rate=B.rate*Math.pow(1.06,f)*G.mod.krate; k.range=B.range+6*f;
+  k.dmg=B.dmg*Math.pow(1.3,f)*G.mod.kdmg; k.rate=B.rate*Math.pow(1.06,f)*G.mod.krate; k.range=(B.range+6*f)*(G.mod.krange||1);
   k.speed=B.speed*G.mod.kspeed; k.magnet=B.magnet*G.mod.magnet;
 }
 function kingSpots(n){
@@ -1325,12 +1670,13 @@ function clearWorld(){
 function setupRun(seed,rm,roster,mapData){
   const n=roster?roster.length:1;
   G.coop=roster?{n}:null; G.client=false;
+  G.speed=!roster&&Store.get('speed',1)===2?2:1;   // เล่นคนเดียวจำความเร็วที่ชอบไว้ · เล่นด้วยกันเริ่มที่ปกติ
   G.seed=seed; G.runMeta=Object.assign({},rm);
   G.map=mapData?mapFromData(mapData):genMap(seed); curKeep=G.map.keep;
   G.plan=genRun(seed,G.map.lanes,n);
   G.rng=mulberry32((seed^0x5bd1e995)>>>0);
   G.mod=defaultMod(); applyMetaMod(G.runMeta); G.modVer++;
-  G.wallLv=0; G.cards=[]; G.cardCount={}; G.offer=[]; G.offerRare=false; G.eid=0; G.cid=0; G.picker=-1; G.cardRound=0;
+  G.wallLv=0; G.cards=[]; G.cardCount={}; G.offer=[]; G.inv=[]; G.offerRare=false; G.eid=0; G.cid=0; G.picker=-1; G.cardRound=0; Cards.sel=-1;
   const K=G.map.keep, hp=BAL.keepHp+Meta.val('walls',G.runMeta);
   G.keep={x:K.x,y:K.y,hp,maxHp:hp,flash:0,smoke:0,inv:0};
   const ros=roster||[{slot:0,ctrl:'local',name:Profile.d.name,color:Profile.d.color,look:Profile.d.look,meta:rm}], spots=kingSpots(ros.length);
@@ -1366,8 +1712,9 @@ function newRun(seed){
 // โหลดรอบที่เซฟไว้: ช่วงพัก / หน้าเลือกการ์ด / กลางด่าน (กลางด่านจะเปิดมาแบบพักเกมไว้ก่อน)
 function loadRun(s){
   setupRun(s.seed,s.meta||{});
-  const m=Object.assign(defaultMod(),s.mod||{}); m.tdmg=Object.assign(defaultMod().tdmg,(s.mod&&s.mod.tdmg)||{}); G.mod=m;
   G.forge=clamp(s.forge|0,1,6); G.wallLv=s.wallLv|0; G.cards=(s.cards||[]).filter(id=>CARD_BY[id]); G.cardCount=Object.assign({},s.cardCount);
+  G.inv=cleanInv(Array.isArray(s.inv)?s.inv:G.cards);   // เซฟรุ่นก่อนไม่มีลิ้นชัก → ย้ายไอเทมที่เลือกล่าสุดเข้าลิ้นชัก
+  recalcMod();
   G.prevBest=s.prevBest|0;
   const K=G.keep; K.maxHp=s.keep.maxHp; K.hp=clamp(s.keep.hp,1,K.maxHp); K.inv=clamp(+s.keep.inv||0,0,3);
   const k=G.king; k.coins=Math.max(0,s.coins|0); if(isFinite(s.kx)&&isFinite(s.ky)){k.x=s.kx;k.y=s.ky;} applyKing();
@@ -1418,6 +1765,7 @@ function restInfoHTML(){
   const soon=G.map.lanes.find(L=>L.from===G.level+1), nb=BOSS_AT[G.level+1];
   if(soon) h+=`<div class="tip"><b>ด่านหน้า${SIDE_NAME[soon.side]}จะเปิด!</b> เก็บเหรียญไว้สร้างหอที่ทางนั้นด้วย</div>`;
   if(nb!=null&&!lv.boss) h+=`<div class="tip"><b>ด่านหน้ามีบอส!</b> เตรียมหอให้แรงพอ</div>`;
+  if(G.inv.length) h+=`<div class="tip invline">${icon('chest')}ลิ้นชัก ${G.inv.length}/${INV_MAX}: ${G.inv.map(id=>`<b class="${CARD_BY[id].rare?'rr':''}">${CARD_BY[id].name}</b>`).join(' · ')}</div>`;
   return h;
 }
 function enterRest(first){
@@ -1490,11 +1838,50 @@ function afterClear(){
   if(G.level%2===0||BOSS_AT[G.level]!=null){ showCards(BOSS_AT[G.level]!=null); return; }
   G.level++; enterRest(false);
 }
-// ---------- การ์ดพร ----------
+// ---------- ความเร็วเกม ×1 / ×2 · เล่นด้วยกัน: ใครกดก็ได้ มีผลทั้งห้อง (หัวห้องเป็นคนเดินเกม) ----------
+function setSpeed(v,k){
+  v=v===2?2:1;
+  if(G.client){ Client.act({a:'speed',v}); return; }
+  if(G.speed===v||!['rest','wave','cleared','cards'].includes(G.phase)) return;
+  G.speed=v; if(!G.coop) Store.set('speed',v);
+  const who=G.coop&&k&&k.name?k.name+' กด · ':'';   // เล่นด้วยกัน: บอกว่าใครกด (มีผลทั้งทีม)
+  UI.toast(v===2?'เร่งความเร็ว ×2':'ความเร็วปกติ ×1', G.coop?who+(v===2?'ทั้งทีมเร็วขึ้นเท่าตัว':'ทั้งทีมกลับมาเร็วเท่าเดิม'):(v===2?'ทุกอย่างเร็วขึ้นเท่าตัว · แตะอีกครั้งเพื่อกลับ':'กลับมาเร็วเท่าเดิมแล้ว'));
+  Sound.spend();
+}
+// ---------- การ์ดพร + ลิ้นชัก ----------
+// ลิ้นชักเก็บไอเทมได้ 3 ชิ้น ไม่ซ้ำกัน และมีของหายากได้ชิ้นเดียว · ค่าพลังคิดใหม่จากการ์ดถาวร + ของในลิ้นชักทุกครั้งที่เปลี่ยน
+function cleanInv(list){
+  const out=[];
+  for(let i=list.length-1;i>=0&&out.length<INV_MAX;i--){   // ไล่จากชิ้นล่าสุด
+    const c=CARD_BY[list[i]]; if(!c||!c.item||out.includes(c.id)) continue;
+    if(c.rare&&out.some(id=>CARD_BY[id].rare)) continue;
+    out.unshift(c.id);
+  }
+  return out;
+}
+function recalcMod(){
+  const m=defaultMod(); G.mod=m; applyMetaMod(G.runMeta);
+  for(const id of G.cards){ const c=CARD_BY[id]; if(c&&!c.item&&c.mod) c.mod(m); }
+  for(const id of G.inv){ const c=CARD_BY[id]; if(c&&c.mod) c.mod(m); }
+  G.modVer++; for(const t of G.turrets) applyTurret(t); applyKing();
+}
+const invRareIdx=()=>G.inv.findIndex(id=>CARD_BY[id]&&CARD_BY[id].rare);
+// รับการ์ดใบนี้ต้องทิ้งอะไรไหม: null = ไม่ต้อง · {rare:i} = แทนของหายากชิ้นเดิม · {full:true} = ลิ้นชักเต็ม ต้องเลือกทิ้ง 1 ชิ้น
+function invNeed(c){
+  if(!c||!c.item) return null;
+  const ri=invRareIdx(); if(c.rare&&ri>=0) return {rare:ri};
+  return G.inv.length>=INV_MAX?{full:true}:null;
+}
+// เลือกทิ้งให้อัตโนมัติ (บอท / หมดเวลา): ชิ้นที่ค่าน้อยสุด
+function autoDrop(c){
+  const nd=invNeed(c); if(!nd) return -1; if(nd.rare!=null) return nd.rare;
+  let bi=0, bv=1e9; G.inv.forEach((id,i)=>{const v=(CARD_BY[id]&&CARD_BY[id].val)||1; if(v<bv){bv=v;bi=i;}}); return bi;
+}
 function drawCards(rare){
-  const pool=CARDS.filter(c=>(G.cardCount[c.id]||0)<c.max), pick=[], r=G.rng;
-  const wOf=c=>{ if(c.rare) return rare?0.6:0.2; if(c.cat==='fire'||c.cat==='water'||c.cat==='plant') return 0.45+0.35*G.turrets.filter(t=>t.el===c.cat).length; return 1; };
-  if(rare){const rp=pool.filter(c=>c.rare); if(rp.length) pick.push(rp[(r()*rp.length)|0]);}
+  const held=new Set(G.inv), r=G.rng, pick=[];
+  const pool=CARDS.filter(c=>!c.rare&&!held.has(c.id)&&(c.item||(G.cardCount[c.id]||0)<c.max));   // การ์ดปกติไม่มีของหายาก
+  const wOf=c=>{ if(c.cat==='fire'||c.cat==='water'||c.cat==='plant') return 0.45+0.35*G.turrets.filter(t=>t.el===c.cat).length; return 1; };
+  if(rare){const rp=CARDS.filter(c=>c.rare&&!held.has(c.id)); if(rp.length) pick.push(rp[(r()*rp.length)|0]);}   // รางวัลบอส: มีสีม่วง 1 ใบ
   while(pick.length<(G.mod.cardN||3)){
     const left=pool.filter(c=>!pick.includes(c)); if(!left.length) break;
     let tot=0; for(const c of left) tot+=wOf(c); let u=r()*tot;
@@ -1508,49 +1895,90 @@ function drawCards(rare){
 function cacheAmt(){return Math.round((30+3*G.level)*(G.coop?COOP.bonus(G.coop.n):1));}
 function cardDesc(c){return c.desc.replace('{cache}',(G.coop?'คนละ +':'+')+cacheAmt()).replace('{R}',G.coop?'ทุกคน':ruler(G.king&&G.king.look));}
 function showCards(rare,preset){
-  G.phase='cards'; G.offerRare=!!rare; G.offer=preset&&preset.length?preset:drawCards(rare); Panel.hide();
+  G.phase='cards'; G.offerRare=!!rare; G.offer=preset&&preset.length?preset:drawCards(rare); Panel.hide(); Cards.sel=-1;
   if(G.coop&&!G.client){   // เล่นด้วยกัน: ผลัดกันเลือก
     const slots=G.kings.map(k=>k.slot).sort((a,b)=>a-b);
     G.picker=slots[G.cardRound%slots.length]; G.cardRound++;
-    Net.sendAll({t:'cards',offer:G.offer.map(c=>c.id),rare:!!rare,picker:G.picker,fx:NetFX.take()});   // ส่งเอฟเฟกต์ค้างไปก่อน ไม่ให้ข้อความผ่านด่านโผล่ทับหน้าการ์ด
+    Net.sendAll({t:'cards',offer:G.offer.map(c=>c.id),rare:!!rare,picker:G.picker,inv:G.inv,fx:NetFX.take()});   // ส่งเอฟเฟกต์ค้างไปก่อน ไม่ให้ข้อความผ่านด่านโผล่ทับหน้าการ์ด
     CoopGame.cardTimer(true);
   }
   renderCards();
   Save.write();
 }
+// หน้าเลือกการ์ด: sel = ใบที่กำลังจะรับ แต่ต้องเลือกทิ้งของในลิ้นชักก่อน (-1 = ยังไม่ได้แตะ)
+const Cards={sel:-1};
+function invChip(id,i,act,out){
+  const c=CARD_BY[id];
+  return `<${act?'button':'span'} class="ivc${c.rare?' rare':''}${act?' act':''}${out?' out':''}"${act?` data-d="${i}"`:''}><span class="cic cat-${c.cat}">${icon(c.icon,'')}</span><span><b>${c.name}</b><small>${cardDesc(c)}</small></span>${act?'<em>ทิ้งชิ้นนี้</em>':''}</${act?'button':'span'}>`;
+}
+function invRow(out){
+  const slots=[]; for(let i=0;i<INV_MAX;i++) slots.push(G.inv[i]?invChip(G.inv[i],i,false,i===out):'<span class="ivc empty">ว่าง</span>');
+  return `<div class="inv-h">${icon('chest','')}<b>ลิ้นชัก ${G.inv.length}/${INV_MAX}</b><span>ของหายากสีม่วงถือได้ชิ้นเดียว</span></div><div class="inv-s">${slots.join('')}</div>`;
+}
+function cardTag(c){
+  if(c.rare) return '<em class="tg rare">ของหายาก · เก็บในลิ้นชัก (ถือได้ชิ้นเดียว)</em>';
+  if(c.item) return '<em class="tg item">เก็บในลิ้นชัก</em>';
+  const n=G.cardCount[c.id]||0;
+  return `<em class="tg now">อัปทันที${c.max>1&&c.max<9?` · มีแล้ว ${n}/${c.max}`:''}</em>`;
+}
 function renderCards(){
   const rare=G.offerRare, mine=!G.coop||G.picker===G.king.slot, pk=G.coop?kingBySlot(G.picker):null;
   $('toast').classList.remove('show');   // ไม่ให้ข้อความ "ผ่านด่าน" ซ้อนอยู่หลังหัวข้อการ์ด
+  const sc=mine&&Cards.sel>=0?G.offer[Cards.sel]:null, nd=sc?invNeed(sc):null;
+  if(sc&&nd){   // ขั้นเลือกทิ้งของในลิ้นชัก
+    const old=nd.rare!=null?CARD_BY[G.inv[nd.rare]]:null;
+    $('cardsTitle').textContent=old?'แลกของหายาก?':'ลิ้นชักเต็มแล้ว';
+    $('cardsSub').textContent=old?`ของหายากถือได้ชิ้นเดียว · รับ "${sc.name}" แล้วทิ้ง "${old.name}" ไหม?`:`แตะของที่จะทิ้ง เพื่อเก็บ "${sc.name}" แทน`;
+    $('cardList').innerHTML=`<div class="swap-new">${icon('chest','')}<span>ของใหม่</span></div>`+
+      `<button class="cpick${sc.rare?' rare':''} picked" disabled><span class="cic cat-${sc.cat}">${icon(sc.icon,'')}</span><span><b>${sc.name}</b><span>${cardDesc(sc)}</span></span></button>`+
+      (old?`<button class="btn wide btn-go swapok" data-d="${nd.rare}">รับของใหม่ · ทิ้ง${old.name}</button>`:'')+
+      `<button class="btn alt wide swapno">กลับไปเลือกใบอื่น</button>`;
+    $('cardInv').innerHTML=old?invRow(nd.rare):`<div class="inv-h">${icon('chest','')}<b>เลือกของที่จะทิ้ง</b></div><div class="inv-s">${G.inv.map((id,i)=>invChip(id,i,true)).join('')}</div>`;
+    $('scrCards').hidden=false; return;
+  }
+  Cards.sel=-1;
   $('cardsTitle').textContent=rare?'รางวัลจากบอส!':G.coop?'เลือกพรให้ทั้งทีม':'เลือกพรของ'+ruler(G.king.look);
   $('cardsSub').textContent=G.coop?(mine?'ตาของคุณเลือก 1 ใบ · ทุกคนได้ผลจนจบรอบนี้':`ตาของ ${pk?pk.name:'เพื่อน'} เลือก · รอสักครู่นะ`):
-    rare?'มีการ์ดหายากให้เลือก 1 ใบ · มีผลจนจบรอบนี้':'เลือก 1 ใบ · มีผลจนจบรอบนี้';
-  $('cardList').innerHTML=G.offer.map((c,i)=>{
-    const n=G.cardCount[c.id]||0;
-    return `<button class="cpick${c.rare?' rare':''}${mine?'':' wait'}" data-i="${i}"${mine?'':' disabled'}>${c.rare?'<span class="rib">หายาก</span>':''}<span class="cic cat-${c.cat}">${icon(c.icon,'')}</span>`+
-      `<span><b>${c.name}</b><span>${cardDesc(c)}</span>${c.max>1&&c.max<9?`<em>มีแล้ว ${n}/${c.max}</em>`:''}</span></button>`;
-  }).join('');
+    rare?'มีของหายากสีม่วงให้เลือก · มีผลจนจบรอบนี้':'เลือก 1 ใบ · มีผลจนจบรอบนี้';
+  $('cardList').innerHTML=G.offer.map((c,i)=>
+    `<button class="cpick${c.rare?' rare':''}${mine?'':' wait'}" data-i="${i}"${mine?'':' disabled'}>${c.rare?'<span class="rib">หายาก</span>':''}<span class="cic cat-${c.cat}">${icon(c.icon,'')}</span>`+
+      `<span><b>${c.name}</b><span>${cardDesc(c)}</span>${cardTag(c)}</span></button>`).join('');
+  $('cardInv').innerHTML=invRow();
   $('scrCards').hidden=false;
 }
-// k = คนที่เลือก (เล่นด้วยกันต้องเป็นตาของคนนั้น) · force = หมดเวลา หัวห้องเลือกแทน
-function pickCard(i,k,force){
+// k = คนที่เลือก (เล่นด้วยกันต้องเป็นตาของคนนั้น) · force = หมดเวลา หัวห้องเลือกแทน · drop = ช่องในลิ้นชักที่จะทิ้ง (ไม่ระบุ = เลือกให้อัตโนมัติ)
+function pickCard(i,k,force,drop){
   if(G.phase!=='cards') return false;
   const c=G.offer[i]; if(!c) return false;
   k=k||G.king;
   if(G.coop){
-    if(G.client){ if(G.picker!==G.king.slot) return false; return Client.act({a:'card',i}); }
+    if(G.client){ if(G.picker!==G.king.slot) return false; return Client.act({a:'card',i,drop}); }
     if(!force&&k.slot!==G.picker) return false;
-    CoopGame.cardTimer(false);
-    Net.sendAll({t:'picked',i,id:c.id,by:k.slot,auto:force?1:0});
   }
+  const nd=invNeed(c); let dropId=null;
+  if(nd){ const d=nd.rare!=null?nd.rare:(Number.isInteger(drop)&&drop>=0&&drop<G.inv.length?drop:autoDrop(c)); dropId=G.inv[d]||null; }
+  if(G.coop){ CoopGame.cardTimer(false); Net.sendAll({t:'picked',i,id:c.id,by:k.slot,auto:force?1:0,drop:dropId}); }
   const desc=cardDesc(c);   // คิดข้อความก่อนขึ้นด่านใหม่ (คลังสมบัติคิดตามด่านที่เลือก)
-  c.apply(); G.cardCount[c.id]=(G.cardCount[c.id]||0)+1; G.cards.push(c.id); G.modVer++;
-  for(const t of G.turrets) applyTurret(t); applyKing();
+  G.cardCount[c.id]=(G.cardCount[c.id]||0)+1; G.cards.push(c.id);
+  if(c.item){ if(dropId) G.inv.splice(G.inv.indexOf(dropId),1); G.inv.push(c.id); }
+  if(c.now) c.now();
+  recalcMod(); Cards.sel=-1;
   $('scrCards').hidden=true;
   G.level++; enterRest(false);
-  NetFX.busy=true; Sound.card(); UI.toast((G.coop?(force?'หมดเวลา · ได้พร: ':k.name+' เลือก: '):'ได้พร: ')+c.name, desc); NetFX.busy=false;   // เครื่องเพื่อนเล่นเสียง/ขึ้นข้อความเองตอนได้รับ "picked"
+  const head=(G.coop?(force?'หมดเวลา · ได้พร: ':k.name+' เลือก: '):'ได้พร: ')+c.name;
+  NetFX.busy=true; Sound.card(); UI.toast(head, dropId?`ทิ้ง ${CARD_BY[dropId].name} · ${desc}`:desc); NetFX.busy=false;   // เครื่องเพื่อนเล่นเสียง/ขึ้นข้อความเองตอนได้รับ "picked"
   return true;
 }
-$('cardList').addEventListener('click',e=>{const b=e.target.closest('.cpick'); if(b&&!b.disabled) pickCard(+b.dataset.i);});
+// แตะการ์ด: ถ้าต้องทิ้งของในลิ้นชักก่อน → ไปขั้นเลือกทิ้ง · แตะของในลิ้นชัก = ทิ้งชิ้นนั้นแล้วรับใบใหม่
+$('scrCards').addEventListener('click',e=>{
+  if(G.phase!=='cards') return;
+  const d=e.target.closest('[data-d]'); if(d&&Cards.sel>=0){ const i=Cards.sel; pickCard(i,null,false,+d.dataset.d); return; }
+  if(e.target.closest('.swapno')){ Cards.sel=-1; Sound.spend(); renderCards(); return; }
+  const b=e.target.closest('.cpick'); if(!b||b.disabled||b.dataset.i==null) return;
+  const i=+b.dataset.i, c=G.offer[i]; if(!c) return;
+  if(invNeed(c)){ Cards.sel=i; Sound.spend(); renderCards(); return; }
+  pickCard(i);
+});
 
 function keepDestroyed(){
   G.phase='defeat'; G.endT=2.2;
@@ -1606,9 +2034,11 @@ function pauseMenu(title){
   $('btnHome').textContent=co?(host?'ปิดห้อง · ทุกคนออกจากเกม':'ออกจากห้อง'):'กลับหน้าแรก (เซฟไว้เล่นต่อ)';
   $('btnRestart').hidden=!!G.client; $('btnRestart').textContent=host?'ยอมแพ้ทั้งทีม':'ยอมแพ้ · เริ่มรอบใหม่';
   $('pauseNote').textContent=G.client?'เกมของทีมยังเดินอยู่ ตัวละครของคุณจะยืนรอ':host?'เกมหยุดให้ทุกคนจนกว่าจะกดเล่นต่อ':'เกมเซฟให้อัตโนมัติ ปิดแอปแล้วกลับมาเล่นต่อได้';
-  {
-    const cnt={}; for(const id of G.cards) cnt[id]=(cnt[id]||0)+1;
-    $('ownedCards').innerHTML=Object.keys(cnt).length?Object.keys(cnt).map(id=>`<span>${CARD_BY[id].name}${cnt[id]>1?' ×'+cnt[id]:''}</span>`).join(''):'<span>ยังไม่มีการ์ดพร</span>';
+  {   // ลิ้นชัก + การ์ดที่อัปไปแล้ว
+    const cnt={}; for(const id of G.cards){ const c=CARD_BY[id]; if(c&&!c.item) cnt[id]=(cnt[id]||0)+1; }
+    const inv=G.inv.map(id=>`<span class="${CARD_BY[id].rare?'rare':'item'}">${CARD_BY[id].name}</span>`).join('');
+    const ups=Object.keys(cnt).map(id=>`<span>${CARD_BY[id].name}${cnt[id]>1?' ×'+cnt[id]:''}</span>`).join('');
+    $('ownedCards').innerHTML=(inv||ups)?`${inv?`<span class="oh">ลิ้นชัก ${G.inv.length}/${INV_MAX}</span>${inv}`:''}${ups?`<span class="oh">อัปแล้ว</span>${ups}`:''}`:'<span>ยังไม่มีการ์ดพร</span>';
     Save.write();}
 }
 function goTitle(){
@@ -1650,7 +2080,7 @@ function updateKings(dt){ for(const k of G.kings) updateKing(k,dt); }
 function updateKing(k,dt,noShoot){
   k=k||G.king; if(G.phase==='defeat'){k.vx*=0.8;k.vy*=0.8;return;}
   if(k.ctrl==='remote'||k.ctrl==='net'){
-    const age=Math.min(0.25,(performance.now()-(k.at||0))/1000), px=k.tx+k.tvx*age, py=k.ty+k.tvy*age, a=1-Math.exp(-dt*14);
+    const age=Math.min(0.25,(performance.now()-(k.at||0))/1000)*(G.speed||1), px=k.tx+k.tvx*age, py=k.ty+k.tvy*age, a=1-Math.exp(-dt*14);
     if(hyp(px-k.x,py-k.y)>240){k.x=px;k.y=py;} else {k.x+=(px-k.x)*a; k.y+=(py-k.y)*a;}
     k.vx=k.tvx; k.vy=k.tvy;
   } else {
@@ -1676,7 +2106,7 @@ function updateKing(k,dt,noShoot){
     if(k.cd<=0){
       k.cd=1/k.rate; const shots=Math.min(G.mod.multishot,kTargets.length);
       for(let i=0;i<shots;i++){const tg=kTargets[i];fire('king',G.mod.kingCounter?counterOf(tg.el):null,k.x+Math.cos(k.aim)*14,k.y-14+Math.sin(k.aim)*8,tg,k.dmg,660,k.slot);}
-      k.recoil=1; if(k===G.king||!G.coop) Sound.shoot();
+      k.recoil=1; if(k===G.king||!G.coop) Sound.shoot(k.x);
     }
   } else k.aim=angLerp(k.aim,Math.atan2(k.fy,k.fx),Math.min(1,dt*8));
 }
@@ -1769,7 +2199,7 @@ function hurt(e,dmg,el){
   const m=mult(el,e.el);
   e.hp-=dmg*m; e.flash=1;
   if(el&&G.phase!=='title'){G.stats.hits++; if(m>1) G.stats.strong++;}
-  if(m!==1) effText(e,m); else Sound.hit();
+  if(m!==1) effText(e,m); else Sound.hit(e.x);
   if(e.type==='berserker'&&!e.enraged&&e.hp<e.maxHp*0.5&&e.hp>0){
     e.enraged=true; e.speed*=1.8; e.dps*=1.5; Sound.roar(); UI.toast('ขุนศึกคลั่ง!','เลือดเหลือครึ่ง วิ่งเร็วขึ้นแล้ว รีบยิงให้ร่วง');
   }
@@ -1785,14 +2215,14 @@ function hurt(e,dmg,el){
   if(e.hp<=0){
     e.dead=true; G.stats.kills++;
     dropCoins(e.x,e.y-4,e.coin);
-    puff(e.x,e.y-e.r,ELEM[e.el].c,e.r); Sound.die();
+    puff(e.x,e.y-e.r,ELEM[e.el].c,e.r); Sound.die(e.x);
     if(ENEMY[e.type].boss){G.shake=14;ring(e.x,e.y-e.r,70,'#ffe27a');Sound.boom();floatText(e.x,e.y-60,'ล้มบอสแล้ว!','#ffe27a',20);G.boss=null;
       const lb=G.plan&&G.phase!=='title'?curLv().boss:null; if(lb) G.bossDown=lb.idx;}
   }
   return m;
 }
 function effText(e,m){
-  if(m>1) Sound.crit(); else Sound.dull();
+  if(m>1) Sound.crit(e.x); else Sound.dull(e.x);
   if(G.t-e.txtT<0.8||G.t-G.effT<0.12) return;
   e.txtT=G.t; G.effT=G.t;
   floatText(e.x+(Math.random()-0.5)*10,e.y-e.r*2.6,m>1?'×'+G.mod.strong:(G.mod.weak<0.6?'×½':'×'+G.mod.weak),m>1?'#fff1a0':'#d2d2d2',m>1?15:12);
@@ -1822,7 +2252,7 @@ function updateTurrets(dt){
     }
     if(best){
       const want=Math.atan2(best.y-best.r-(t.y-t.h-8),best.x-t.x); t.aim=angLerp(t.aim,want,Math.min(1,dt*14));
-      if(t.cd<=0){t.cd=1/t.rate;fire('tower',t.el,t.x+Math.cos(t.aim)*16,t.y-t.h-8+Math.sin(t.aim)*10,best,t.dmg,760,t.pad.id);t.recoil=1;Sound.tower();}
+      if(t.cd<=0){t.cd=1/t.rate;fire('tower',t.el,t.x+Math.cos(t.aim)*16,t.y-t.h-8+Math.sin(t.aim)*10,best,t.dmg,760,t.pad.id);t.recoil=1;Sound.tower(t.x);}
     }
   }
 }
@@ -1892,7 +2322,8 @@ function updateCoins(dt){
       c.x+=c.vx*dt; c.y+=c.vy*dt; const f=Math.pow(0.03,dt); c.vx*=f; c.vy*=f;
       c.z+=c.vz*dt; c.vz-=520*dt; if(c.z<0){c.z=0;c.vz=c.vz<-45?-c.vz*0.35:0;}
       if(c.t>0.3&&G.phase!=='defeat'){const k=coinTaker(c); if(k){c.state=1;c.to=k.slot;c.sp=G.vacuum?160:70;}}
-      if(c.t>COIN_LIFE&&!G.vacuum) c.dead=true;
+      if(G.phase!=='wave') c.t=Math.min(c.t,1);   // ช่วงพัก/จบด่าน เหรียญไม่หมดอายุ
+      else if(c.t>COIN_LIFE&&!G.vacuum){ c.dead=true; puff(c.x,c.y-4,'#cdb98a',8); }   // ตกพื้นเกิน 28 วินาที (เวลาในเกม) = หายจริง
     } else {
       const k=kingBySlot(c.to); if(!k){c.state=0;c.to=-1;continue;}   // เจ้าของหลุดจากเกม → ตกพื้นให้คนอื่นเก็บ
       c.sp=Math.min(c.sp+1500*dt,950);
@@ -1903,7 +2334,7 @@ function updateCoins(dt){
 }
 function collect(c,k){
   k=k||G.king; k.coins+=c.v; if(G.phase!=='title') G.stats.coins+=c.v;
-  if(k===G.king){G.combo++; G.comboT=0.7; Sound.coin(G.combo);}
+  if(k===G.king){G.combo++; G.comboT=0.7; Sound.coin(G.combo,k.x);}
 }
 function stackVis(c){return c<=0?0:c<=24?c:Math.min(46,24+Math.floor(Math.sqrt(c-24)*2.3));}
 
@@ -2098,7 +2529,7 @@ function update(dt){
   if(G.coop&&G.phase==='rest'&&G.kings.length){   // เล่นด้วยกัน: ทุกคนพร้อม → เริ่มด่าน · พร้อมครึ่งทีมแล้ว → นับถอยหลัง (กันเพื่อนเผลอวางมือถือแล้วทั้งทีมค้าง)
     const r=G.kings.filter(k=>k.ready).length;
     if(r===G.kings.length) startWave();
-    else if(r*2>=G.kings.length){ G.readyT=(G.readyT==null?COOP.readyWait:G.readyT)-dt; if(G.readyT<=0) startWave(); }
+    else if(r*2>=G.kings.length){ G.readyT=(G.readyT==null?COOP.readyWait:G.readyT)-dt/(G.speed>1?G.speed:1); if(G.readyT<=0) startWave(); }   // นับเป็นวินาทีจริง แม้เร่ง ×2
     else G.readyT=null;
   }
   Hints.update();
@@ -2109,10 +2540,11 @@ function frame(now){
   requestAnimationFrame(frame);
   let dt=(now-last)/1000; last=now; if(dt>0.1)dt=0.1; if(dt<0)dt=0;
   if(G.phase==='title'){acc+=dt;let n=0;while(acc>=STEP&&n<8){demoUpdate(STEP);acc-=STEP;n++;}if(n>=8)acc=0;}
-  else if(G.client){acc+=dt;let n=0;while(acc>=STEP&&n<8){Client.update(STEP);acc-=STEP;n++;}if(n>=8)acc=0;}   // เครื่องเพื่อน: วาดตามหัวห้อง
+  else if(G.client){acc+=dt*(G.speed||1);let n=0;while(acc>=STEP&&n<8){Client.update(STEP);acc-=STEP;n++;}if(n>=8)acc=0;}   // เครื่องเพื่อน: วาดตามหัวห้อง (เร็วเท่าหัวห้อง)
   else if(!G.paused&&!G.endShown&&G.phase!=='cards'){acc+=dt*G.speed;let n=0;while(acc>=STEP&&n<8){update(STEP);acc-=STEP;n++;}if(n>=8)acc=0;}
   else if(G.phase==='cards'){G.t+=dt*0.3;}
   Net.tick(dt);
+  Music.update();
   render();
   if(G.phase!=='title') UI.sync();
 }
@@ -2821,6 +3253,7 @@ const UI={
     if(this.put('hKeep',kh+'/'+G.keep.maxHp)){$('hKeepFill').style.width=(100*G.keep.hp/G.keep.maxHp)+'%';$('hKeepBox').classList.toggle('low',G.keep.hp/G.keep.maxHp<0.3);}
     this.put('hFoes',String(foesLeft()));
     const fv=G.phase==='wave'; if(this.last.fv!==fv){this.last.fv=fv;$('hFoesBox').style.visibility=fv?'visible':'hidden';}
+    const sp=G.speed===2; if(this.last.sp!==sp){this.last.sp=sp; const sb=$('btnSpeed'); sb.classList.toggle('on',sp); sb.setAttribute('aria-pressed',String(sp)); $('hSpeed').textContent=sp?'×2':'×1';}
     const rv=G.mod.revive>0&&!G.reviveUsed; if(this.last.rv!==rv){this.last.rv=rv;$('hBanner').hidden=!rv;}
     const b=G.boss&&!G.boss.dead?G.boss:null;
     if(this.last.bv!==!!b){this.last.bv=!!b;$('bossBar').hidden=!b;app.classList.toggle('boss-on',!!b);}
@@ -2858,7 +3291,6 @@ const UI={
 };
 
 // ---------- ปุ่มต่างๆ ----------
-function soundLabel(){$('btnSound').textContent='เสียง: '+(Sound.on?'เปิด':'ปิด');}
 // ปุ่มอันตราย (ทิ้งรอบ/ยอมแพ้/คืนแต้ม) ต้องแตะ 2 ครั้ง กันกดพลาด
 function armOr(btn,msg,fn){
   if(btn.classList.contains('armed')){disarm(btn); fn(); return;}
@@ -2939,7 +3371,12 @@ $('btnHow').addEventListener('click',()=>{const h=$('howto'); h.hidden=!h.hidden
 $('btnWave').addEventListener('click',()=>{ if(G.coop) CoopGame.toggleReady(); else startWave(); });
 $('btnPause').addEventListener('click',()=>togglePause());
 $('btnResume').addEventListener('click',()=>togglePause(false));
-$('btnSound').addEventListener('click',()=>{Sound.on=!Sound.on;Store.set('sound',Sound.on);soundLabel();if(Sound.on)Sound.init();});
+$('btnSetT').addEventListener('click',()=>{ Sound.init(); renderVols(); $('scrSet').hidden=false; });
+$('btnSetDone').addEventListener('click',()=>{ $('scrSet').hidden=true; Sound.spend(); });
+$('btnSpeed').addEventListener('click',()=>setSpeed(G.speed===2?1:2));
+// แตะตรงไหนก็ได้ครั้งแรก = เปิดระบบเสียง (เบราว์เซอร์มือถือต้องให้ผู้เล่นแตะก่อน) → เพลงหน้าแรกเริ่มเล่น
+document.addEventListener('pointerdown',()=>Sound.init(),true);
+document.addEventListener('keydown',()=>Sound.init(),true);
 $('btnRestart').addEventListener('click',()=>armOr($('btnRestart'),G.coop?'แตะอีกครั้ง: ยอมแพ้ทั้งทีม':'แตะอีกครั้งเพื่อยอมแพ้รอบนี้',surrender));
 $('btnHome').addEventListener('click',()=>{ if(G.coop) armOr($('btnHome'),Net.role==='host'?'แตะอีกครั้ง: ปิดห้อง':'แตะอีกครั้ง: ออกจากห้อง',()=>CoopGame.quit()); else goTitle(); });
 $('btnEndHall').addEventListener('click',()=>Hall.open('end'));
@@ -2947,7 +3384,7 @@ $('btnAgain').addEventListener('click',()=>newRun());
 $('btnHome2').addEventListener('click',goTitle);
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&['rest','wave','cleared'].includes(G.phase))togglePause(true);});
 window.addEventListener('pagehide',()=>{if(G.phase!=='title')Save.write();});
-soundLabel();
+renderVols();
 
 // =====================================================================
 //  เล่นด้วยกัน (ทดลอง) — ห้องรอสูงสุด 4 คน ผ่าน Wi-Fi
@@ -3226,7 +3663,8 @@ const CoopGame={
       case 'el': if(live&&near(p)) choosePadElement(p,m.el,k); break;
       case 'royal': if(live&&near(G.map.pads[0])&&['repair','forge','wall'].includes(m.r)) royalBuy(m.r,k); break;
       case 'ready': if(G.phase==='rest') k.ready=!!m.v; break;
-      case 'card': if(G.phase==='cards'&&G.picker===slot) pickCard(m.i|0,k); break;
+      case 'speed': setSpeed(m.v,k); break;
+      case 'card': if(G.phase==='cards'&&G.picker===slot) pickCard(m.i|0,k,false,Number.isInteger(m.drop)?m.drop:undefined); break;
     }
   },
   // เพื่อนหลุดกลางเกม: เหรียญที่แบกอยู่ตกพื้นให้คนอื่นเก็บต่อ
@@ -3237,10 +3675,10 @@ const CoopGame={
     UI.toast(P.name+' หลุดจากเกม','เหรียญที่แบกอยู่ตกอยู่ตรงนั้น ไปเก็บต่อได้');
     if(G.phase==='cards'&&G.picker===slot){
       const slots=G.kings.map(q=>q.slot).sort((a,b)=>a-b); G.picker=slots[0];
-      Net.sendAll({t:'cards',offer:G.offer.map(c=>c.id),rare:G.offerRare,picker:G.picker}); renderCards(); this.cardTimer(true);
+      Net.sendAll({t:'cards',offer:G.offer.map(c=>c.id),rare:G.offerRare,picker:G.picker,inv:G.inv}); Cards.sel=-1; renderCards(); this.cardTimer(true);
     }
   },
-  cardTimer(on){ clearTimeout(this.timer); if(on) this.timer=setTimeout(()=>{ if(G.coop&&!G.client&&G.phase==='cards') pickCard(0,kingBySlot(G.picker)||G.king,true); },30000); },
+  cardTimer(on){ clearTimeout(this.timer); if(on) this.timer=setTimeout(()=>{ if(G.coop&&!G.client&&G.phase==='cards'){ const i=Math.max(0,G.offer.findIndex(c=>!invNeed(c))); pickCard(i,kingBySlot(G.picker)||G.king,true); } },30000); },   // หมดเวลา: เลือกใบที่ไม่ต้องทิ้งของในลิ้นชัก
   toggleReady(){
     const k=G.king; if(!G.coop||G.phase!=='rest'||!k) return;
     k.ready=!k.ready; Sound.spend();
@@ -3249,15 +3687,15 @@ const CoopGame={
   snapshot(){
     const R=Math.round, K=G.keep;
     const s={t:'s',ph:G.phase,lv:G.level,kp:[rd1(K.hp),K.maxHp,K.flash>0.3?1:0,rd1(K.inv||0)],wl:G.wallLv,fl:foesLeft(),sh:R(G.shake),ka:G.keepAlarm>0.2?1:0,
-      pz:G.paused?1:0,rv:G.reviveUsed?1:0,vac:G.vacuum?1:0,pk:G.picker,mv:G.modVer,rt:G.readyT==null?-1:Math.ceil(G.readyT),b:G.boss&&!G.boss.dead?G.boss.id:-1,
+      pz:G.paused?1:0,rv:G.reviveUsed?1:0,vac:G.vacuum?1:0,pk:G.picker,mv:G.modVer,sp:G.speed===2?2:1,rt:G.readyT==null?-1:Math.ceil(G.readyT),b:G.boss&&!G.boss.dead?G.boss.id:-1,
       k:G.kings.map(k=>[k.slot,rd1(k.x),rd1(k.y),R(k.vx),R(k.vy),k.coins,k.forge,Math.round(k.aim*100)/100,k.ready?1:0]),
       e:G.enemies.map(e=>[e.id,TYPE_IDX[e.type],ELEM_IDX[e.el],e.lane,rd1(e.s),rd1(e.off),R(e.hp),R(e.maxHp),e.state==='attack'?1:0,rd1(e.speed),R(e.ax),R(e.ay),
         (e.inv>0?1:0)|(e.enraged?2:0)|(e.cast>0?4:0),e.phase|0,e.order?e.order.map(x=>ELEM_IDX[x]).join(''):'']),
-      c:G.coins.map(c=>[c.id,R(c.x),R(c.y),R(c.z),c.v,c.state,c.to]),
+      c:G.coins.map(c=>[c.id,R(c.x),R(c.y),R(c.z),c.v,c.state,c.to,R(c.t)]),
       tw:G.turrets.map(t=>[t.pad.id,t.level,t.el?ELEM_IDX[t.el]:-1,Math.round(t.aim*100)/100,t.invested]),
       fx:NetFX.take()};
     const now=performance.now();
-    if(this.sentMod!==G.modVer||now-this.modT>3000){ s.m=G.mod; this.sentMod=G.modVer; this.modT=now; }   // การ์ดพรเปลี่ยน → ส่งค่าพลังใหม่
+    if(this.sentMod!==G.modVer||now-this.modT>3000){ s.m=G.mod; s.iv=G.inv; this.sentMod=G.modVer; this.modT=now; }   // การ์ดพรเปลี่ยน → ส่งค่าพลังใหม่ + ลิ้นชัก
     return s;
   },
   hostEnd(win,gaveUp){
@@ -3291,9 +3729,10 @@ const Client={
     if(!G.client||!G.coop) return;
     const now=performance.now(); this.snapAt=now;
     if(s.m&&s.mv!==this.modVer){ this.modVer=s.mv; const m=Object.assign(defaultMod(),s.m); m.tdmg=Object.assign(defaultMod().tdmg,s.m.tdmg||{}); G.mod=m; for(const t of G.turrets) applyTurret(t); applyKing(); }
+    if(Array.isArray(s.iv)) G.inv=cleanInv(s.iv);
     const K=G.keep; K.hp=s.kp[0]; K.maxHp=s.kp[1]; if(s.kp[2]) K.flash=Math.max(K.flash,0.6); K.inv=s.kp[3];
     G.wallLv=s.wl|0; G.foes=s.fl|0; G.shake=Math.max(G.shake,s.sh|0); if(s.ka) G.keepAlarm=1.5;
-    G.vacuum=!!s.vac; G.reviveUsed=!!s.rv; G.hostPaused=!!s.pz; G.picker=s.pk; G.readyT=s.rt>=0?s.rt:null;
+    G.vacuum=!!s.vac; G.reviveUsed=!!s.rv; G.hostPaused=!!s.pz; G.picker=s.pk; G.readyT=s.rt>=0?s.rt:null; if(s.sp) G.speed=s.sp;
     // ราชา/ราชินีทุกคน
     const seenK=new Set();
     for(const a of s.k||[]){
@@ -3303,7 +3742,7 @@ const Client={
     }
     for(let i=G.kings.length-1;i>=0;i--) if(G.kings[i]!==G.king&&!seenK.has(G.kings[i].slot)) G.kings.splice(i,1);   // เพื่อนที่หลุด
     const me=G.king;
-    if(this.lastCoins>=0&&me.coins>this.lastCoins){G.combo++; G.comboT=0.7; Sound.coin(G.combo);}
+    if(this.lastCoins>=0&&me.coins>this.lastCoins){G.combo++; G.comboT=0.7; Sound.coin(G.combo,me.x);}
     this.lastCoins=me.coins;
     // หอธนู
     for(const a of s.tw||[]){
@@ -3327,10 +3766,10 @@ const Client={
     // เหรียญ
     const seenC=new Set();
     for(const a of s.c||[]){
-      const [id,x,y,z,v,st,to]=a; seenC.add(id);
+      const [id,x,y,z,v,st,to,age]=a; seenC.add(id);
       let c=this.cmap.get(id);
       if(!c){ c={id,x,y,z,v,state:st,to,spin:Math.random()*TAU,t:0,dead:false,tx:x,ty:y,tz:z,arrived:false}; this.cmap.set(id,c); G.coins.push(c); }
-      c.tx=x; c.ty=y; c.tz=z; c.v=v; c.state=st; c.to=to;
+      c.tx=x; c.ty=y; c.tz=z; c.v=v; c.state=st; c.to=to; c.t=age|0;
     }
     for(const [id,c] of this.cmap) if(!seenC.has(id)){ c.dead=true; this.cmap.delete(id); }
     // เอฟเฟกต์/เสียง/ข้อความ
@@ -3354,7 +3793,7 @@ const Client={
   },
   update(dt){
     G.t+=dt;
-    const me=G.king, now=performance.now(), age=Math.min(0.3,(now-this.snapAt)/1000), a=Math.min(1,dt*8);
+    const me=G.king, now=performance.now(), age=Math.min(0.3,(now-this.snapAt)/1000)*(G.speed||1), a=Math.min(1,dt*8);
     for(const k of G.kings) updateKing(k,dt,true);   // ตัวเองเดินได้ทันที · เพื่อนไหลตามข้อมูล · หัวห้องเป็นคนยิง
     for(const e of G.enemies){
       if(e.state==='walk'){
@@ -3391,7 +3830,7 @@ const Client={
       case 'f': {   // ลูกธนู
         const [,kind,el,x,y,tid,spd,own]=f, tg=this.emap.get(tid); if(!tg) break;
         let sx=x, sy=y;
-        if(kind===1){ const kk=kingBySlot(own); if(kk){ kk.recoil=1; if(kk===G.king){ sx=kk.x+Math.cos(kk.aim)*14; sy=kk.y-14+Math.sin(kk.aim)*8; Sound.shoot(); } } }
+        if(kind===1){ const kk=kingBySlot(own); if(kk){ kk.recoil=1; if(kk===G.king){ sx=kk.x+Math.cos(kk.aim)*14; sy=kk.y-14+Math.sin(kk.aim)*8; Sound.shoot(kk.x); } } }
         else { const p=G.map.pads[own]; if(p&&p.turret) p.turret.recoil=1; }
         G.proj.push({kind:kind===1?'king':'tower',el:el>=0?ELEMS[el]:null,x:sx,y:sy,target:tg,tx:tg.x,ty:tg.y-tg.r,dmg:0,spd,life:1.6,ang:0,dead:false});
         break; }
@@ -3405,14 +3844,16 @@ const Client={
   cards(m){
     if(!G.client) return;
     for(const f of m.fx||[]) this.fx(f);
-    G.offer=(m.offer||[]).map(id=>CARD_BY[id]).filter(Boolean); G.offerRare=!!m.rare; G.picker=m.picker; G.phase='cards';
+    G.offer=(m.offer||[]).map(id=>CARD_BY[id]).filter(Boolean); G.offerRare=!!m.rare; G.picker=m.picker; G.phase='cards'; Cards.sel=-1;
+    if(Array.isArray(m.inv)) G.inv=cleanInv(m.inv);
     Panel.hide(); renderCards();
   },
   picked(m){
     if(!G.client) return;
-    const c=CARD_BY[m.id]; if(c){ G.cardCount[c.id]=(G.cardCount[c.id]||0)+1; G.cards.push(c.id); }
-    $('scrCards').hidden=true; Sound.card();
-    const k=kingBySlot(m.by); if(c) UI.toast((m.auto?'หมดเวลา · ได้พร: ':(k?k.name:'เพื่อน')+' เลือก: ')+c.name, cardDesc(c));
+    const c=CARD_BY[m.id], dr=CARD_BY[m.drop]; if(c){ G.cardCount[c.id]=(G.cardCount[c.id]||0)+1; G.cards.push(c.id);
+      if(c.item){ if(dr&&G.inv.includes(dr.id)) G.inv.splice(G.inv.indexOf(dr.id),1); if(!G.inv.includes(c.id)) G.inv.push(c.id); G.inv=cleanInv(G.inv); } }
+    $('scrCards').hidden=true; Sound.card(); Cards.sel=-1;
+    const k=kingBySlot(m.by); if(c) UI.toast((m.auto?'หมดเวลา · ได้พร: ':(k?k.name:'เพื่อน')+' เลือก: ')+c.name, (dr?`ทิ้ง ${dr.name} · `:'')+cardDesc(c));
   },
   end(m){
     if(!G.client) return;
@@ -3526,8 +3967,8 @@ const Lobby={
     else if(host){ $('btnLobStart').disabled=!Net.canStart(); st=n<2?`รอเพื่อนเข้าห้อง (${n}/${NET.MAX} คน)`:rd<n-1?`รอเพื่อนกดพร้อม (${rd}/${n-1})`:'ทุกคนพร้อมแล้ว กดเริ่มได้เลย'; }
     else { const r=!!(meP&&meP.ready), b=$('btnReady'); b.textContent=r?'✓ พร้อมแล้ว':'พร้อม'; b.classList.toggle('ready-on',r); b.classList.toggle('btn-go',!r); st=r?'รอหัวห้องกดเริ่ม · แตะปุ่มอีกครั้งถ้าจะยกเลิก':'กด "พร้อม" เมื่อพร้อมเล่น'; }
     $('lobStatus').textContent=st;
-    $('lobDiff').textContent=n>1?`${n} คน: ศัตรูเยอะขึ้น ×${COOP.cnt(n).toFixed(1)} อึดขึ้น ${Math.round((COOP.hp(n)-1)*100)}% · หารต่อคนแล้วเบากว่าเล่นคนเดียว ${Math.round((1-COOP.load(n))*100)}% · เหรียญของใครของมัน หอธนูกับป้อมใช้ร่วมกัน`:
-      'เล่นได้ 2–4 คน · ยิ่งคนเยอะ ศัตรูยิ่งเยอะ แต่หารต่อคนแล้วง่ายกว่าเล่นคนเดียวนิดหน่อย';
+    $('lobDiff').textContent=n>1?`${n} คน: ศัตรูเยอะขึ้น ×${COOP.cnt(n).toFixed(1)} อึดขึ้น ${Math.round((COOP.hp(n)-1)*100)}% · ยากพอๆ กับเล่นคนเดียว ถ้าช่วยกันยิงอัดทีละทางจะง่ายขึ้น · เหรียญของใครของมัน หอธนูกับป้อมใช้ร่วมกัน`:
+      'เล่นได้ 2–4 คน · ยิ่งคนเยอะ ศัตรูยิ่งเยอะ ยากพอๆ กับเล่นคนเดียว แต่ช่วยกันวางแผนจะง่ายขึ้น';
     const fresh=Net.notice&&performance.now()-Net.noticeT<4000, nb=$('lobNotice');
     nb.hidden=!fresh; if(fresh&&nb.textContent!==Net.notice) nb.textContent=Net.notice;
   }
@@ -3583,6 +4024,7 @@ window.KK={G,BAL,CURVE,ENEMY,ELEM,ELEMS,CARDS,BOSS_AT,BOSS_HP,STEP,MAX_LEVEL,upd
   showEnd,enterRest,curLv,hurt,buyBuild,buyUpgrade,UI,cam,
   Meta,Save,META,HONOR,loadRun,setupRun,continueRun,surrender,Hall,refreshTitle,reviveKeep,goTitle,hitKeep,togglePause,
   Net,NET,CoopGame,Client,NetFX,COOP,Lobby,Profile,KING_COLORS,cleanName,kingBySlot,mapToData,mapFromData,choosePadElement,
+  CARD_BY,INV_MAX,Cards,invNeed,autoDrop,recalcMod,cleanInv,drawCards,showCards,renderCards,Music,Sound,SONGS,PATCH,setSpeed,renderVols,COIN_LIFE,
   scale(){return SCALE;},
   pick(el){return choosePadElement(G.onPad,el);},
   step(n){for(let i=0;i<n;i++)update(STEP);},
