@@ -765,7 +765,11 @@ function counterOf(el){ for(const k of ELEMS) if(ELEM[k].beats===el) return k; r
 //    และต้องเลือกให้คุ้ม: เปลี่ยนเฉพาะหอที่ "แพ้ทาง" (บอทที่เปลี่ยนทุกหอที่แค่ไม่ชนะทาง เงินหมดจนแพ้มากกว่า)
 //  · ทุนที่พาเข้าโลกได้คือแต้มต่อจากหอเกียรติยศ (ฝีมือธนูหลวง ม้าทรง อาวุธ Lv3 ฯลฯ) · เกียรติยศในโลก 2 ได้ ×1.5
 //  ลองแล้ว: บีบเศรษฐกิจ ×2 ตรงๆ (อึด ×1.6 รายได้ ×0.8) แม้แต้มต่อเต็มบอทก็ชนะ 0% → ยากเกินสองเท่าไปมาก
-//  ผลบอท (รายละเอียดใน WORLD_STATS ด้านล่าง)
+//  ผลบอท 160 แผนที่ต่อแบบ (เล่นคนเดียว · บอทเลือกธาตุเก่ง เปลี่ยนเฉพาะหอที่แพ้ทาง):
+//    ไม่มีแต้มต่อ: โลก 1 ชนะ 36% · โลก 2 ชนะ 3%   |   แต้มต่อราว 1/3: โลก 2 ชนะ 9%
+//    แต้มต่อเต็ม: โลก 1 ชนะ 89% · โลก 2 ชนะ 47% (เหลือครึ่ง = ยาก ×2)
+//    แต้มต่อเต็ม + สุ่มธาตุไม่เคยเปลี่ยน: โลก 1 72% · โลก 2 19%   |   แต้มต่อเต็ม + เปลี่ยนธาตุทุกหอที่ไม่ชนะทาง: โลก 2 18%
+//    เล่นด้วยกัน 2 คน แต้มต่อเต็ม: โลก 2 ชนะ 48% (ยากเท่าเล่นคนเดียว)
 // =====================================================================
 const WORLDS={
   1:{id:1,name:'ทุ่งหญ้า',els:['fire','water','plant'],cycle:['water','fire','plant'],hp:1,coin:1,swap:0.25,honor:1,
@@ -1105,24 +1109,29 @@ const Sound={
   },
   bell(f,v,pan,d,rv,delay){ this.tn('sine',f,0,0,0.004,d||0.42,v,pan,rv==null?0.3:rv,delay); this.tn('sine',f*2.76,0,0,0.003,(d||0.42)*0.35,v*0.22,pan,0,delay); },
   pluck(f,v,pan,d,rv,delay){ this.tn('triangle',f,0,0,0.003,d||0.14,v,pan,rv==null?0.12:rv,delay); this.tn('sine',f*2,0,0,0.002,(d||0.14)*0.55,v*0.35,pan,0,delay); },
-  // โทนของเพลงที่กำลังเล่น (คอร์ดในห้องนี้ + คีย์หลัก) · ปิดเพลงอยู่ = ดีไมเนอร์
-  chord(){ const S=Music.song; return S&&S.ch?S.ch[Math.floor(Music.step/16)%S.ch.length]:{r:2,t:[0,3,7]}; },
-  tonic(){ const S=Music.song; return S&&S.ch?S.ch[0]:{r:2,t:[0,3,7]}; },
+  // โทนของเพลงที่กำลังเล่น (คอร์ดในห้องนี้ + คีย์หลัก) · ปิดเพลงอยู่ = ดีไมเนอร์ (โลก 2 = ดีฮิญาซ)
+  chord(){ const S=Music.song; return S&&S.ch?S.ch[Math.floor(Music.step/16)%S.ch.length]:this.home(); },
+  tonic(){ const S=Music.song; return S&&S.ch?S.ch[0]:this.home(); },
+  home(){ return W2()?{r:2,t:[0,4,7]}:{r:2,t:[0,3,7]}; },
+  // เพลงสเกลพิเศษ (ฮิญาซของโลก 2) บอกโน้ตให้เสียงประกอบเอง · null = ใช้สูตรเดิม (เพนทาโทนิกของคีย์)
+  key(){ const S=Music.song; return S?S.sfx:(W2()?SONGS.main2.sfx:null); },
   hz:n=>440*Math.pow(2,(n-69)/12),
   vary:a=>1+(Math.random()*2-1)*a,
   // ---- เสียงในเกม (x = ตำแหน่งบนแผนที่ ใช้แพนซ้าย-ขวา) ----
   coin(n,x){
     if(!this.gap('coin',38)) return;
-    const k=this.tonic(), PENT=[0,2,4,7,9], i=Math.min(Math.max(0,(n||1)-1),11), base=72+((k.r+3)%12);   // เพนทาโทนิกของคีย์เมเจอร์คู่ขนาน
-    const f=this.hz(base+PENT[i%5]+12*Math.floor(i/5)), pan=this.pan(x);
+    const k=this.tonic(), K=this.key(), i=Math.min(Math.max(0,(n||1)-1),11);
+    const SC=K?K.coin:[0,2,4,7,9], base=K?72+K.root:72+((k.r+3)%12);   // เพนทาโทนิกของคีย์เมเจอร์คู่ขนาน · เพลงฮิญาซ = ห้าโน้ตของฮิญาซ (มีครึ่งเสียง ♭2)
+    const f=this.hz(base+SC[i%5]+12*Math.floor(i/5)), pan=this.pan(x);
     this.bell(f,0.066*(1-i*0.03),pan,0.45,0.32);
     this.nz('highpass',6200,0.8,0.002,0.016,0.015,pan,0);   // เสียงเหรียญกระทบกันเบาๆ
-    if(n>0&&n%10===0){ this.bell(f*1.5,0.022,-pan,0.6,0.45,0.05); this.bell(f*2,0.016,pan*0.5,0.7,0.5,0.1); }   // คอมโบครบ 10: ประกายเสียง
+    if(n>0&&n%10===0){ const f2=K?this.hz(base+19):f*1.5, f3=K?this.hz(base+24):f*2;   // คอมโบครบ 10: ประกายเสียง (ฮิญาซ: ขั้นห้า + โน้ตหลัก ไม่หลุดสเกล)
+      this.bell(f2,0.022,-pan,0.6,0.45,0.05); this.bell(f3,0.016,pan*0.5,0.7,0.5,0.1); }
   },
   shoot(x){
     if(!this.gap('shoot',70)) return;
     const c=this.chord(), PAT=[0,1,2,3,2,1], j=PAT[this.arp++%PAT.length], tone=j<3?c.t[j]:12, pan=this.pan(x);
-    this.pluck(this.hz(62+c.r+tone)*this.vary(0.004),0.024,pan,0.13,0.1);
+    this.pluck(this.hz(60+c.r+tone)*this.vary(0.004),0.024,pan,0.13,0.1);
     this.nz('bandpass',2300,1.2,0.002,0.035,0.009,pan,0);   // สายธนูดีด "ฟึ่บ" เบาๆ
   },
   tower(x){ if(!this.gap('tower',110)) return; const p=this.pan(x), v=this.vary(0.06);
@@ -1130,25 +1139,29 @@ const Sound={
   hit(x){ if(!this.gap('hit',60)) return; const p=this.pan(x);
     this.nz('bandpass',2500*this.vary(0.1),1.4,0.002,0.026,0.017,p,0.04); this.tn('sine',330,240,0.035,0.002,0.05,0.011,p,0); },
   crit(x){ if(!this.gap('crit',90)) return; const c=this.chord(), j=(Math.random()*3)|0;
-    this.bell(this.hz(86+c.r+c.t[j]),0.017,this.pan(x),0.3,0.35); },
+    this.bell(this.hz(84+c.r+c.t[j]),0.017,this.pan(x),0.3,0.35); },
   dull(x){ if(this.gap('dull',140)){ const p=this.pan(x); this.tn('sine',150,104,0.08,0.003,0.1,0.03,p,0); this.nz('lowpass',420,0.7,0.003,0.05,0.01,p,0); } },
   die(x){ if(!this.gap('die',60)) return; const p=this.pan(x), v=this.vary(0.08);
     this.tn('sine',330*v,700*v,0.045,0.003,0.1,0.038,p,0.12); this.nz('highpass',3200,0.8,0.001,0.012,0.012,p,0); },   // ป๊อปเหมือนฟองสบู่แตก
   spend(){ if(!this.gap('spend',55)) return; this.nz('bandpass',1700,3,0.002,0.03,0.034,0,0.05); this.tn('sine',520,0,0,0.002,0.05,0.014,0,0); },
-  pick(el){ const c=this.tonic(), up={fire:7,water:3,plant:0}[el]||0, f=this.hz(62+c.r+up); this.pluck(f,0.05,0,0.2,0.2); this.pluck(f*1.5,0.04,0,0.24,0.2,0.07); },
-  arpUp(notes,gapS,v,d,rv,fn){ const c=this.tonic(); notes.forEach((nn,i)=>this[fn||'bell'](this.hz(nn+c.r),v,0,d,rv,i*gapS)); },
+  pick(el){ const c=this.tonic(), K=this.key();
+    if(K){ const f=this.hz(60+K.root+(K.pick[el]||0)); this.pluck(f,0.05,0,0.2,0.2); this.pluck(f*2,0.034,0,0.24,0.2,0.07); return; }   // ฮิญาซ: คู่แปด (ขั้นห้าบางตัวหลุดสเกล)
+    const up={fire:7,water:3,plant:0}[el]||0, f=this.hz(60+c.r+up); this.pluck(f,0.05,0,0.2,0.2); this.pluck(f*1.5,0.04,0,0.24,0.2,0.07); },
+  // ไล่โน้ต (เขียนไว้เป็นดีไมเนอร์) → ย้ายไปคีย์ของเพลง · เพลงฮิญาซดึงโน้ตเข้าสเกล (ฟา → ฟา♯)
+  arpUp(notes,gapS,v,d,rv,fn){ const c=this.tonic(), K=this.key(), sh=(K?K.root:c.r)-2;
+    notes.forEach((nn,i)=>{ let n=nn+sh; if(K){ const rel=((n-K.root)%12+12)%12; n+=K.snap[rel]-rel; } this[fn||'bell'](this.hz(n),v,0,d,rv,i*gapS); }); },
   attune(){ this.arpUp([74,77,81,86],0.06,0.04,0.4,0.35); },
   buy(){ this.arpUp([77,81,86],0.05,0.042,0.4,0.3); },
-  card(){ const c=this.tonic(), b=72+((c.r+3)%12); [0,4,7,9,12].forEach((s2,i)=>this.bell(this.hz(b+s2),0.04,0,0.6,0.45,i*0.08)); },
-  heal(){ if(this.gap('heal',400)){ const c=this.tonic(); this.bell(this.hz(86+c.r),0.022,0,0.5,0.4); this.bell(this.hz(93+c.r),0.016,0,0.5,0.4,0.08); } },
+  card(){ const c=this.tonic(), K=this.key(), b=K?72+K.root:72+((c.r+3)%12); (K?K.card:[0,4,7,9,12]).forEach((s2,i)=>this.bell(this.hz(b+s2),0.04,0,0.6,0.45,i*0.08)); },
+  heal(){ if(this.gap('heal',400)){ const c=this.tonic(); this.bell(this.hz(84+c.r),0.022,0,0.5,0.4); this.bell(this.hz(91+c.r),0.016,0,0.5,0.4,0.08); } },
   summon(){ this.nz('bandpass',420,1.2,0.12,0.6,0.05,0,0.3,0,1700); this.tn('sine',110,140,0.5,0.1,0.6,0.03,0,0.2); },
   roar(){ this.nz('lowpass',260,0.7,0.04,0.95,0.12,0,0.25); this.tn('sine',82,50,0.9,0.02,0.95,0.08,0,0.1); this.tn('triangle',123,75,0.7,0.02,0.75,0.04,0,0.1,0.08); },
   deny(){ this.tn('triangle',220,180,0.12,0.004,0.15,0.045,0,0.05); },
   build(){ this.arpUp([62,69,74,77],0.07,0.05,0.24,0.25,'pluck'); this.tn('sine',140,90,0.12,0.004,0.16,0.04,0,0.1); },
   keep(){ if(!this.gap('keep',320)) return; this.tn('sine',120,70,0.18,0.004,0.22,0.05,0,0.12); this.nz('lowpass',320,0.7,0.004,0.16,0.035,0,0.1); },
-  horn(){ const c=this.tonic(), f=this.hz(50+c.r); this.tn('triangle',f,0,0,0.07,0.6,0.05,0,0.35); this.tn('triangle',f*1.5,0,0,0.08,0.7,0.035,0,0.35,0.14); this.tn('sine',f*2,0,0,0.08,0.7,0.02,0,0.35,0.14); },
-  win(){ const c=this.tonic(), b=72+((c.r+3)%12); [0,4,7,12,16].forEach((s2,i)=>this.bell(this.hz(b+s2),0.05,0,0.55,0.45,i*0.1)); },
-  lose(){ const c=this.tonic(); [7,3,0,-5].forEach((s2,i)=>this.tn('triangle',this.hz(62+c.r+s2),0,0,0.02,0.5,0.045,0,0.35,i*0.17)); },
+  horn(){ const c=this.tonic(), f=this.hz(48+c.r); this.tn('triangle',f,0,0,0.07,0.6,0.05,0,0.35); this.tn('triangle',f*1.5,0,0,0.08,0.7,0.035,0,0.35,0.14); this.tn('sine',f*2,0,0,0.08,0.7,0.02,0,0.35,0.14); },
+  win(){ const c=this.tonic(), K=this.key(), b=K?72+K.root:72+((c.r+3)%12); (K?K.win:[0,4,7,12,16]).forEach((s2,i)=>this.bell(this.hz(b+s2),0.05,0,0.55,0.45,i*0.1)); },
+  lose(){ const c=this.tonic(), K=this.key(); (K?K.lose:[7,3,0,-5]).forEach((s2,i)=>this.tn('triangle',this.hz(60+(K?K.root:c.r)+s2),0,0,0.02,0.5,0.045,0,0.35,i*0.17)); },   // ฮิญาซ: ลา ฟา♯ มี♭ เร (ลงจบแบบอียิปต์)
   boom(){ this.tn('sine',80,38,0.55,0.005,0.65,0.12,0,0.2); this.nz('lowpass',220,0.6,0.005,0.6,0.1,0,0.25); }
 };
 
@@ -1157,6 +1170,11 @@ const Sound={
 //  · main  = เพลงยุคกลาง (โหมดดอเรียน) ใช้หน้าแรกและด่านปกติ
 //  · boss  = ด่านบอส 5 / 10 / 15 · มืด ตึงเครียด เครื่องสายรัวเร็ว ทองเหลืองหนัก กลองศึก
 //  · final = ด่าน 20 มังกรสามธาตุ · ยิ่งใหญ่ คอรัส ทองเหลือง กลองทิมปานี
+//  โลก 2 ทะเลทราย — สเกลอียิปต์: มาคามฮิญาซ (Hijaz · 1 ♭2 3 4 5 ♭6 ♭7) ที่เพลงอียิปต์/อาหรับใช้บ่อยที่สุด
+//    ช่วงกระโดด ♭2→3 (เช่น มี♭→ฟา♯) ห่าง 3 ครึ่งเสียง คือกลิ่นทะเลทราย · เพลงบอสเติมโน้ตนำเสียงแบบสเกล double harmonic ให้ดุขึ้น
+//  · main2  = ด่านปกติ (ฮิญาซบน D · จังหวะมักซุม ดุม-เต็ก-เต็ก-ดุม-เต็ก) ปี่ซูร์นานำ อู๊ดดีดคอร์ด กลองดาร์บูกา + ริก
+//  · boss2  = ด่านหัวหน้า 5 / 10 / 15 (ฮิญาซบน E + ดี♯ · จังหวะซาอิดี) เร็ว ดุ ทองเหลือง เครื่องสายรัว
+//  · final2 = ด่าน 20 สฟิงซ์สี่ธาตุ (ฮิญาซบน D + ซี♯) มหากาพย์ คอรัส ทองเหลือง กานูนรูดสาย ทิมปานี
 //  เครื่องดนตรี: FM 2 ตัว (ตัวพา + ตัวกล้ำ) เหมือนชิปเสียงยุคนั้น · กลองสังเคราะห์จากคลื่นไซน์/เสียงซ่า · มีเสียงสะท้อน (echo)
 // =====================================================================
 const NOTE_PC={C:0,D:2,E:4,F:5,G:7,A:9,B:11};
@@ -1172,8 +1190,15 @@ const PATCH={
   stab: {r:1,  i0:2.2,i1:0.6, it:0.1, a:0.003,d:0.08,s:0.3, rel:0.05,v:0.075},
   choir:{r:1,  i0:0.8,i1:0.5, it:0.4, a:0.3,  d:0.6, s:0.85,rel:0.5, v:0.04,vib:[4.6,0.008],det:9},
   pad:  {r:1,  i0:0.8,i1:0.5, it:0.4, a:0.35, d:0.7, s:0.85,rel:0.6, v:0.03,det:9},
-  psg:  {w:'square',a:0.002,d:0.06,s:0.35,rel:0.03,v:0.022}
+  psg:  {w:'square',a:0.002,d:0.06,s:0.35,rel:0.03,v:0.022},
+  // โลก 2: ปี่ซูร์นา (ลิ้นคู่ เสียงขึ้นจมูก ไวบราโตลึกแบบตะวันออกกลาง) · อู๊ด (พิณดีด) · กานูน (พิณตั้ง เสียงใสแบบโลหะ)
+  zurna:{r:1,  i0:3.1,i1:2.1, it:0.1, a:0.02, d:0.4, s:0.78,rel:0.07,v:0.12,vib:[6.2,0.011]},
+  oud:  {r:1,  i0:3.6,i1:0.6, it:0.22,a:0.002,d:0.16,s:0.12,rel:0.2, v:0.11},
+  qanun:{r:3,  i0:2.2,i1:0.1, it:0.3, a:0.002,d:0.25,s:0,   rel:0.3, v:0.06}
 };
+// โทนสำหรับเสียงประกอบในเพลงสเกลฮิญาซ (เก็บเหรียญ/ได้การ์ด/ชนะ/แพ้ ไม่ให้ชนกับเพลง) · ตัวเลข = ครึ่งเสียงจากโน้ตหลัก
+// snap = ดึงโน้ตแต่ละครึ่งเสียง (0–11 จากโน้ตหลัก) เข้าสเกลฮิญาซ 1 ♭2 3 4 5 ♭6 ♭7
+const HIJAZ_SFX={coin:[0,1,4,7,8],card:[0,4,7,8,12],win:[0,4,7,12,16],lose:[7,4,1,0],pick:{fire:7,water:4,plant:0,earth:8},snap:[0,1,1,4,4,5,7,7,8,10,10,12]};
 // โน้ต: "ชื่อโน้ต:ความยาว" (ความยาวนับเป็นโน้ตเขบ็ตสองชั้น 1/16 · r = พัก · | = ขีดห้อง ไว้อ่านง่าย)
 // แพตเทิร์นต่อห้อง: R = ราก F = ขั้นห้า O = รากสูงขึ้นคู่แปด T = ขั้นสาม · ตัวเลข = โน้ตในคอร์ดไล่ขึ้นไป (0 ราก 1 ขั้นสาม 2 ขั้นห้า 3 รากคู่แปด …)
 const ALL=[0,1];
@@ -1223,6 +1248,62 @@ const SONGS={
       L.drum({k:'x.x.....x.x...x.',s:'....x.......x...',h:'x.x.x.x.x.x.x.x.',p:'x.......x.......'},[1],main);
       L.drum({k:'x.......x.......',s:'....x.......x.xx',t:'....x.x.........',m:'........x.x.....',l:'............xxxx',p:'x...............'},ALL,fill);
       L.drum({c:'x...............'},ALL,[0,4,8,12]);
+    }},
+  // ---------- โลก 2 ทะเลทราย ----------
+  // ด่านปกติ: ฮิญาซบน D (D E♭ F♯ G A B♭ C) · 112 BPM · จังหวะมักซุม
+  main2:{bpm:112, chords:'D D Eb D D Cm Eb D Gm Gm Cm D Eb Cm Eb D', sfx:Object.assign({root:2},HIJAZ_SFX),
+    lead:'A4:2 Bb4:1 A4:1 F#4:2 Eb4:2 D4:4 F#4:2 A4:2 | D5:3 C5:1 Bb4:2 A4:2 D5:2 C5:2 Bb4:2 A4:2 | G4:2 Bb4:2 Eb5:6 D5:2 C5:2 Bb4:2 | F#4:2 Eb4:2 F#4:2 G4:2 A4:8 |'+
+      ' A4:2 Bb4:1 A4:1 F#4:2 Eb4:2 D4:4 A4:2 D5:2 | Eb5:3 D5:1 C5:2 Bb4:2 C5:2 G4:2 Eb4:4 | G4:2 Bb4:2 Eb5:2 F#5:2 G5:4 F#5:2 Eb5:2 | D5:8 A4:4 r:4 |'+
+      ' G5:4 F#5:2 G5:2 Bb5:2 A5:2 G5:2 F#5:2 | D5:4 Eb5:2 D5:2 C5:2 Bb4:2 A4:2 G4:2 | C5:3 Eb5:1 G5:6 F#5:2 Eb5:2 C5:2 | D5:2 Eb5:2 F#5:4 A5:4 F#5:4 |'+
+      ' G5:2 F#5:2 Eb5:2 D5:2 Eb5:4 Bb4:4 | C5:2 Eb5:2 D5:2 C5:2 Bb4:2 A4:2 G4:2 F#4:2 | G4:2 Bb4:2 A4:2 G4:2 Eb4:4 F#4:2 G4:2 | A4:6 Bb4:2 A4:4 D4:4',
+    build(L,S){
+      L.mel(S.lead,'zurna',[0],0,1,1); L.mel(S.lead,'zurna',[1],0,0.9,1); L.mel(S.lead,'reed',[1],12,0.5,0);
+      L.bar('R:3 R:1 R:2 F:2 R:4 O:2 F:2','bass',ALL,2);
+      L.bar('0:2 1:1 2:1 3:2 2:2 1:2 2:2 3:2 2:2','oud',[0],3,1,1);
+      L.bar('0:1 1:1 2:1 3:1 2:1 1:1 0:1 1:1 2:1 3:1 4:1 3:1 2:1 1:1 2:1 1:1','oud',[1],3,0.8,1);
+      L.pad('pad',ALL,3,0.7);
+      const fill=[7,15], main=L.except(fill);
+      L.drum({D:'x.......x.......',T:'..x...x.....x...',K:'...x.x.....x.x.x'},ALL,main);   // มักซุม: ดุม เต็ก . เต็ก ดุม . เต็ก .
+      L.drum({J:'x.x.x.x.x.x.x.x.'},[1],main);                                            // รอบสอง: ริก (แทมบูรีนอาหรับ)
+      L.drum({D:'x.......x.......',T:'..x.x.x.x.xxxxxx',J:'x...x...x...x...'},ALL,fill);   // ห้องส่ง: รัวดาร์บูกา
+      L.drum({Z:'x.......x.......'},ALL,[3,11]);                                           // ฉาบนิ้ว
+      L.drum({c:'x...............'},ALL,[0,8]);
+    }},
+  // ด่านหัวหน้า 5/10/15: ฮิญาซบน E (E F G♯ A B C D) + ดี♯ นำเสียง · 144 BPM · จังหวะซาอิดี
+  boss2:{bpm:144, chords:'E F E F Am Dm E E Am F Dm E F E F E', sfx:Object.assign({root:4},HIJAZ_SFX),
+    lead:'E4:4 F4:2 G#4:2 B4:4 A4:2 G#4:2 | A4:4 C5:4 F5:4 E5:2 D5:2 | E5:4 D5:2 C5:2 B4:8 | C5:4 A4:4 F4:6 G#4:2 |'+
+      ' A4:4 B4:2 C5:2 E5:4 D5:2 C5:2 | D5:4 F5:2 E5:2 D5:4 A4:4 | B4:4 G#4:4 E4:2 F4:2 G#4:2 F4:2 | E4:12 r:4 |'+
+      ' A5:4 G#5:2 A5:2 B5:2 A5:2 G#5:2 F5:2 | F5:4 E5:2 F5:2 A5:6 G#5:2 | A5:4 F5:2 E5:2 D5:4 F5:4 | E5:8 B4:4 G#4:4 |'+
+      ' C5:4 B4:2 A4:2 F4:4 A4:4 | B4:4 C5:2 D#5:2 E5:8 | F5:4 E5:2 D5:2 C5:2 B4:2 A4:2 G#4:2 | E4:8 G#4:4 F4:4',
+    build(L,S){
+      L.mel(S.lead,'brass',[0],0,1.1,1); L.mel(S.lead,'zurna',[1],0,1.15,1); L.mel(S.lead,'choir',[1],0,1.5,0);   // รอบสอง: ปี่ซูร์นานำแทนทองเหลือง
+      L.bar('0:1 3:1 0:1 2:1 0:1 3:1 0:1 2:1 0:1 3:1 0:1 2:1 1:1 2:1 3:1 2:1','stab',ALL,3);
+      L.pad('pad',ALL,4);
+      L.bar('R:2 R:2 R:1 R:1 R:2 R:2 R:2 O:2 R:2','bass2',ALL,2);
+      const fill=[7,15], main=L.except(fill);
+      L.drum({D:'x.....x.x.......',k:'x.....x.x.......',T:'..x.........x...',K:'.....x.....x.x.x',p:'x...............'},ALL,main);   // ซาอิดี: ดุม เต็ก . ดุม ดุม . เต็ก .
+      L.drum({J:'x.x.x.x.x.x.x.x.',s:'....x.......x...'},[1],main);
+      L.drum({k:'x..x..x.x.......',T:'....x...x.x.xxxx',m:'........x.x.....',l:'............x.x.',p:'x...............'},ALL,fill);
+      L.drum({c:'x...............'},ALL,[0,4,8,12]);
+    }},
+  // ด่าน 20 สฟิงซ์สี่ธาตุ: ฮิญาซบน D + ซี♯ นำเสียงก่อนจบ · 128 BPM · มหากาพย์
+  final2:{bpm:128, chords:'D Eb Cm D Gm Eb D D Gm Cm Eb D Cm Eb D D', sfx:Object.assign({root:2},HIJAZ_SFX),
+    lead:'D4:6 Eb4:2 F#4:8 | G4:4 Bb4:4 Eb5:8 | D5:4 C5:4 G4:8 | A4:12 F#4:2 G4:2 |'+
+      ' Bb4:6 C5:2 D5:8 | Eb5:4 D5:4 C5:4 Bb4:4 | A4:8 F#4:4 Eb4:4 | D4:12 r:4 |'+
+      ' D5:4 Eb5:2 F#5:2 G5:8 | G5:4 F#5:2 Eb5:2 C5:8 | Bb4:4 Eb5:4 G5:4 Bb5:4 | A5:12 F#5:2 G5:2 |'+
+      ' C6:4 Bb5:2 A5:2 G5:4 Eb5:4 | G5:6 F#5:2 Eb5:8 | D5:4 Eb5:2 D5:2 C#5:2 D5:6 | D5:12 A4:2 F#4:2',
+    build(L,S){
+      L.mel(S.lead,'brass',ALL,0,1.05,1); L.mel(S.lead,'choir',[0],-12,1.7,0); L.mel(S.lead,'zurna',[1],0,0.55,0); L.mel(S.lead,'brass',[1],-12,0.8,0);
+      L.pad('pad',ALL,4,1.15);
+      L.bar('0:2 2:2 3:2 2:2 0:2 2:2 3:2 4:2','stab',[0],3);
+      L.bar('0:1 2:1 3:1 2:1 0:1 2:1 3:1 4:1 0:1 2:1 3:1 2:1 0:1 2:1 4:1 5:1','stab',[1],3,0.85);
+      L.bar('0:1 1:1 2:1 3:1 4:1 5:1 6:1 5:1 4:1 3:1 2:1 1:1 2:1 3:1 4:1 3:1','qanun',[1],4,0.6,1);
+      L.bar('R:4 R:2 R:2 O:4 R:2 F:2','bass2',ALL,2);
+      const fill=[7,15], main=L.except(fill);
+      L.drum({k:'x.......x.x.....',D:'x.......x.......',T:'..x...x.....x...',s:'....x.......x...',p:'x.......x.......'},[0],main);
+      L.drum({k:'x.x.....x.x...x.',D:'x.x.....x.x.....',T:'..x...x.....x.x.',s:'....x.......x...',J:'x.x.x.x.x.x.x.x.',p:'x.......x.......'},[1],main);
+      L.drum({k:'x.......x.......',s:'....x.......x.xx',t:'....x.x.........',m:'........x.x.....',l:'............xxxx',T:'x.x.x.x.........',p:'x...............'},ALL,fill);
+      L.drum({c:'x...............',Z:'....x.......x...'},ALL,[0,4,8,12]);
     }}
 };
 // แปลงเพลงเป็นตารางเหตุการณ์ทีละช่อง 1/16 (เตรียมครั้งเดียว) · รอบคี่/คู่เรียบเรียงต่างกัน (pass 0 / 1) ให้ฟังไม่ซ้ำเร็ว
@@ -1242,6 +1323,7 @@ function buildSong(def){
   };
   def.build(L,def);
   S.ch=bars;   // คอร์ดแต่ละห้อง (ให้เสียงยิง/เก็บเหรียญเล่นโน้ตเข้ากับเพลง)
+  S.sfx=def.sfx||null;   // เพลงสเกลพิเศษ (ฮิญาซ): บอกโน้ตที่เสียงประกอบควรใช้
   return S;
 }
 const Music={
@@ -1313,16 +1395,24 @@ const Music={
       case 'm': osc('triangle',210,120,0.18,0.36,0.3); break;
       case 'l': osc('triangle',150,90,0.2,0.4,0.36); break;
       case 'p': osc('triangle',130,96,0.35,0.42,0.9); osc('sine',65,50,0.3,0.25,0.7); noise('lowpass',320,0.7,0.2,0.5); break;   // ทิมปานี
+      // ---- เครื่องตีโลก 2: ดาร์บูกา (กลองถ้วยอียิปต์) ดุม/เต็ก/กา · ริก (แทมบูรีน) · ฉาบนิ้ว
+      case 'D': osc('sine',125,72,0.1,0.42,0.3); osc('triangle',250,150,0.03,0.12,0.06); break;   // ดุม: ตีกลางหน้ากลอง เสียงทุ้มก้อง
+      case 'T': noise('bandpass',3300,1.4,0.27,0.06); osc('triangle',820,640,0.02,0.11,0.045); break;   // เต็ก: ตีขอบ เสียงแหลมคม
+      case 'K': noise('bandpass',2600,1.2,0.13*acc,0.05); break;   // กา: เต็กเบาๆ มือซ้าย
+      case 'J': noise('highpass',8200,0.9,0.055*acc,0.12); noise('bandpass',5200,3,0.028,0.08); break;   // ริก: กระดิ่งแทมบูรีน
+      case 'Z': osc('sine',2400,2380,0.3,0.045,0.45); osc('sine',3360,3340,0.3,0.03,0.35); break;   // ฉาบนิ้ว (ซิลส์)
     }
   },
   // เพลงตามจังหวะเกม · หน้าการ์ดเล่นเพลงเดิมต่อ · จบรอบ = เงียบ (ให้เสียงชนะ/แพ้เด่น)
   want(){
     if(!this.on) return null;
+    const w=G.world===2?'2':'';   // โลก 2 ใช้ชุดเพลงสเกลอียิปต์
+    if(G.phase==='title') return 'main'+w;   // กลับหน้าแรกหลังจบรอบ เพลงก็กลับมา
     if(G.endShown||G.phase==='defeat'||G.phase==='victory') return null;
-    if(G.phase==='title'||!G.plan) return 'main';
-    if(G.phase==='cards') return this.cur||'main';
-    if(G.level>=MAX_LEVEL) return 'final';
-    return BOSS_AT[G.level]!=null?'boss':'main';
+    if(!G.plan) return 'main'+w;
+    if(G.phase==='cards') return this.cur||'main'+w;
+    if(G.level>=MAX_LEVEL) return 'final'+w;
+    return (BOSS_AT[G.level]!=null?'boss':'main')+w;
   },
   update(){
     if(!this.bus&&!(Sound.ctx&&this.init())) return;
